@@ -218,13 +218,13 @@ const DATA = {
   tidbits: [
     "Since MFL, the Champion of the previous season has <strong>not reached the playoffs</strong> the following year (Imran ×3, Dante ×2, Austin, Shak ×2).",
     "<strong>Raj</strong> has the longest drought since reaching the Fantasy Bowl — last appearance was 2006.",
-    "<strong>Austin</strong> is the only GM to win a Fantasy Bowl without winning a single week during the regular season (2017).",
+    "<strong>Austin and Shak</strong> are the only GMs to win a Fantasy Bowl without winning a single week during the regular season (Austin in 2017, Shak in 2025).",
     "<strong>Raj, Anand, Dante, and Vip</strong> are the only GMs to score 200+ pts in a week and still lose. Anand is the only one to do it twice (2018 & 2019).",
     "<strong>Shak, Anand, Samson, and Vip</strong> are the only GMs to score 200+ pts twice in the same season.",
     "<strong>Samson</strong> has won the regular season in MFL three years in a row (2016–2018).",
     "<strong>Imran</strong> has made the Fantasy Four 4 times without winning the regular season or earning a 1st round bye.",
     "<strong>Shak and Imran</strong> are the only GMs to score 200+ pts in a Fantasy Bowl (2018, 2020).",
-    "<strong>Samson</strong> reached the playoffs every year in MFL (2015–2023).",
+    "<strong>Samson</strong> reached the playoffs every year in MFL (2015–2025).",
     "The 2019 MFL season is the first time in history that two teams who were last at one point ended up reaching the Fantasy Bowl.",
     "<strong>Shak</strong> is the only GM to score 200+ pts in back-to-back weeks (2021, Wks 1–2).",
     "<strong>Samson</strong> is the only GM since the MFL merger to have at least 1 Week Win each season.",
@@ -235,10 +235,8 @@ const DATA = {
     "<strong>Samson</strong> joins Asher as the only GMs to reach the Fantasy Bowl but never win — a combined 0-8 with 4 losses each.",
     "<strong>Samson</strong> is the only GM to win 6 weeks in a row (2025).",
     "<strong>Samson</strong> holds records for Best Regular Season Record (.829), Most Playoff Apps (18), Most Consecutive Apps (11), Most Week Wins (35), and Most 200+pt Performances (10).",
-    "<strong>Asher</strong> has reached the playoffs 6 years in a row. He joins Shak this season as the only GMs to make the playoffs without winning a single week.",
-    "First time since 2022 that no GM of Mexican heritage has reached the playoffs.",
     "<strong>Ryaan (2025)</strong> joins Anand (2015), Andres (2016), Raj (2018), and Hoss (2021) as the only GMs since MFL to have 1st picks in each round and miss the playoffs.",
-    "<strong>Laura</strong> is the first expansion team to reach the playoffs in her first season in the league.",
+    "<strong>Laura (2025)</strong> is the first expansion team to reach the playoffs in her first season in the league and reach the Fantasy Bowl.",
   ],
 
   drafts: [
