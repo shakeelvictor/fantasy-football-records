@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#0B162A" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)" />
+  <title>The League — Fantasy Football Records</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-mark">FFL</span>
+      <span class="brand-text">The League · Records Book</span>
+    </div>
+    <nav class="site-nav" id="siteNav">
+      <a href="#champions">Champions</a>
+      <a href="#leaders">Leaders</a>
+      <a href="#records">Records</a>
+      <a href="#seasons">Seasons</a>
+      <a href="#tidbits">Notes</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="siteNav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Est. 2002 · 24 Seasons</p>
+      <h1>The Book of <span class="accent">Champions</span><br/>&amp; Heartbreak</h1>
+      <p class="lede">A complete archive of our fantasy football league — every champion, every record, every legendary tidbit from the Yahoo! era through the modern MFL dynasty.</p>
+      <div class="hero-stats">
+        <div class="stat-tile">
+          <span class="stat-num">24</span>
+          <span class="stat-label">Seasons</span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-num">13</span>
+          <span class="stat-label">GMs All-Time</span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-num">9</span>
+          <span class="stat-label">Unique Champs</span>
+        </div>
+        <div class="stat-tile">
+          <span class="stat-num accent">2025</span>
+          <span class="stat-label">Reigning: Shak</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="champions" class="section">
+      <div class="section-head">
+        <h2>Champions Timeline</h2>
+        <p>Every Fantasy Bowl winner since 2002 — from the Yahoo! days to the MFL era.</p>
+      </div>
+
+      <div class="era-tabs">
+        <button class="era-tab active" data-era="all">All Eras</button>
+        <button class="era-tab" data-era="mfl">MFL · 2015–2025</button>
+        <button class="era-tab" data-era="yahoo">Yahoo! · 2002–2014</button>
+      </div>
+
+      <div class="champions-grid" id="championsGrid"></div>
+    </section>
+
+    <section id="leaders" class="section">
+      <div class="section-head">
+        <h2>All-Time Leaders</h2>
+        <p>Cumulative stats across all eras of the league.</p>
+      </div>
+
+      <div class="leaderboards">
+        <div class="leaderboard">
+          <h3>Playoff Appearances</h3>
+          <ul id="playoffApps"></ul>
+        </div>
+        <div class="leaderboard">
+          <h3>Fantasy Bowl Appearances</h3>
+          <ul id="bowlApps"></ul>
+        </div>
+        <div class="leaderboard">
+          <h3>Weekly Regular Season Wins (MFL)</h3>
+          <ul id="weeklyWins"></ul>
+        </div>
+        <div class="leaderboard">
+          <h3>200+ Point Performances</h3>
+          <ul id="bigGames"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="records" class="section">
+      <div class="section-head">
+        <h2>Single-Game &amp; Season Records</h2>
+        <p>The book of bests, worsts, blowouts, and squeakers.</p>
+      </div>
+
+      <div class="records-grid" id="recordsGrid"></div>
+    </section>
+
+    <section id="seasons" class="section">
+      <div class="section-head">
+        <h2>Playoff Field by Season</h2>
+        <p>Every team that made the playoffs, year by year.</p>
+      </div>
+      <div class="seasons-list" id="seasonsList"></div>
+    </section>
+
+    <section id="tidbits" class="section">
+      <div class="section-head">
+        <h2>Notable Tidbits</h2>
+        <p>The trivia, oddities, and historical footnotes that make this league.</p>
+      </div>
+      <ul class="tidbits-list" id="tidbitsList"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>The League · Records compiled across 24 seasons · 2002–2025</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
