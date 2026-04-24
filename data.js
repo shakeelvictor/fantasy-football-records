@@ -88,6 +88,14 @@ const DATA = {
 
   records: [
     {
+      label: 'Most Fantasy Bowl Championships',
+      value: '7',
+      holder: 'Shak',
+      context: '2005, 2012, 2013, 2014, 2018, 2021, 2025',
+      prev: 'Previous: Vip & Imran · 4',
+      trophy: true
+    },
+    {
       label: 'Most Consecutive Playoff Apps',
       value: '11',
       holder: 'Samson',

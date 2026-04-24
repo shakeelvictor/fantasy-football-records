@@ -42,17 +42,14 @@ function renderChampions(filter = 'all') {
 function renderLeaderboard(elId, items, valueKey = 'count', valueRenderer = null) {
   const ul = document.getElementById(elId);
   const sorted = [...items].sort((a, b) => b[valueKey] - a[valueKey]);
-  const max = Math.max(...sorted.map(i => i[valueKey]));
   ul.innerHTML = sorted.map((item, i) => {
+    const isTop = i === 0;
     const value = item[valueKey];
-    const pct = (value / max) * 100;
-    const rankClass = i === 0 ? 'top' : '';
     const valueText = valueRenderer ? valueRenderer(item) : value + (item.note || '');
     return `
-      <li>
-        <span class="rank ${rankClass}">${String(i + 1).padStart(2, '0')}</span>
+      <li class="${isTop ? 'top-rank' : ''}">
+        <span class="rank ${isTop ? 'top' : ''}">${String(i + 1).padStart(2, '0')}</span>
         <span class="gm-name">${item.gm}</span>
-        <span class="bar"><span class="bar-fill" style="width: ${pct}%"></span></span>
         <span class="gm-value">${valueText}</span>
       </li>
     `;
@@ -60,10 +57,20 @@ function renderLeaderboard(elId, items, valueKey = 'count', valueRenderer = null
 }
 
 // ====== Records ======
+const TROPHY_SVG = `<svg class="trophy-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+    <path d="M20 6h24v10c0 7-5 12-12 12s-12-5-12-12V6z" fill="currentColor"/>
+    <path d="M14 10H8v4c0 5 4 9 9 9h3v-3h-3c-3 0-6-3-6-6v-1h3V10z" fill="currentColor"/>
+    <path d="M50 10h6v4c0 5-4 9-9 9h-3v-3h3c3 0 6-3 6-6v-1h-3V10z" fill="currentColor"/>
+    <rect x="28" y="28" width="8" height="10" fill="currentColor"/>
+    <rect x="20" y="38" width="24" height="4" rx="1" fill="currentColor"/>
+    <rect x="16" y="44" width="32" height="6" rx="2" fill="currentColor"/>
+  </svg>`;
+
 function renderRecords() {
   const grid = document.getElementById('recordsGrid');
   grid.innerHTML = DATA.records.map(r => `
-    <div class="record-card">
+    <div class="record-card ${r.trophy ? 'has-trophy' : ''}">
+      ${r.trophy ? TROPHY_SVG : ''}
       <div class="record-label">${r.label}</div>
       <div class="record-value">${r.value}</div>
       <div class="record-holder">${r.holder}</div>

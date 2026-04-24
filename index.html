@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#0B162A" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
   <title>The League — Fantasy Football Records</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,7 +50,15 @@
           <span class="stat-num">9</span>
           <span class="stat-label">Unique Champs</span>
         </div>
-        <div class="stat-tile">
+        <div class="stat-tile reigning">
+          <svg class="trophy-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <path d="M20 6h24v10c0 7-5 12-12 12s-12-5-12-12V6z" fill="currentColor"/>
+            <path d="M14 10H8v4c0 5 4 9 9 9h3v-3h-3c-3 0-6-3-6-6v-1h3V10z" fill="currentColor"/>
+            <path d="M50 10h6v4c0 5-4 9-9 9h-3v-3h3c3 0 6-3 6-6v-1h-3V10z" fill="currentColor"/>
+            <rect x="28" y="28" width="8" height="10" fill="currentColor"/>
+            <rect x="20" y="38" width="24" height="4" rx="1" fill="currentColor"/>
+            <rect x="16" y="44" width="32" height="6" rx="2" fill="currentColor"/>
+          </svg>
           <span class="stat-num accent">2025</span>
           <span class="stat-label">Reigning: Shak</span>
         </div>
@@ -80,12 +88,12 @@
 
       <div class="leaderboards">
         <div class="leaderboard">
-          <h3>Playoff Appearances</h3>
-          <ul id="playoffApps"></ul>
-        </div>
-        <div class="leaderboard">
           <h3>Fantasy Bowl Appearances</h3>
           <ul id="bowlApps"></ul>
+        </div>
+        <div class="leaderboard">
+          <h3>Playoff Appearances</h3>
+          <ul id="playoffApps"></ul>
         </div>
         <div class="leaderboard">
           <h3>Weekly Regular Season Wins (MFL)</h3>

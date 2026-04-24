@@ -1,42 +1,42 @@
 :root {
-  /* Chicago Bears dark theme (default) */
-  --bg: #0B162A;
-  --bg-elev: #122441;
-  --bg-card: #173058;
-  --border: #1f3a66;
-  --border-strong: #2f4f80;
-  --text: #f3f6fb;
-  --text-dim: #a9b6cc;
-  --text-muted: #6c7a93;
-  --accent: #C83803;
-  --accent-2: #ff6a1f;
+  /* Dark theme: black base, field green + football brown accents */
+  --bg: #0c0c0c;
+  --bg-elev: #161616;
+  --bg-card: #1a1a1a;
+  --border: #262626;
+  --border-strong: #3a3a3a;
+  --text: #f5f5f5;
+  --text-dim: #a8a8a8;
+  --text-muted: #6a6a6a;
+  --accent: #3d8f4a;          /* field green */
+  --accent-2: #8b5a2b;         /* football leather brown */
   --accent-fg: #ffffff;
-  --header-bg: rgba(11, 22, 42, 0.85);
-  --gold: #C83803;
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
-  --glow-1: rgba(200, 56, 3, 0.08);
-  --glow-2: rgba(23, 48, 88, 0.45);
+  --header-bg: rgba(12, 12, 12, 0.85);
+  --gold: #3d8f4a;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --glow-1: rgba(61, 143, 74, 0.06);
+  --glow-2: rgba(139, 90, 43, 0.05);
   --maxw: 1200px;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg: #f5f7fa;
+    --bg: #fafafa;
     --bg-elev: #ffffff;
     --bg-card: #ffffff;
-    --border: #dde3ec;
-    --border-strong: #c2cbda;
-    --text: #0B162A;
-    --text-dim: #4a5670;
-    --text-muted: #7a8497;
-    --accent: #C83803;
-    --accent-2: #0B162A;
+    --border: #e4e4e4;
+    --border-strong: #c8c8c8;
+    --text: #0f0f0f;
+    --text-dim: #525252;
+    --text-muted: #8a8a8a;
+    --accent: #2d7a3e;          /* deeper green for white bg contrast */
+    --accent-2: #7c4a25;         /* deeper brown */
     --accent-fg: #ffffff;
-    --header-bg: rgba(245, 247, 250, 0.9);
-    --gold: #C83803;
-    --shadow: 0 4px 18px rgba(11, 22, 42, 0.08);
-    --glow-1: rgba(200, 56, 3, 0.05);
-    --glow-2: rgba(11, 22, 42, 0.04);
+    --header-bg: rgba(250, 250, 250, 0.9);
+    --gold: #2d7a3e;
+    --shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    --glow-1: rgba(45, 122, 62, 0.04);
+    --glow-2: rgba(124, 74, 37, 0.03);
   }
 }
 
@@ -230,6 +230,30 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
   gap: 6px;
+  position: relative;
+}
+
+.stat-tile.reigning {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.trophy-icon {
+  position: absolute;
+  top: -18px;
+  right: -14px;
+  width: 44px;
+  height: 44px;
+  color: var(--accent);
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.35));
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: light) {
+  .trophy-icon {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+  }
 }
 
 .stat-num {
@@ -265,6 +289,7 @@ a { color: inherit; text-decoration: none; }
 .section-head h2 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 48px;
+  line-height: 1;
   letter-spacing: 1px;
   margin-bottom: 8px;
 }
@@ -351,7 +376,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .era-badge.mfl { color: var(--accent); border: 1px solid var(--accent); }
-.era-badge.yahoo { color: var(--text-dim); border: 1px solid var(--border-strong); }
+.era-badge.yahoo { color: var(--accent-2); border: 1px solid var(--accent-2); }
 
 .matchup {
   display: grid;
@@ -483,7 +508,7 @@ a { color: inherit; text-decoration: none; }
 
 .leaderboard li {
   display: grid;
-  grid-template-columns: 32px 1fr auto auto;
+  grid-template-columns: 32px 1fr auto;
   gap: 12px;
   align-items: center;
   padding: 10px 0;
@@ -500,7 +525,27 @@ a { color: inherit; text-decoration: none; }
 }
 
 .rank.top {
-  color: var(--gold);
+  color: var(--accent);
+}
+
+.leaderboard li.top-rank {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-bottom-color: transparent;
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 12px 12px 9px;
+  margin: 4px -12px 6px;
+  position: relative;
+}
+
+.leaderboard li.top-rank .gm-name {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.leaderboard li.top-rank .gm-value {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .gm-name {
@@ -513,20 +558,6 @@ a { color: inherit; text-decoration: none; }
   font-weight: 600;
   font-size: 15px;
   color: var(--text);
-}
-
-.bar {
-  width: 60px;
-  height: 6px;
-  background: var(--bg-elev);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  border-radius: 999px;
 }
 
 /* ======= Records ======= */
@@ -544,10 +575,16 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: relative;
   transition: border-color 0.15s;
 }
 
-.record-card:hover {
+.record-card.has-trophy {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.record-card:not(.has-trophy):hover {
   border-color: var(--border-strong);
 }
 
@@ -596,7 +633,8 @@ a { color: inherit; text-decoration: none; }
 
 .tidbits-list li {
   background: var(--bg-card);
-  border-left: 3px solid var(--accent);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-2);
   border-radius: 8px;
   padding: 16px 20px;
   font-size: 14px;
