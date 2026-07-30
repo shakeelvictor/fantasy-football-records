@@ -206,6 +206,23 @@ a { color: inherit; text-decoration: none; }
 
 .site-nav a:hover { color: var(--accent); }
 
+/* Links to a separate page (not an in-page anchor) read as a pill */
+.site-nav a.nav-page-link {
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin: -6px 0;
+  line-height: 1.4;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.site-nav a.nav-page-link:hover,
+.site-nav a.nav-page-link.active {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -275,6 +292,13 @@ a { color: inherit; text-decoration: none; }
     border-bottom: 1px solid var(--border);
   }
   .site-nav a:last-child { border-bottom: none; }
+  .site-nav a.nav-page-link {
+    margin: 20px 0 0;
+    padding: 16px 4px;
+    text-align: center;
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+  }
 }
 
 /* ======= Hero ======= */
@@ -801,6 +825,207 @@ a { color: inherit; text-decoration: none; }
   .section { padding: 56px 18px; }
   .hero { padding: 64px 18px 40px; }
   .recap { padding: 24px 18px 48px; }
+}
+
+/* ======= Keeper History Page ======= */
+.page-hero {
+  padding-bottom: 40px;
+}
+
+.page-hero h1 {
+  font-size: clamp(48px, 8vw, 96px);
+}
+
+.filter-bar {
+  position: sticky;
+  /* --header-h is measured and set by keepers.js so the bar never tucks
+     under the sticky header when font loading changes its height. */
+  top: var(--header-h, 68px);
+  z-index: 90;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.filter-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.year-pills {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px 0;
+}
+
+.year-pills::-webkit-scrollbar { display: none; }
+
+.year-pill {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+}
+
+.keepers-section {
+  border-top: none;
+  padding-top: 40px;
+}
+
+.filter-summary {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.keeper-seasons {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.keeper-season-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.keeper-season-head h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+
+.keeper-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.keeper-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.keeper-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.keeper-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.keeper-owner {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.keeper-picks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.keeper-picks li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.keeper-picks li:last-child { border-bottom: none; }
+
+.keeper-player {
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 0;
+}
+
+.round-badge {
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.round-badge.fa {
+  color: var(--accent-2);
+  border-color: var(--accent-2);
+}
+
+.keeper-none {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+
+.keeper-none-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+@media (max-width: 720px) {
+  .filter-inner { padding: 12px 18px; gap: 12px; }
+  .filter-label { display: none; }
+  .keeper-season-head h2 { font-size: 36px; }
 }
 
 /* ======= Footer ======= */
