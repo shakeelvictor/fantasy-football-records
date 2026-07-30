@@ -56,6 +56,36 @@ function renderLeaderboard(elId, items, valueKey = 'count', valueRenderer = null
   }).join('');
 }
 
+// ====== Living Totals ======
+// Leaderboard totals are the frozen baseline through 2025 (data.js) plus
+// everything recorded since in weekly-log.js.
+function gmOf(entry) {
+  return typeof entry === 'string' ? entry : entry.gm;
+}
+
+function tally(baseline, gms) {
+  const totals = new Map(baseline.map(row => [row.gm, { ...row }]));
+  gms.forEach(gm => {
+    if (!GMS.includes(gm)) {
+      console.warn(`weekly-log.js: "${gm}" isn't in GMS — check the spelling.`);
+    }
+    const row = totals.get(gm);
+    if (row) row.count += 1;
+    else totals.set(gm, { gm, count: 1 });
+  });
+  return [...totals.values()];
+}
+
+function weeklyWinsTotals() {
+  const winners = WEEKLY_LOG.map(w => w.winner).filter(Boolean);
+  return tally(DATA.weeklyWinsBaseline, winners);
+}
+
+function bigGamesTotals() {
+  const scorers = WEEKLY_LOG.flatMap(w => (w.big || []).map(gmOf));
+  return tally(DATA.bigGamesBaseline, scorers);
+}
+
 // ====== Records ======
 const TROPHY_SVG = `<svg class="trophy-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
     <path d="M20 6h24v10c0 7-5 12-12 12s-12-5-12-12V6z" fill="currentColor"/>
@@ -143,8 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderLeaderboard('bowlApps', DATA.bowlApps, 'count',
     item => `${item.count} <span style="color:var(--text-muted);font-size:11px">(${item.record})</span>`
   );
-  renderLeaderboard('weeklyWins', DATA.weeklyWins);
-  renderLeaderboard('bigGames', DATA.bigGames);
+  renderLeaderboard('weeklyWins', weeklyWinsTotals());
+  renderLeaderboard('bigGames', bigGamesTotals());
   renderRecords();
   renderTidbits();
   renderSeasons();

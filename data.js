@@ -58,7 +58,9 @@ const DATA = {
     { gm: 'Laura', count: 1, record: '0-1' },
   ],
 
-  weeklyWins: [
+  // Frozen totals through the 2025 season. Don't edit these to record a new
+  // result — add a line to weekly-log.js and app.js will tally it on top.
+  weeklyWinsBaseline: [
     { gm: 'Samson', count: 35 },
     { gm: 'Shak', count: 15 },
     { gm: 'Asher', count: 15 },
@@ -72,7 +74,8 @@ const DATA = {
     { gm: 'Laura', count: 1 },
   ],
 
-  bigGames: [
+  // Frozen totals through the 2025 season — see the note on weeklyWinsBaseline.
+  bigGamesBaseline: [
     { gm: 'Samson', count: 10 },
     { gm: 'Shak', count: 5 },
     { gm: 'Anand', count: 5 },
