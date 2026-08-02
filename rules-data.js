@@ -137,8 +137,6 @@ const RULES = [
     items: [
       { text: '<strong>Straight draft.</strong> The same order runs top to bottom in every round — the first pick of round one also has the first pick of round twenty.' },
       { text: '<strong>Snake drafts are rejected</strong>, and in 2024 the league imposed a <strong>three-year moratorium</strong> on raising the topic again. The subject is eligible for debate in 2027.', since: '2024' },
-      { text: '<strong>Expansion teams pick first.</strong> New franchises hold the first two picks of every round in their debut season.', since: '2025' },
-      { text: '<strong>8-hour pick clock</strong> when the draft runs online.' },
     ],
   },
   {
@@ -151,7 +149,6 @@ const RULES = [
       { text: '<strong>Keeper-eligible players can be traded</strong>, and they stay connected to their draft position when they change hands.', since: '2019' },
       { text: '<strong>Once you declare your two keepers, only those two players may be traded.</strong> You may still change your declarations up until the deadline, but you cannot trade a keeper-eligible player you did not declare.', since: '2025' },
       { text: '<strong>Rosters freeze for free agents when the season ends.</strong> You cannot pick up a player after the season is over and keep him the following year.', since: '2022' },
-      { text: 'Proposals to <strong>move keepers up two rounds</strong> (2022) and to <strong>lock keepers once announced</strong> (2023) were both rejected. The keeper system stands as written.' },
     ],
   },
   {
@@ -180,10 +177,19 @@ const RULES = [
     title: 'Playoffs',
     blurb: 'Fourteen weeks to qualify, three weeks to win it.',
     items: [
-      { text: '<strong>The regular season runs Weeks 1–14.</strong> The playoffs are Weeks 15, 16, and 17.', since: '2021' },
-      { text: '<strong>Six teams qualify.</strong> The top two seeds receive a first-round bye and enter in the Fantasy Four.' },
-      { text: '<strong>The Fantasy Bowl is Week 17.</strong> Week 18 belongs to the Pro Bowl.' },
-      { text: '<strong>No home-field bonus.</strong> A proposal to award the regular-season winner bonus points in the playoffs was rejected.', since: '2019' },
+      { text: '<strong>Six teams qualify</strong> for the playoffs.' },
+      { text: '<strong>Only the regular-season winner gets a bye.</strong> The No. 1 seed sits out the first round; everyone else plays in Week 15.' },
+      { text: '<strong>The Fantasy Bowl is Week 17.</strong> Week 18 belongs to Pakistan vs. the World.' },
+    ],
+    tables: [
+      {
+        caption: 'Season Structure',
+        rows: [
+          ['Regular season', 'Weeks 1–14'],
+          ['Playoffs', 'Weeks 15–17'],
+          ['Pakistan vs. the World', 'Week 18'],
+        ],
+      },
     ],
   },
   {
@@ -214,22 +220,6 @@ const RULES = [
       { text: '<strong>The Pro Bowl, Week 18.</strong> Pakistan versus the World, $20 a head. Each side fields a super lineup declared before the week starts, under normal starting lineup rules.', since: '2024' },
       { text: '<strong>The worst record buys the bottle.</strong> Whoever finishes last must supply a bottle to take shots from at the following year\'s draft. Raj is permanently exempt from buying alcohol.', since: '2024' },
       { text: '<strong>The champion owns the last-place team\'s name.</strong> The reigning champion may rename the previous season\'s last-place franchise at will, all year long.', since: '2021' },
-      { text: '<strong>A survivor pool</strong> runs alongside the league as a separate optional buy-in.' },
-    ],
-  },
-  {
-    id: 'settled',
-    title: 'Settled Debates',
-    blurb: 'Proposals the league has already voted down. Bring them back at your peril.',
-    items: [
-      { text: '<strong>Snake draft</strong> — rejected in 2019, 2020, 2021, and 2022. In 2024 it drew a three-year moratorium and the note "20 min of wasted time" from the 2022 meeting.' },
-      { text: '<strong>Points for first downs</strong> — raised and rejected three years running: vetted in MFL in 2023, voted down in 2024, and rejected again in 2025.' },
-      { text: '<strong>Cash considerations in trades</strong> — rejected in 2021.' },
-      { text: '<strong>Money for transactions</strong> — rejected in 2022.' },
-      { text: '<strong>Moving keepers up two rounds</strong> — rejected in 2022.' },
-      { text: '<strong>Locking keepers once announced</strong> — rejected in 2023.' },
-      { text: '<strong>Waiver priority order</strong> — rejected in 2019.' },
-      { text: '<strong>Home-field points bonus for the regular-season winner</strong> — rejected in 2019.' },
     ],
   },
 ];
