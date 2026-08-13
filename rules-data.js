@@ -13,9 +13,9 @@ const RULES = [
       { text: '<strong>11 franchises.</strong> The league expanded from 10 in 2025 with the addition of Ryaan and Laura, both approved unanimously.', since: '2025' },
       { text: '<strong>20-player rosters, strictly enforced.</strong> A proposal to expand rosters to accommodate multi-player trades was rejected — a trade cannot leave you over the limit.', since: '2019' },
       { text: '<strong>3 injured reserve spots</strong>, on top of the 20 roster spots. A player must be classified IR before he can be deactivated; suspended players and contract holdouts do not qualify.', since: '2020' },
-      { text: '<strong>Head-to-head every week</strong>, scoring from Week 1 through Week 18.' },
-      { text: '<strong>Ties count as ties.</strong> No tiebreaker is applied to a regular-season matchup.' },
-      { text: '<strong>Standings are sorted</strong> by overall winning percentage, then total points scored, then victory points.' },
+      { text: '<strong>All-play, every week.</strong> Every team is scored against every other team, so one week is ten games, not one — post the high score in an 11-team league and you go 10&ndash;0 that week. A full season record reads 116&ndash;24, not 12&ndash;2.' },
+      { text: '<strong>Ties count as ties.</strong> No tiebreaker is applied to a regular-season result.' },
+      { text: '<strong>Standings are sorted</strong> by W&ndash;L record, then total points scored.' },
     ],
   },
   {
@@ -24,10 +24,10 @@ const RULES = [
     blurb: 'Twelve starters, set before kickoff.',
     items: [
       { text: 'A <strong>tight end may start in place of one WR</strong>, letting you field up to three tight ends across the WR, TE, and flex spots.', since: '2024' },
-      { text: 'The <strong>flex accepts any position except quarterback</strong>.' },
-      { text: '<strong>No more than 8 combined QB/RB/WR/TE</strong> may be started, which caps how far the IDP slots can be raided.' },
+      { text: 'The <strong>flex accepts any position except quarterback</strong> — and that means any: a third tight end, a fourth IDP, even a second kicker.' },
+      { text: '<strong>No more than 8 combined QB/RB/WR/TE</strong> may be started. The cap sits on offense, not defense: a standard lineup spends 7 on offense plus the flex, 1 on a kicker, and 3 on IDP. Give the flex to a defender instead and you can start a 4th IDP — 7 offensive players, 1 PK, 4 IDP.' },
       { text: '<strong>Players lock at the kickoff of their own game</strong>, not at the start of the week — you can keep editing around a late game.' },
-      { text: '<strong>Partial lineups are not allowed.</strong> All 12 slots must be filled.' },
+      { text: '<strong>Setting the lineup is your problem.</strong> MFL will not let you save a lineup with a slot left empty, but teams have still gone into a week a man short — Week 11 of 2023 and Week 4 of 2024 were both played with 11 starters. The score counts exactly as submitted; an unfilled slot is worth zero and the week stands.' },
       { text: '<strong>Players on bye may be submitted</strong> as starters. They will score zero, and that is your problem.' },
     ],
     tables: [
@@ -40,7 +40,7 @@ const RULES = [
           ['TE', '1'],
           ['Flex', '1 — any position except QB'],
           ['PK', '1'],
-          ['IDP', '3'],
+          ['IDP', '3 — a 4th may take the flex'],
         ],
       },
     ],
@@ -167,7 +167,7 @@ const RULES = [
     blurb: 'A blind-bid budget, introduced in 2025 after six years of rejecting a waiver wire.',
     items: [
       { text: '<strong>$100 blind bidding budget per manager</strong>, run as a silent auction. Nobody sees a bid until waivers process.', since: '2025' },
-      { text: '<strong>Bids can carry conditions.</strong> MFL supports grouping bids so you do not win a player you no longer need after an earlier bid lands.', since: '2025' },
+      { text: '<strong>Bids can be linked.</strong> Put several bids in one group and rank them, and MFL stops the group as soon as you win one — so chasing three running backs cannot leave you paying for all three.', since: '2025' },
       { text: '<strong>No waiver priority order.</strong> The budget is the only currency — a proposal for priority-based waivers was rejected in 2019.' },
       { text: 'The league ran with <strong>no waiver wire at all</strong> from the MFL merger through 2024, rejecting the idea in 2019, 2021, 2023, and 2024 before adopting blind bidding.' },
     ],
@@ -178,7 +178,7 @@ const RULES = [
     blurb: 'Fourteen weeks to qualify, three weeks to win it.',
     items: [
       { text: '<strong>Six teams qualify</strong> for the playoffs.' },
-      { text: '<strong>Only the regular-season winner gets a bye.</strong> The No. 1 seed sits out the first round; everyone else plays in Week 15.' },
+      { text: '<strong>Only the regular-season winner gets a bye.</strong> The No. 1 seed sits out the first round; every other playoff team plays in Week 15.' },
       { text: '<strong>The Fantasy Bowl is Week 17.</strong> Week 18 belongs to Pakistan vs. the World.' },
     ],
     tables: [
@@ -198,7 +198,6 @@ const RULES = [
     blurb: '$100 a manager, $1,100 on the table, all of it paid back out.',
     items: [
       { text: '<strong>$100 buy-in per manager</strong>, set when the league expanded to 11 teams.', since: '2025' },
-      { text: '<strong>Weekly winners take the largest share.</strong> The 2025 restructure raised the weekly payout and the Fantasy Bowl purses; the regular-season prize was left alone.', since: '2025' },
     ],
     tables: [
       {

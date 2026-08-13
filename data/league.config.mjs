@@ -16,8 +16,8 @@ export const config = {
   playoffTeams: 6,
 
   // Only the regular-season winner gets a bye. Verified against the Playoffs
-  // section of rules-data.js: "The No. 1 seed sits out the first round;
-  // everyone else plays in Week 15." A second bye is rejected in derive.mjs —
+  // section of rules-data.js: "The No. 1 seed sits out the first round; every
+  // other playoff team plays in Week 15." A second bye is rejected in derive.mjs —
   // the counts alone would not catch it.
   byeSeeds: [1],
   eliminatedPerWeek: { 15: 2, 16: 2 },
