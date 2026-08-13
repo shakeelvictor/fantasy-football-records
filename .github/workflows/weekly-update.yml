@@ -51,11 +51,19 @@ jobs:
         env:
           MFL_API_KEY: ${{ secrets.MFL_API_KEY }}
 
+      # Records the finished season into data.js — champion, playoff field,
+      # Pakistan vs. the World, appearance counts and any all-time record the
+      # season broke. No-ops until Week 18 has been played, and no-ops again
+      # once the season is recorded, so it is safe to run every week.
+      - run: npm run season-end
+        env:
+          MFL_API_KEY: ${{ secrets.MFL_API_KEY }}
+
       - name: Commit if changed
         run: |
           git config user.name "fflr-bot"
           git config user.email "fflr-bot@users.noreply.github.com"
-          git add data/ weekly-log.js
+          git add data/ weekly-log.js data.js
           git diff --staged --quiet || git commit -m "Week update $(date +%F)"
           git push
 

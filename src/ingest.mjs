@@ -77,7 +77,7 @@ async function main() {
     weeks: weeks.map((w) => ({
       week: w.week,
       scores: w.scores
-        .map((s) => ({ gm: map.get(s.id), score: s.score, starters: s.starters }))
+        .map((s) => ({ gm: map.get(s.id), score: s.score, starters: s.starters, topPlayer: s.topPlayer }))
         .sort((a, b) => a.gm.localeCompare(b.gm)),
     })),
   };

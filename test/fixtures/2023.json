@@ -7,52 +7,92 @@
         {
           "gm": "Anand",
           "score": 125.54,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13116",
+            "score": 25.04
+          }
         },
         {
           "gm": "Andres",
           "score": 168.5,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12801",
+            "score": 45
+          }
         },
         {
           "gm": "Asher",
           "score": 79.79,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15711",
+            "score": 10.83
+          }
         },
         {
           "gm": "Dante",
           "score": 137.89,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13319",
+            "score": 27.07
+          }
         },
         {
           "gm": "Hoss",
           "score": 124.53,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13130",
+            "score": 35.47
+          }
         },
         {
           "gm": "Imran",
           "score": 120.91,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13214",
+            "score": 26
+          }
         },
         {
           "gm": "Raj",
           "score": 148.99,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14085",
+            "score": 23.53
+          }
         },
         {
           "gm": "Samson",
           "score": 137.88,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14778",
+            "score": 39.31
+          }
         },
         {
           "gm": "Shak",
           "score": 117.37,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14779",
+            "score": 23.43
+          }
         },
         {
           "gm": "Vip",
           "score": 104.91,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15238",
+            "score": 18.51
+          }
         }
       ]
     },
@@ -62,52 +102,92 @@
         {
           "gm": "Anand",
           "score": 137.03,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15716",
+            "score": 30.8
+          }
         },
         {
           "gm": "Andres",
           "score": 137.86,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13589",
+            "score": 29.89
+          }
         },
         {
           "gm": "Asher",
           "score": 166.29,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12620",
+            "score": 24.07
+          }
         },
         {
           "gm": "Dante",
           "score": 110.78,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14136",
+            "score": 20.37
+          }
         },
         {
           "gm": "Hoss",
           "score": 159.72,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13593",
+            "score": 28.68
+          }
         },
         {
           "gm": "Imran",
           "score": 168.38,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13214",
+            "score": 25
+          }
         },
         {
           "gm": "Raj",
           "score": 150.12,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14783",
+            "score": 28.39
+          }
         },
         {
           "gm": "Samson",
           "score": 140.39,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "16211",
+            "score": 23.73
+          }
         },
         {
           "gm": "Shak",
           "score": 170.59,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14779",
+            "score": 27.2
+          }
         },
         {
           "gm": "Vip",
           "score": 132.67,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "11671",
+            "score": 29.1
+          }
         }
       ]
     },
@@ -117,52 +197,92 @@
         {
           "gm": "Anand",
           "score": 156.06,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13116",
+            "score": 32.61
+          }
         },
         {
           "gm": "Andres",
           "score": 134.19,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12801",
+            "score": 29.2
+          }
         },
         {
           "gm": "Asher",
           "score": 135.63,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15711",
+            "score": 32.33
+          }
         },
         {
           "gm": "Dante",
           "score": 145.84,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14782",
+            "score": 27.56
+          }
         },
         {
           "gm": "Hoss",
           "score": 210.35,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "11675",
+            "score": 38.7
+          }
         },
         {
           "gm": "Imran",
           "score": 150.06,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13113",
+            "score": 25.69
+          }
         },
         {
           "gm": "Raj",
           "score": 149.08,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14836",
+            "score": 25.4
+          }
         },
         {
           "gm": "Samson",
           "score": 160.26,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14778",
+            "score": 37.36
+          }
         },
         {
           "gm": "Shak",
           "score": 176.03,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "11222",
+            "score": 44.46
+          }
         },
         {
           "gm": "Vip",
           "score": 159.09,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12447",
+            "score": 44.43
+          }
         }
       ]
     },
@@ -172,52 +292,92 @@
         {
           "gm": "Anand",
           "score": 151.95,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15710",
+            "score": 30.63
+          }
         },
         {
           "gm": "Andres",
           "score": 154.18,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13589",
+            "score": 46.07
+          }
         },
         {
           "gm": "Asher",
           "score": 147.47,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13671",
+            "score": 22.5
+          }
         },
         {
           "gm": "Dante",
           "score": 147.33,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14071",
+            "score": 38.13
+          }
         },
         {
           "gm": "Hoss",
           "score": 155.14,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13130",
+            "score": 49.73
+          }
         },
         {
           "gm": "Imran",
           "score": 84.3,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14225",
+            "score": 14.5
+          }
         },
         {
           "gm": "Raj",
           "score": 146.03,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14783",
+            "score": 30.29
+          }
         },
         {
           "gm": "Samson",
           "score": 190.02,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12626",
+            "score": 30.95
+          }
         },
         {
           "gm": "Shak",
           "score": 162.64,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15290",
+            "score": 35.3
+          }
         },
         {
           "gm": "Vip",
           "score": 128.59,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14104",
+            "score": 40
+          }
         }
       ]
     },
@@ -227,52 +387,92 @@
         {
           "gm": "Anand",
           "score": 96.74,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13116",
+            "score": 23.24
+          }
         },
         {
           "gm": "Andres",
           "score": 175.4,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15708",
+            "score": 38.8
+          }
         },
         {
           "gm": "Asher",
           "score": 116.12,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14221",
+            "score": 17
+          }
         },
         {
           "gm": "Dante",
           "score": 148.74,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15281",
+            "score": 50.7
+          }
         },
         {
           "gm": "Hoss",
           "score": 128.57,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14797",
+            "score": 16.13
+          }
         },
         {
           "gm": "Imran",
           "score": 141.87,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "16167",
+            "score": 32.03
+          }
         },
         {
           "gm": "Raj",
           "score": 146.13,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14783",
+            "score": 32.72
+          }
         },
         {
           "gm": "Samson",
           "score": 204.28,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13635",
+            "score": 51
+          }
         },
         {
           "gm": "Shak",
           "score": 130.83,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13299",
+            "score": 26.2
+          }
         },
         {
           "gm": "Vip",
           "score": 164.48,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15238",
+            "score": 42.88
+          }
         }
       ]
     },
@@ -282,52 +482,92 @@
         {
           "gm": "Anand",
           "score": 160.07,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15710",
+            "score": 33.07
+          }
         },
         {
           "gm": "Andres",
           "score": 139.03,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12801",
+            "score": 28.3
+          }
         },
         {
           "gm": "Asher",
           "score": 164.62,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12620",
+            "score": 28.21
+          }
         },
         {
           "gm": "Dante",
           "score": 94.11,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15237",
+            "score": 19.24
+          }
         },
         {
           "gm": "Hoss",
           "score": 119.55,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13593",
+            "score": 21.19
+          }
         },
         {
           "gm": "Imran",
           "score": 108.03,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14777",
+            "score": 17.93
+          }
         },
         {
           "gm": "Raj",
           "score": 138.11,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14783",
+            "score": 23.47
+          }
         },
         {
           "gm": "Samson",
           "score": 185.81,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14778",
+            "score": 28.48
+          }
         },
         {
           "gm": "Shak",
           "score": 149.35,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13164",
+            "score": 25.3
+          }
         },
         {
           "gm": "Vip",
           "score": 134.88,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12447",
+            "score": 37.53
+          }
         }
       ]
     },
@@ -337,52 +577,92 @@
         {
           "gm": "Anand",
           "score": 155.66,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13116",
+            "score": 48.83
+          }
         },
         {
           "gm": "Andres",
           "score": 164.97,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13589",
+            "score": 28.87
+          }
         },
         {
           "gm": "Asher",
           "score": 131.26,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13671",
+            "score": 20.3
+          }
         },
         {
           "gm": "Dante",
           "score": 139.4,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "16162",
+            "score": 25.37
+          }
         },
         {
           "gm": "Hoss",
           "score": 135.78,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13593",
+            "score": 47.08
+          }
         },
         {
           "gm": "Imran",
           "score": 125.91,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13590",
+            "score": 19.27
+          }
         },
         {
           "gm": "Raj",
           "score": 150.53,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14783",
+            "score": 27.96
+          }
         },
         {
           "gm": "Samson",
           "score": 189.68,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "11244",
+            "score": 35.9
+          }
         },
         {
           "gm": "Shak",
           "score": 86.87,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "10768",
+            "score": 14.5
+          }
         },
         {
           "gm": "Vip",
           "score": 177.6,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13134",
+            "score": 34.47
+          }
         }
       ]
     },
@@ -392,52 +672,92 @@
         {
           "gm": "Anand",
           "score": 130.37,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "16080",
+            "score": 28.1
+          }
         },
         {
           "gm": "Andres",
           "score": 189.2,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13589",
+            "score": 35.43
+          }
         },
         {
           "gm": "Asher",
           "score": 175.52,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12620",
+            "score": 38.69
+          }
         },
         {
           "gm": "Dante",
           "score": 154.85,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "16162",
+            "score": 38.47
+          }
         },
         {
           "gm": "Hoss",
           "score": 139.18,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13130",
+            "score": 28.6
+          }
         },
         {
           "gm": "Imran",
           "score": 140.27,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13590",
+            "score": 26.01
+          }
         },
         {
           "gm": "Raj",
           "score": 147.13,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14783",
+            "score": 36.56
+          }
         },
         {
           "gm": "Samson",
           "score": 160.08,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15253",
+            "score": 27.03
+          }
         },
         {
           "gm": "Shak",
           "score": 164.08,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14779",
+            "score": 30.05
+          }
         },
         {
           "gm": "Vip",
           "score": 176.12,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13850",
+            "score": 31.07
+          }
         }
       ]
     },
@@ -447,52 +767,92 @@
         {
           "gm": "Anand",
           "score": 114.13,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13116",
+            "score": 20.6
+          }
         },
         {
           "gm": "Andres",
           "score": 135.3,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13589",
+            "score": 28.19
+          }
         },
         {
           "gm": "Asher",
           "score": 152.19,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12620",
+            "score": 40.83
+          }
         },
         {
           "gm": "Dante",
           "score": 112.6,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15693",
+            "score": 23.6
+          }
         },
         {
           "gm": "Hoss",
           "score": 113.31,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12175",
+            "score": 23.4
+          }
         },
         {
           "gm": "Imran",
           "score": 138.99,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14777",
+            "score": 29.45
+          }
         },
         {
           "gm": "Raj",
           "score": 115.75,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14783",
+            "score": 31.08
+          }
         },
         {
           "gm": "Samson",
           "score": 113.39,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12626",
+            "score": 20.2
+          }
         },
         {
           "gm": "Shak",
           "score": 137.13,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14073",
+            "score": 25.07
+          }
         },
         {
           "gm": "Vip",
           "score": 155.68,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14867",
+            "score": 22
+          }
         }
       ]
     },
@@ -502,52 +862,92 @@
         {
           "gm": "Anand",
           "score": 125.47,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15716",
+            "score": 25.97
+          }
         },
         {
           "gm": "Andres",
           "score": 143,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13404",
+            "score": 21.73
+          }
         },
         {
           "gm": "Asher",
           "score": 197.38,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12620",
+            "score": 52.43
+          }
         },
         {
           "gm": "Dante",
           "score": 170.39,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15693",
+            "score": 31.75
+          }
         },
         {
           "gm": "Hoss",
           "score": 161.59,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15256",
+            "score": 21.63
+          }
         },
         {
           "gm": "Imran",
           "score": 146.18,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14777",
+            "score": 27.55
+          }
         },
         {
           "gm": "Raj",
           "score": 132.42,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "11150",
+            "score": 34.49
+          }
         },
         {
           "gm": "Samson",
           "score": 135.25,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15287",
+            "score": 29.8
+          }
         },
         {
           "gm": "Shak",
           "score": 171.69,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "11222",
+            "score": 41
+          }
         },
         {
           "gm": "Vip",
           "score": 162.21,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14080",
+            "score": 33.6
+          }
         }
       ]
     },
@@ -557,52 +957,92 @@
         {
           "gm": "Anand",
           "score": 124.18,
-          "starters": 11
+          "starters": 11,
+          "topPlayer": {
+            "id": "13116",
+            "score": 22.15
+          }
         },
         {
           "gm": "Andres",
           "score": 162.6,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13589",
+            "score": 29
+          }
         },
         {
           "gm": "Asher",
           "score": 129.99,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13131",
+            "score": 20.8
+          }
         },
         {
           "gm": "Dante",
           "score": 109.48,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15693",
+            "score": 20.91
+          }
         },
         {
           "gm": "Hoss",
           "score": 157.12,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13593",
+            "score": 29.76
+          }
         },
         {
           "gm": "Imran",
           "score": 134.3,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "16204",
+            "score": 25.9
+          }
         },
         {
           "gm": "Raj",
           "score": 182.37,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13604",
+            "score": 30.77
+          }
         },
         {
           "gm": "Samson",
           "score": 147.93,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14778",
+            "score": 24.8
+          }
         },
         {
           "gm": "Shak",
           "score": 131.8,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14779",
+            "score": 32.13
+          }
         },
         {
           "gm": "Vip",
           "score": 156.16,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15698",
+            "score": 36.19
+          }
         }
       ]
     },
@@ -612,52 +1052,92 @@
         {
           "gm": "Anand",
           "score": 140.36,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15710",
+            "score": 43.17
+          }
         },
         {
           "gm": "Andres",
           "score": 173.13,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13589",
+            "score": 49.36
+          }
         },
         {
           "gm": "Asher",
           "score": 156.96,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12620",
+            "score": 43.57
+          }
         },
         {
           "gm": "Dante",
           "score": 144.69,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14802",
+            "score": 24.13
+          }
         },
         {
           "gm": "Hoss",
           "score": 152.05,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13130",
+            "score": 33.2
+          }
         },
         {
           "gm": "Imran",
           "score": 177.07,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "9431",
+            "score": 31.43
+          }
         },
         {
           "gm": "Raj",
           "score": 159.33,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14783",
+            "score": 42.67
+          }
         },
         {
           "gm": "Samson",
           "score": 144.35,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12626",
+            "score": 22.63
+          }
         },
         {
           "gm": "Shak",
           "score": 167.25,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "16161",
+            "score": 28.83
+          }
         },
         {
           "gm": "Vip",
           "score": 142.39,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12447",
+            "score": 24.53
+          }
         }
       ]
     },
@@ -667,52 +1147,92 @@
         {
           "gm": "Anand",
           "score": 109.4,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15710",
+            "score": 21.63
+          }
         },
         {
           "gm": "Andres",
           "score": 138.73,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12801",
+            "score": 32.67
+          }
         },
         {
           "gm": "Asher",
           "score": 196.67,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12620",
+            "score": 35.03
+          }
         },
         {
           "gm": "Dante",
           "score": 165.27,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14136",
+            "score": 37.53
+          }
         },
         {
           "gm": "Hoss",
           "score": 127.97,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13130",
+            "score": 23.9
+          }
         },
         {
           "gm": "Imran",
           "score": 128.85,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "9431",
+            "score": 28.89
+          }
         },
         {
           "gm": "Raj",
           "score": 185.45,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14102",
+            "score": 35.4
+          }
         },
         {
           "gm": "Samson",
           "score": 172.03,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12626",
+            "score": 28.9
+          }
         },
         {
           "gm": "Shak",
           "score": 142.35,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15290",
+            "score": 35.6
+          }
         },
         {
           "gm": "Vip",
           "score": 161.59,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15698",
+            "score": 38.76
+          }
         }
       ]
     },
@@ -722,52 +1242,92 @@
         {
           "gm": "Anand",
           "score": 145.91,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13192",
+            "score": 25.1
+          }
         },
         {
           "gm": "Andres",
           "score": 150.52,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15708",
+            "score": 23.93
+          }
         },
         {
           "gm": "Asher",
           "score": 190.64,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15751",
+            "score": 27.2
+          }
         },
         {
           "gm": "Dante",
           "score": 120.69,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14136",
+            "score": 33.63
+          }
         },
         {
           "gm": "Hoss",
           "score": 164.46,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13189",
+            "score": 28
+          }
         },
         {
           "gm": "Imran",
           "score": 129.77,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "9431",
+            "score": 29.63
+          }
         },
         {
           "gm": "Raj",
           "score": 123.22,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13604",
+            "score": 24.47
+          }
         },
         {
           "gm": "Samson",
           "score": 156.94,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13635",
+            "score": 24.47
+          }
         },
         {
           "gm": "Shak",
           "score": 90.1,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13164",
+            "score": 21.5
+          }
         },
         {
           "gm": "Vip",
           "score": 128.18,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15698",
+            "score": 31.65
+          }
         }
       ]
     },
@@ -777,52 +1337,77 @@
         {
           "gm": "Anand",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Andres",
           "score": 136.33,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15715",
+            "score": 47.07
+          }
         },
         {
           "gm": "Asher",
           "score": 154.87,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15284",
+            "score": 25.2
+          }
         },
         {
           "gm": "Dante",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Hoss",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Imran",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Raj",
           "score": 101.35,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14783",
+            "score": 24.65
+          }
         },
         {
           "gm": "Samson",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Shak",
           "score": 112.76,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "14358",
+            "score": 23.96
+          }
         },
         {
           "gm": "Vip",
           "score": 156.57,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "16214",
+            "score": 26.1
+          }
         }
       ]
     },
@@ -832,52 +1417,74 @@
         {
           "gm": "Anand",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Andres",
           "score": 156.95,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15708",
+            "score": 40.27
+          }
         },
         {
           "gm": "Asher",
           "score": 138.26,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12620",
+            "score": 23.45
+          }
         },
         {
           "gm": "Dante",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Hoss",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Imran",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Raj",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Samson",
           "score": 141.89,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "12626",
+            "score": 25.81
+          }
         },
         {
           "gm": "Shak",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Vip",
           "score": 146.22,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15238",
+            "score": 29.73
+          }
         }
       ]
     },
@@ -887,52 +1494,68 @@
         {
           "gm": "Anand",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Andres",
           "score": 142.36,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "15708",
+            "score": 25.9
+          }
         },
         {
           "gm": "Asher",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Dante",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Hoss",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Imran",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Raj",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Samson",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Shak",
           "score": 0,
-          "starters": 0
+          "starters": 0,
+          "topPlayer": null
         },
         {
           "gm": "Vip",
           "score": 125.67,
-          "starters": 12
+          "starters": 12,
+          "topPlayer": {
+            "id": "13354",
+            "score": 22
+          }
         }
       ]
     }

@@ -1,4 +1,5 @@
 const DATA = {
+  // >>> BEGIN GENERATED champions
   champions: [
     // Yahoo! Era
     { year: 2002, era: 'yahoo', champ: 'Jimmy', seed: 6, runnerUp: 'Augie', runnerSeed: 8, score: null, note: 'Points unavailable' },
@@ -27,6 +28,7 @@ const DATA = {
     { year: 2024, era: 'mfl', champ: 'Raj', seed: 1, runnerUp: 'Samson', runnerSeed: 2, score: '166.52 – 151.95' },
     { year: 2025, era: 'mfl', champ: 'Shak', seed: 6, runnerUp: 'Laura', runnerSeed: 5, score: '123.76 – 116.70' },
   ],
+  // <<< END GENERATED champions
 
   // Pakistan vs. the World — the Week 18 exhibition, first contested in 2024.
   // The league's Pro Bowl: each side fields one combined super lineup of its
@@ -36,6 +38,7 @@ const DATA = {
   //
   // Rosters live in data/exhibition.json and the numbers are derived by
   // src/derive.mjs — `npm run seal-season` prints the new row each January.
+  // >>> BEGIN GENERATED exhibition
   exhibition: [
     {
       year: 2025,
@@ -93,7 +96,9 @@ const DATA = {
       },
     },
   ],
+  // <<< END GENERATED exhibition
 
+  // >>> BEGIN GENERATED playoffApps
   playoffApps: [
     { gm: 'Samson', count: 18 },
     { gm: 'Hoss', count: 17 },
@@ -109,7 +114,9 @@ const DATA = {
     { gm: 'Jimmy', count: 3 },
     { gm: 'Augie', count: 2 },
   ],
+  // <<< END GENERATED playoffApps
 
+  // >>> BEGIN GENERATED bowlApps
   bowlApps: [
     { gm: 'Shak', count: 9, record: '7-2' },
     { gm: 'Vip', count: 7, record: '4-3', note: '*' },
@@ -123,9 +130,11 @@ const DATA = {
     { gm: 'Raj', count: 2, record: '1-1' },
     { gm: 'Laura', count: 1, record: '0-1' },
   ],
+  // <<< END GENERATED bowlApps
 
   // Frozen totals through the 2025 season. Don't edit these to record a new
   // result — add a line to weekly-log.js and app.js will tally it on top.
+  // >>> BEGIN GENERATED weeklyWinsBaseline
   weeklyWinsBaseline: [
     { gm: 'Samson', count: 35 },
     { gm: 'Shak', count: 15 },
@@ -139,8 +148,10 @@ const DATA = {
     { gm: 'Hoss', count: 8 },
     { gm: 'Laura', count: 1 },
   ],
+  // <<< END GENERATED weeklyWinsBaseline
 
   // Frozen totals through the 2025 season — see the note on weeklyWinsBaseline.
+  // >>> BEGIN GENERATED bigGamesBaseline
   bigGamesBaseline: [
     { gm: 'Samson', count: 10 },
     { gm: 'Shak', count: 5 },
@@ -154,7 +165,9 @@ const DATA = {
     { gm: 'Raj', count: 2 },
     { gm: 'Laura', count: 1 },
   ],
+  // <<< END GENERATED bigGamesBaseline
 
+  // >>> BEGIN GENERATED records
   records: [
     {
       label: 'Most Fantasy Bowl Championships',
@@ -283,6 +296,7 @@ const DATA = {
       context: 'Imran · 2020 · Fantasy Bowl'
     },
   ],
+  // <<< END GENERATED records
 
   tidbits: [
     "Since MFL, the Champion of the previous season has <strong>not reached the playoffs</strong> the following year (Imran ×3, Dante ×2, Austin, Shak ×2).",
@@ -369,6 +383,7 @@ const DATA = {
     },
   ],
 
+  // >>> BEGIN GENERATED seasons
   seasons: [
     { year: 2002, teams: ['Jimmy', 'Augie', 'Imran', 'Andres', 'Asher', 'Hoss', 'Anand/Vip', 'Samson'], champ: 'Jimmy' },
     { year: 2003, teams: ['Anand/Vip', 'Dante', 'Andres', 'Shak', 'Asher', 'Augie', 'Imran', 'Jimmy'], champ: 'B&C' },
@@ -395,4 +410,5 @@ const DATA = {
     { year: 2024, teams: ['Raj', 'Samson', 'Dante', 'Asher', 'Shak', 'Anand'], champ: 'Raj' },
     { year: 2025, teams: ['Samson', 'Hoss', 'Asher', 'Imran', 'Laura', 'Shak'], champ: 'Shak' },
   ],
+  // <<< END GENERATED seasons
 };

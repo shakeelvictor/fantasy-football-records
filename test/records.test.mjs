@@ -1,0 +1,136 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import vm from 'node:vm';
+
+import { CONFIG, fixture, rosterFor } from './helpers.mjs';
+import { playoffResult } from '../src/derive.mjs';
+import { buildContext, compareToRecords, contestedWeeks, DEFINITIONS } from '../src/records.mjs';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+
+function siteData() {
+  const ctx = { Set };
+  vm.createContext(ctx);
+  vm.runInContext(`${readFileSync(join(root, 'data.js'), 'utf8')}\nthis.OUT = DATA;`, ctx);
+  return ctx.OUT;
+}
+
+const compare = (year, cards) => {
+  const s = fixture(year);
+  return compareToRecords(cards, buildContext(s, CONFIG, playoffResult(s, CONFIG)));
+};
+
+// The cards on the site already reflect 2025, so replaying 2025 must not claim
+// to break anything. This is the guard against a definition drifting.
+test('2025 breaks none of the records it already holds', () => {
+  const { broken } = compare(2025, siteData().records);
+  assert.deepEqual(broken.map((b) => b.label), []);
+});
+
+test('2025 reproduces the record values it does hold', () => {
+  const { unchanged } = compare(2025, siteData().records);
+  const find = (label) => unchanged.find((u) => u.label === label);
+  assert.equal(find('Most Weekly Wins, Single Season').candidate, '8');
+  assert.equal(find('Best Record · Expanded Season').candidate, '116-24 · .829');
+});
+
+test('a beaten record is rewritten with the old value demoted to Previous', () => {
+  const cards = [
+    {
+      label: 'Highest Single Week · Reg. Season',
+      value: '100.00',
+      holder: 'Nobody',
+      context: '1999 · Week 1',
+    },
+  ];
+  const { broken } = compare(2025, cards);
+  assert.equal(broken.length, 1);
+  assert.equal(broken[0].card.holder, 'Hoss');
+  assert.equal(broken[0].card.value, '217.53');
+  assert.equal(broken[0].card.context, '2025 · Week 12');
+  assert.equal(broken[0].card.prev, 'Previous: Nobody · 100.00 (1999 · Week 1)');
+});
+
+test('a record the season did not beat is left untouched', () => {
+  const cards = [
+    { label: 'Highest Single Week · Reg. Season', value: '400.00', holder: 'Nobody', context: 'x' },
+  ];
+  const { broken, unchanged } = compare(2025, cards);
+  assert.equal(broken.length, 0);
+  assert.equal(unchanged.length, 1);
+});
+
+// Slimmest Margin is report-only. Counting every adjacent pair gives 0.01 in
+// both 2023 and 2024, which would have beaten the standing 0.25 twice over —
+// so that reading is provably not the league's, and the card must not move.
+test('slimmest margin never rewrites the card, only reports', () => {
+  for (const year of [2023, 2024, 2025]) {
+    const { broken, review } = compare(year, siteData().records);
+    assert.equal(broken.filter((b) => b.label === 'Slimmest Margin of Victory').length, 0);
+    assert.equal(review.some((r) => r.label === 'Slimmest Margin of Victory'), true);
+  }
+});
+
+test('report-only records are declared, not inferred', () => {
+  const reportOnly = DEFINITIONS.filter((d) => d.reportOnly).map((d) => d.label);
+  assert.deepEqual(reportOnly, ['Slimmest Margin of Victory']);
+});
+
+// ── Contested weeks ─────────────────────────────────────────────────────────
+
+test('contested weeks follow the fold, not the all-play score sheet', () => {
+  const s = fixture(2024);
+  const p = playoffResult(s, CONFIG);
+  const played = contestedWeeks(p, CONFIG);
+
+  // Raj was the bye seed: no week 15, then 16 and the Bowl.
+  assert.deepEqual([...played.get('Raj')].sort(), [16, 17]);
+  // Samson reached the Bowl, so all three count.
+  assert.deepEqual([...played.get('Samson')].sort(), [15, 16, 17]);
+  // Eliminated in week 15.
+  assert.deepEqual([...played.get('Shak')].sort(), [15]);
+  // Missed the playoffs entirely — still posts scores, but contests nothing.
+  assert.equal(played.has('Vip'), false);
+});
+
+test('season points ignore weeks a team was already out', () => {
+  const s = fixture(2024);
+  const ctx = buildContext(s, CONFIG, playoffResult(s, CONFIG));
+  const def = DEFINITIONS.find((d) => d.label === 'Highest Total Points · Season');
+  const got = def.compute(ctx);
+
+  // Samson: 2182.75 regular season plus weeks 15, 16 and the Bowl.
+  assert.equal(got.holder, 'Samson');
+  assert.equal(got.value, '2760.45');
+
+  // A non-playoff team must not accrue playoff weeks. Vip's total should equal
+  // his regular-season points exactly.
+  const vipReg = ctx.allPlay.find((r) => r.gm === 'Vip').pointsFor;
+  const contested = contestedWeeks(ctx.playoff, CONFIG);
+  assert.equal(contested.has('Vip'), false);
+  assert.ok(vipReg > 0);
+});
+
+// ── Exhibition rosters ──────────────────────────────────────────────────────
+
+test('the standing exhibition split carries forward to a new season', () => {
+  const future = rosterFor(2031);
+  assert.deepEqual(future.pakistan, ['Hoss', 'Shak', 'Samson', 'Asher', 'Imran', 'Ryaan']);
+  assert.deepEqual(future.world, ['Laura', 'Anand', 'Vip', 'Dante', 'Andres']);
+});
+
+test('2024 keeps its own split, because Raj was still in the league', () => {
+  assert.ok(rosterFor(2024).world.includes('Raj'));
+  assert.ok(!rosterFor(2025).world.includes('Raj'));
+});
+
+test('the standing split covers exactly the current league', () => {
+  const gms = JSON.parse(readFileSync(join(root, 'data/franchises.json'), 'utf8'))
+    .franchises.map((f) => f.gm)
+    .sort();
+  const sides = [...rosterFor(2026).pakistan, ...rosterFor(2026).world].sort();
+  assert.deepEqual(sides, gms);
+});

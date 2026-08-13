@@ -71,10 +71,40 @@ export async function fetchWeeklyResults(season, leagueId) {
           // matters for the Week 18 exhibition, where each side fields one
           // combined lineup and managers contribute uneven numbers of players.
           starters: String(f.starters ?? '').split(',').filter(Boolean).length,
+          // Best STARTED player this week. Benched points don't count toward
+          // the single-player records. Kept as one row per franchise per week
+          // rather than every player, which would bloat the season file for
+          // no gain — the records only ever ask for a maximum.
+          topPlayer: bestStarter(f),
         })),
     }))
     .filter((w) => Number.isFinite(w.week) && w.scores.length > 0)
     .sort((a, b) => a.week - b.week);
+}
+
+function bestStarter(franchise) {
+  const started = toArray(franchise.player).filter((p) => p.status === 'starter');
+  if (started.length === 0) return null;
+  const best = started.reduce((a, b) => (Number(b.score) > Number(a.score) ? b : a));
+  return { id: best.id, score: Number(best.score) };
+}
+
+/**
+ * Resolve player ids to display names. Filtered by id, so this stays a small
+ * request — only ever called for the handful of ids that hold a record.
+ * MFL returns "Last, First"; the site writes names the human way round.
+ */
+export async function fetchPlayerNames(season, leagueId, ids) {
+  const wanted = [...new Set(ids)].filter(Boolean);
+  if (wanted.length === 0) return new Map();
+
+  const body = await call(season, 'players', { L: leagueId, PLAYERS: wanted.join(',') });
+  const out = new Map();
+  for (const p of toArray(body?.players?.player)) {
+    const [last, first] = String(p.name ?? '').split(',').map((s) => s.trim());
+    out.set(p.id, first ? `${first} ${last}` : last);
+  }
+  return out;
 }
 
 // TYPE=leagueStandings is deliberately not fetched. Its totals include the

@@ -19,24 +19,35 @@ Commits to `main` deploy. That is intended.
 
 ```bash
 npm test            # offline; replays checked-in fixtures
-npm run ingest      # fetch current season, rewrite data/<year>.json + weekly-log.js
-npm run seal-season # January only; prints what to paste into data.js
+npm run ingest      # fetch current season -> data/<year>.json + weekly-log.js
+npm run season-end  # after Week 18: write the season into data.js (no-op until then)
+npm run seal-season # rollover only: fold baselines, reset the log for next year
 npm run fixtures    # regenerate replay fixtures (dev only, hits MFL)
 ```
+
+Both `ingest` and `season-end` run in the weekly job. `season-end` no-ops until
+Week 18 has been played and no-ops again once the season is recorded, so it is
+safe to run every week forever.
 
 ## Editing rules
 
 - **`weekly-log.js`** — the block between `>>> BEGIN GENERATED` and
   `<<< END GENERATED` is rewritten by `npm run ingest`. Hand-edits there are
   lost. Everything outside the markers, including `GMS`, is hand-maintained.
-- **`data.js`** — hand-maintained. Holds the frozen pre-2026 baselines and the
-  prose (records cards, tidbits). The site tallies the generated log on top of
-  these baselines; the ingest never writes this file.
+- **`data.js`** — part generated, part hand-maintained. Blocks wrapped in
+  `>>> BEGIN GENERATED <key>` markers (champions, seasons, exhibition,
+  playoffApps, bowlApps, records, both baselines) are rewritten by
+  `season-end` and `seal-season`. `tidbits` and `drafts` have no markers and are
+  never touched by any script — tidbits are editorial and stay that way.
+  Rewriting the same data back must be byte-identical, or the weekly job commits
+  churn; `test/write-data.test.mjs` asserts that.
 - **`data/franchises.json`** — hand-maintained, and the one thing that cannot
   be fetched: MFL carries no `owner_name` for this league, so nothing links a
   franchise id to a GM name. Ids are stable across seasons; team names are not.
-- **`data/exhibition.json`** — hand-maintained Week 18 sides. MFL has no concept
-  of Pakistan vs. the World.
+- **`data/exhibition.json`** — the Pakistan vs. the World split. `standing`
+  carries forward to every new season, so a normal year needs no edit;
+  `overrides` pins a year that differed (2024, when Raj was still in the
+  league). MFL has no concept of these sides, so this cannot be fetched.
 
 ## Traps
 
@@ -66,6 +77,20 @@ earlier to "get results sooner" — it would race the corrections, and weekly
 winners carry the largest payout share, so a revised winner is a money
 question. The cron is UTC (`23 19 * * 4`), landing 13:23–14:23 Central.
 
+**Records are only auto-updated when the reading is provable.** `src/records.mjs`
+declares each record and how to compute it. `Slimmest Margin of Victory` is
+marked `reportOnly` and must stay that way until the league defines it: counting
+every adjacent pair in an all-play week gives 0.01 in both 2023 and 2024, which
+would have beaten the standing 0.25 (2019) twice over — so that reading is
+provably wrong. When a record's meaning is ambiguous, report it; do not guess
+and rewrite. A records book that silently invents history is worse than a stale
+one.
+
+**Playoff-week points only count for teams still playing.** All-play means an
+eliminated team and a team that missed the playoffs both still post a score
+every week. `contestedWeeks()` derives who actually played from the fold — the
+bye seed skips Week 15, eliminated teams stop, only the finalists play Week 17.
+
 **Config keys must be live.** `data/league.config.mjs` previously carried keys
 that looked like settings but were never read. Every key there is now consulted
 by code. If you add one, wire it up or leave it out.
@@ -78,11 +103,24 @@ champion, runner-up, and exact Fantasy Bowl scores. If a change breaks those,
 the change is wrong, not the fixtures. Regenerate fixtures only when adding a
 season.
 
-## Season rollover (January)
+## End of season
 
-`npm run seal-season` prints the champions row, seasons row, recomputed
-baselines and exhibition block to paste into `data.js`. It deliberately does not
-write that file — it mixes derived counts with prose that needs judgement.
-Then bump `season` in `data/league.config.mjs`, re-verify `franchises.json`
-against the new roster, and re-enable the scheduled workflow if the offseason
-disabled it.
+After Week 18 the weekly job records the year automatically: champion, playoff
+field, Pakistan vs. the World, playoff and Bowl appearance counts, and any
+all-time record the season broke. Nothing to paste.
+
+Only two things remain manual:
+
+1. **Tidbits** — editorial prose, deliberately never generated.
+2. **Rollover**, when you're ready to open the next year:
+   `npm run seal-season --apply` folds the finished season's weekly wins and
+   200+ games into the frozen baselines and resets `weekly-log.js`. It refuses
+   to run before `season-end` has recorded the year. Then bump `season` in
+   `data/league.config.mjs`, re-verify `franchises.json` against the new roster,
+   run `npm run fixtures`, and re-enable the workflow if the offseason
+   disabled it.
+
+The fold and the log reset must happen together — the site tallies the log on
+top of the baselines, so folding without clearing double-counts and clearing
+without folding loses the season. That is why it is one step, and why it is not
+automatic.

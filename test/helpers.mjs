@@ -27,11 +27,13 @@ export const CONFIG = {
 export const fixture = (year) =>
   JSON.parse(readFileSync(join(here, `fixtures/${year}.json`), 'utf8'));
 
-/** Hand-maintained Pakistan vs. the World sides. */
-export const rosterFor = (year) =>
-  JSON.parse(readFileSync(join(here, '../data/exhibition.json'), 'utf8')).seasons.find(
-    (r) => r.year === year
-  );
+/** Pakistan vs. the World sides: a season's override, else the standing split. */
+export const rosterFor = (year) => {
+  const file = JSON.parse(readFileSync(join(here, '../data/exhibition.json'), 'utf8'));
+  const override = (file.overrides ?? []).find((o) => o.year === year);
+  const { pakistan, world } = override ?? file.standing;
+  return { year, pakistan, world };
+};
 
 /** A season built from inline weeks, for unit tests that need no fixture. */
 export const season = (weeks) => ({ season: 2026, weeks });

@@ -1,35 +1,33 @@
 {
   "_comment": [
-    "Pakistan vs. the World — the Week 18 exhibition. Rosters are hand-maintained:",
-    "MFL has no concept of these sides, so there is nothing to fetch. Scores come",
-    "from Week 18 in the season file; only the split is recorded here.",
+    "Pakistan vs. the World — the Week 18 exhibition, the league's Pro Bowl.",
     "",
-    "This is the league's Pro Bowl. Each side fields ONE combined super lineup",
-    "built from its managers' best players, and both lineups are the same size —",
-    "12 a side in 2024 and 2025. Managers contribute uneven numbers of players",
-    "to it (Dante supplied 6 of the World's 12 in 2024; Anand supplied none),",
-    "and the sides need not have the same number of MANAGERS. That is not an",
-    "imbalance: the lineups are equal, so the totals compare like for like.",
-    "derive.mjs throws if the two lineups ever differ in size.",
+    "Each side fields ONE combined super lineup built from its managers' best",
+    "players, and both lineups are the same size — 12 a side in 2024 and 2025.",
+    "Managers contribute uneven numbers of players to it (Dante supplied 6 of",
+    "the World's 12 in 2024; Anand supplied none), and the sides need not have",
+    "the same number of MANAGERS. That is not an imbalance: the lineups are",
+    "equal, so the totals compare like for like. derive.mjs throws if the two",
+    "lineups ever differ in size.",
     "",
-    "Every GM who played that season must appear on exactly one side. derive.mjs",
-    "checks this against the Week 18 scores and fails loudly on a GM who is",
-    "missing, duplicated, or on both sides.",
+    "'standing' is the current split and carries forward to every new season, so",
+    "a normal year needs no edit here. It covers exactly the 11 GMs in the 2026",
+    "league. Only touch it if the league actually re-picks sides.",
     "",
-    "First contested in 2024; there is no Week 18 before that.",
+    "'overrides' pins a season whose split differed. 2024 is listed because Raj",
+    "was still in the league then and Ryaan and Laura were not.",
     "",
-    "Add the new season's sides here before running seal-season in January."
+    "First contested in 2024; there is no Week 18 before that."
   ],
-  "seasons": [
+  "standing": {
+    "pakistan": ["Hoss", "Shak", "Samson", "Asher", "Imran", "Ryaan"],
+    "world": ["Laura", "Anand", "Vip", "Dante", "Andres"]
+  },
+  "overrides": [
     {
       "year": 2024,
       "pakistan": ["Hoss", "Shak", "Samson", "Asher", "Imran"],
       "world": ["Raj", "Anand", "Vip", "Andres", "Dante"]
-    },
-    {
-      "year": 2025,
-      "pakistan": ["Hoss", "Shak", "Samson", "Asher", "Imran", "Ryaan"],
-      "world": ["Laura", "Anand", "Vip", "Dante", "Andres"]
     }
   ]
 }

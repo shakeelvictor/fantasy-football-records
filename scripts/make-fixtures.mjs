@@ -42,7 +42,7 @@ for (const [season, map] of Object.entries(MAPS)) {
       scores: w.scores
         .map((s) => {
           if (!map[s.id]) throw new Error(`${season}: unmapped franchise ${s.id}`);
-          return { gm: map[s.id], score: s.score, starters: s.starters };
+          return { gm: map[s.id], score: s.score, starters: s.starters, topPlayer: s.topPlayer };
         })
         .sort((a, b) => a.gm.localeCompare(b.gm)),
     })),
