@@ -137,15 +137,15 @@ const DATA = {
   // >>> BEGIN GENERATED weeklyWinsBaseline
   weeklyWinsBaseline: [
     { gm: 'Samson', count: 35 },
-    { gm: 'Shak', count: 15 },
     { gm: 'Asher', count: 15 },
     { gm: 'Dante', count: 15 },
+    { gm: 'Shak', count: 15 },
     { gm: 'Andres', count: 14 },
     { gm: 'Imran', count: 12 },
     { gm: 'Anand', count: 11 },
     { gm: 'Raj', count: 9 },
-    { gm: 'Vip', count: 8 },
     { gm: 'Hoss', count: 8 },
+    { gm: 'Vip', count: 8 },
     { gm: 'Laura', count: 1 },
   ],
   // <<< END GENERATED weeklyWinsBaseline
@@ -153,15 +153,15 @@ const DATA = {
   // Frozen totals through the 2025 season — see the note on weeklyWinsBaseline.
   // >>> BEGIN GENERATED bigGamesBaseline
   bigGamesBaseline: [
-    { gm: 'Samson', count: 10 },
-    { gm: 'Shak', count: 5 },
+    { gm: 'Samson', count: 11 },
     { gm: 'Anand', count: 5 },
     { gm: 'Hoss', count: 5 },
-    { gm: 'Imran', count: 3 },
+    { gm: 'Shak', count: 5 },
     { gm: 'Andres', count: 3 },
-    { gm: 'Vip', count: 3 },
     { gm: 'Asher', count: 3 },
-    { gm: 'Dante', count: 2 },
+    { gm: 'Dante', count: 3 },
+    { gm: 'Imran', count: 3 },
+    { gm: 'Vip', count: 3 },
     { gm: 'Raj', count: 2 },
     { gm: 'Laura', count: 1 },
   ],
@@ -318,7 +318,7 @@ const DATA = {
     "<strong>Raj</strong> joins Shak as the only GMs in MFL history to win the Regular Season AND the Fantasy Bowl in the same year.",
     "<strong>Samson</strong> joins Asher as the only GMs to reach the Fantasy Bowl but never win — a combined 0-8 with 4 losses each.",
     "<strong>Samson</strong> is the only GM to win 6 weeks in a row (2025).",
-    "<strong>Samson</strong> holds records for Best Regular Season Record (.829), Most Playoff Apps (18), Most Consecutive Apps (11), Most Week Wins (35), and Most 200+pt Performances (10).",
+    "<strong>Samson</strong> holds records for Best Regular Season Record (.829), Most Playoff Apps (18), Most Consecutive Apps (11), Most Week Wins (35), and Most 200+pt Performances (11).",
     "<strong>Ryaan (2025)</strong> joins Anand (2015), Andres (2016), Raj (2018), and Hoss (2021) as the only GMs since MFL to have 1st picks in each round and miss the playoffs.",
     "<strong>Laura (2025)</strong> is the first expansion team to reach the playoffs in her first season in the league and reach the Fantasy Bowl.",
   ],
