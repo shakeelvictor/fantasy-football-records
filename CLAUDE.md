@@ -77,14 +77,20 @@ earlier to "get results sooner" — it would race the corrections, and weekly
 winners carry the largest payout share, so a revised winner is a money
 question. The cron is UTC (`23 19 * * 4`), landing 13:23–14:23 Central.
 
-**Records are only auto-updated when the reading is provable.** `src/records.mjs`
-declares each record and how to compute it. `Slimmest Margin of Victory` is
-marked `reportOnly` and must stay that way until the league defines it: counting
-every adjacent pair in an all-play week gives 0.01 in both 2023 and 2024, which
-would have beaten the standing 0.25 (2019) twice over — so that reading is
-provably wrong. When a record's meaning is ambiguous, report it; do not guess
-and rewrite. A records book that silently invents history is worse than a stale
-one.
+**Record definitions were verified against MFL, not assumed.** Two are easy to
+get wrong and are locked by tests:
+
+- *Slimmest Margin of Victory* is the margin a week was **won** by (first over
+  second), not the gap between any adjacent pair. In 2019 the closest adjacent
+  pair was 0.19 while the recorded record is 0.25 — that season's narrowest
+  winning margin.
+- *Lowest Points to Win a Week* includes playoff rounds but **excludes the
+  Fantasy Bowl**. Three Bowls were won for less than the standing 132.54, so
+  the league does not count the Bowl as a week; it has its own records.
+
+When a record's meaning is genuinely ambiguous, mark it `reportOnly` and
+surface the number rather than guessing. A records book that silently invents
+history is worse than a stale one.
 
 **Playoff-week points only count for teams still playing.** All-play means an
 eliminated team and a team that missed the playoffs both still post a score

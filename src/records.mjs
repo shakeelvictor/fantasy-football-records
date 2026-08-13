@@ -200,11 +200,16 @@ export const DEFINITIONS = [
     label: 'Lowest Points to Win a Week',
     better: 'lower',
     read: (card) => num(card.value),
-    compute: ({ season, config }) => {
-      const wins = weeklyWinners(season, config);
+    compute: ({ season, config, playoff }) => {
+      const wins = weekWinners(season, config, playoff);
       if (!wins.length) return null;
       const low = wins.reduce((a, b) => (b.score < a.score ? b : a));
-      return { n: low.score, value: low.score.toFixed(2), holder: low.gm, context: `${season.season} · Week ${low.week}` };
+      return {
+        n: low.score,
+        value: low.score.toFixed(2),
+        holder: low.gm,
+        context: `${season.season} · Week ${low.week}`,
+      };
     },
   },
   {
@@ -240,25 +245,17 @@ export const DEFINITIONS = [
     label: 'Slimmest Margin of Victory',
     better: 'lower',
     read: (card) => num(card.value),
-    // REPORT ONLY — never rewrites the card. What counts as "a victory" in an
-    // all-play league is genuinely ambiguous, and the obvious reading is
-    // provably not the league's: counting every adjacent pair in a week gives
-    // 0.01 in both 2023 and 2024, which would have beaten the standing 0.25
-    // (Andres over Dante, 2019) twice before 2025. Since the record still
-    // stands at 0.25, the league means something narrower. Until someone says
-    // what, this surfaces the number and leaves the card alone.
-    reportOnly: true,
-    compute: ({ season, config }) => {
-      // All-play, so "a victory" is any adjacent pair in a week's ranking.
+    // The margin by which a week was WON — first over second — not the gap
+    // between any adjacent pair. Verified against MFL: in 2019 the closest
+    // adjacent pair was 0.19 (wk 7) while the recorded record is 0.25, which is
+    // exactly that season's narrowest winning margin (wk 9). The league counts
+    // the win, not the ranking gap.
+    compute: ({ season, config, playoff }) => {
       let best = null;
-      for (const w of weeksIn(season, config.regularSeasonWeeks)) {
-        const ranked = [...w.scores].sort((a, b) => b.score - a.score);
-        for (let i = 0; i + 1 < ranked.length; i++) {
-          const gap = round2(ranked[i].score - ranked[i + 1].score);
-          if (!best || gap < best.n) {
-            best = { n: gap, over: ranked[i + 1], winner: ranked[i], week: w.week };
-          }
-        }
+      for (const { week, ranked } of rankedWeeks(season, config, playoff)) {
+        if (ranked.length < 2) continue;
+        const gap = round2(ranked[0].score - ranked[1].score);
+        if (!best || gap < best.n) best = { n: gap, week, winner: ranked[0], over: ranked[1] };
       }
       if (!best) return null;
       return {
@@ -284,6 +281,39 @@ export const DEFINITIONS = [
     compute: ({ season, config }) => topPlayerIn(season, config.playoffWeeks, season.season, config.fantasyBowlWeek),
   },
 ];
+
+/**
+ * Every week that has a winner, ranked, with only the teams that actually
+ * played it — regular-season weeks plus the playoff rounds.
+ *
+ * The Fantasy Bowl is deliberately absent. Verified against MFL: three Bowls
+ * were won with fewer points than the standing "Lowest Points to Win a Week"
+ * record of 132.54 (2016 wk 14, a five-team playoff round), so the league does
+ * not treat winning the Bowl as winning a week. It has its own records.
+ *
+ * playoff.rounds already stops before the Bowl and already carries only the
+ * teams still alive, which is why it is the source here rather than the raw
+ * score sheet — in an all-play league everyone posts a score every week.
+ */
+function rankedWeeks(season, config, playoff) {
+  const out = weeksIn(season, config.regularSeasonWeeks).map((w) => ({
+    week: w.week,
+    ranked: [...w.scores].sort(byScore),
+  }));
+  for (const round of playoff?.rounds ?? []) {
+    out.push({ week: round.week, ranked: [...round.ranked].sort(byScore) });
+  }
+  return out.sort((a, b) => a.week - b.week);
+}
+
+const byScore = (a, b) => b.score - a.score || a.gm.localeCompare(b.gm);
+
+/** Winner of every week that has one, Fantasy Bowl excluded. */
+function weekWinners(season, config, playoff) {
+  return rankedWeeks(season, config, playoff)
+    .filter((w) => w.ranked.length)
+    .map((w) => ({ week: w.week, gm: w.ranked[0].gm, score: w.ranked[0].score }));
+}
 
 /**
  * Which playoff weeks each GM actually contested.

@@ -218,10 +218,10 @@ const DATA = {
     },
     {
       label: 'Highest Total Points · Season',
-      value: '2709.23',
-      holder: 'Shak',
-      context: '2021 (incl. playoffs)',
-      prev: 'Previous: Shak · 2702.92 (2018)'
+      value: '2760.45',
+      holder: 'Samson',
+      context: '2024 (incl. playoffs)',
+      prev: 'Previous: Shak · 2709.23 (2021)'
     },
     {
       label: 'Highest Total Points · Reg. Season',
@@ -278,10 +278,10 @@ const DATA = {
     },
     {
       label: 'Slimmest Margin of Victory',
-      value: '0.25',
-      holder: 'Andres over Dante',
-      context: '2019 · Wk 9 · 162.19 – 161.94',
-      prev: 'Honorable: 1.31 — 2015 FB · Imran 127.35 over Dante 126.04'
+      value: '0.14',
+      holder: 'Vip over Asher',
+      context: '2020 · Wk 5 · 178.11 – 177.97',
+      prev: 'Previous: Andres over Dante · 0.25 (2019, Wk 9) · Honorable: 1.31 — 2015 FB'
     },
     {
       label: 'Highest Single-Player · Reg. Season',

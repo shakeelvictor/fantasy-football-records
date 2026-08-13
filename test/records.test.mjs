@@ -63,20 +63,66 @@ test('a record the season did not beat is left untouched', () => {
   assert.equal(unchanged.length, 1);
 });
 
-// Slimmest Margin is report-only. Counting every adjacent pair gives 0.01 in
-// both 2023 and 2024, which would have beaten the standing 0.25 twice over —
-// so that reading is provably not the league's, and the card must not move.
-test('slimmest margin never rewrites the card, only reports', () => {
-  for (const year of [2023, 2024, 2025]) {
-    const { broken, review } = compare(year, siteData().records);
-    assert.equal(broken.filter((b) => b.label === 'Slimmest Margin of Victory').length, 0);
-    assert.equal(review.some((r) => r.label === 'Slimmest Margin of Victory'), true);
-  }
+// Slimmest Margin is the margin a week was WON by — first over second — not the
+// gap between any adjacent pair. Verified against MFL: 2019's closest adjacent
+// pair was 0.19 (wk 7), while the recorded record is 0.25, which is exactly
+// that season's narrowest winning margin (wk 9). The "any pair" reading would
+// also have broken the record in 2023 and 2024 at 0.01, which never happened.
+test('slimmest margin measures the winning margin, not any adjacent gap', () => {
+  const s = fixture(2025);
+  const ctx = buildContext(s, CONFIG, playoffResult(s, CONFIG));
+  const got = DEFINITIONS.find((d) => d.label === 'Slimmest Margin of Victory').compute(ctx);
+
+  // 2025's narrowest winning margin is 0.87 (wk 4). The narrowest adjacent gap
+  // anywhere that season is 0.05 — if that number ever appears here, the
+  // definition has regressed.
+  assert.equal(got.value, '0.87');
+  assert.equal(got.holder, 'Samson over Imran');
+
+  const anyPair = Math.min(
+    ...s.weeks
+      .filter((w) => CONFIG.regularSeasonWeeks.includes(w.week))
+      .flatMap((w) => {
+        const r = [...w.scores].sort((a, b) => b.score - a.score);
+        return r.slice(1).map((_, i) => Math.round((r[i].score - r[i + 1].score) * 100) / 100);
+      })
+  );
+  assert.equal(anyPair, 0.05);
+  assert.notEqual(got.value, String(anyPair));
 });
 
-test('report-only records are declared, not inferred', () => {
-  const reportOnly = DEFINITIONS.filter((d) => d.reportOnly).map((d) => d.label);
-  assert.deepEqual(reportOnly, ['Slimmest Margin of Victory']);
+// Three Fantasy Bowls were won with fewer points than the standing 132.54
+// record (2016 wk 14, a five-team playoff round), so winning the Bowl is not
+// "winning a week" — it has its own records.
+test('week winners include playoff rounds but never the Fantasy Bowl', () => {
+  const s = fixture(2025);
+  const ctx = buildContext(s, CONFIG, playoffResult(s, CONFIG));
+  const got = DEFINITIONS.find((d) => d.label === 'Lowest Points to Win a Week').compute(ctx);
+
+  // 2025's Fantasy Bowl was won with 123.77 — lower than this — and must not
+  // be the answer.
+  assert.equal(got.value, '168.69');
+  const bowl = s.weeks.find((w) => w.week === CONFIG.fantasyBowlWeek);
+  const bowlWin = Math.max(...bowl.scores.map((x) => x.score));
+  assert.ok(bowlWin < Number(got.value), 'the Bowl was won for less, so it must be excluded');
+});
+
+test('no record is report-only now that every definition is verified', () => {
+  assert.deepEqual(DEFINITIONS.filter((d) => d.reportOnly).map((d) => d.label), []);
+});
+
+// ── Week 18 ─────────────────────────────────────────────────────────────────
+
+test('week 18 never contributes to season totals', () => {
+  const s = fixture(2025);
+  const def = DEFINITIONS.find((d) => d.label === 'Highest Total Points · Season');
+  const before = def.compute(buildContext(s, CONFIG, playoffResult(s, CONFIG))).value;
+
+  const spiked = structuredClone(s);
+  spiked.weeks.find((w) => w.week === 18).scores.find((x) => x.gm === 'Samson').score = 9999;
+  const after = def.compute(buildContext(spiked, CONFIG, playoffResult(spiked, CONFIG))).value;
+
+  assert.equal(after, before);
 });
 
 // ── Contested weeks ─────────────────────────────────────────────────────────
