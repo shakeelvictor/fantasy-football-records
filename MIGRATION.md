@@ -239,12 +239,15 @@ table weekly winners take the largest share — a revised winner is a money
 question, not a cosmetic one. The afternoon slot also means the hour of DST
 drift moves the run *away* from the correction window, never back into it.
 
-A late correction — one landing after Thursday afternoon — is still picked up,
-because every run refetches the whole season and overwrites. The site would
-show the old figure for a week and then change silently. Rerun discrepancy
-reconciliation was explicitly out of scope, so nothing announces that; if the
-league ever wants a heads-up when a past week's winner changes, that is a small
-addition to the ingest and worth asking for rather than assuming.
+**Corrections do not land later than that** — confirmed by the league, and
+consistent with how MFL has behaved for the whole MFL era. So the Thursday
+afternoon run reads final numbers, and rerun reconciliation is not a scenario
+this needs to design for. That is why none exists, beyond the spec having ruled
+it out.
+
+The refetch-and-overwrite design would still absorb a late correction if one
+ever appeared, since every run rebuilds the season from scratch. That is a
+property of the design, not a mechanism anyone needs to rely on.
 
 ---
 
