@@ -15,6 +15,13 @@ declaring globals. **They are not modules** — do not add `import`/`export` or
 make them async, it will silently break the page. Node code under `src/` is
 separate and never shipped to the browser.
 
+**Two module systems live in this repo, and the file extension is what tells
+them apart.** `.mjs` is Node ESM; `.js` at the repo root is a browser classic
+script. `package.json` deliberately has **no `"type"` field**: setting
+`"type": "module"` would declare that `data.js` and `app.js` are ES modules,
+which is false, and it is not needed because `.mjs` is unambiguous on its own.
+Keep new Node code as `.mjs`.
+
 Commits to `main` deploy. That is intended.
 
 ```bash

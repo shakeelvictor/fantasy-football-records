@@ -2,7 +2,6 @@
   "name": "fflr-records",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
   "description": "FFLR records site. Static pages plus a weekly MFL ingest.",
   "engines": {
     "node": ">=22"
