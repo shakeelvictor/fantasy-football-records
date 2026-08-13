@@ -245,15 +245,16 @@ const DATA = {
     },
     {
       label: 'Lowest Points to Win a Week',
-      value: '132.54',
-      holder: 'Raj',
-      context: '2016 · Week 14'
+      value: '154.05',
+      holder: 'Anand',
+      context: '2021 · Week 8',
+      prev: 'Previous: Raj · 132.54 (2016 · Wk 14 — a playoff round, no longer counted)'
     },
     {
       label: 'Most Consecutive Wins',
       value: '6',
       holder: 'Samson',
-      context: '2023 · Weeks 3–8',
+      context: '2025 · Weeks 3–8',
       prev: 'Previous: Samson · 4 (2023) and Shak · 4 (2017–18)'
     },
     {

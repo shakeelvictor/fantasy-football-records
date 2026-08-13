@@ -84,9 +84,11 @@ get wrong and are locked by tests:
   second), not the gap between any adjacent pair. In 2019 the closest adjacent
   pair was 0.19 while the recorded record is 0.25 — that season's narrowest
   winning margin.
-- *Lowest Points to Win a Week* includes playoff rounds but **excludes the
-  Fantasy Bowl**. Three Bowls were won for less than the standing 132.54, so
-  the league does not count the Bowl as a week; it has its own records.
+- *Lowest Points to Win a Week* and *Most Consecutive Wins* are **regular
+  season only**. Winning a week means topping the whole league; topping a
+  four-team playoff round is a different achievement and the postseason has its
+  own records. The old 132.54 card came from a 2016 playoff round and no longer
+  qualifies.
 
 When a record's meaning is genuinely ambiguous, mark it `reportOnly` and
 surface the number rather than guessing. A records book that silently invents

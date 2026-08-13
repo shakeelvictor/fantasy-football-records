@@ -96,6 +96,35 @@ export const DEFINITIONS = [
     },
   },
   {
+    // Consecutive regular-season week wins.
+    //
+    // Computed within a season only. The card's own previous line cites a
+    // streak spanning 2017-18, so a run CAN cross seasons, and this pipeline
+    // only ever sees one year at a time. That makes the number a floor, never
+    // an overstatement — it can miss a cross-season streak but can never
+    // invent one, so a missed record stays stale rather than becoming wrong.
+    label: 'Most Consecutive Wins',
+    better: 'higher',
+    read: (card) => num(card.value),
+    compute: ({ season, config }) => {
+      const wins = weekWinners(season, config);
+      let best = null, run = 0, start = null;
+      for (let i = 0; i < wins.length; i++) {
+        const sameAsPrev = i > 0 && wins[i - 1].gm === wins[i].gm && wins[i - 1].week === wins[i].week - 1;
+        run = sameAsPrev ? run + 1 : 1;
+        if (!sameAsPrev) start = wins[i].week;
+        if (!best || run > best.n) best = { n: run, gm: wins[i].gm, from: start, to: wins[i].week };
+      }
+      if (!best || best.n < 2) return null;
+      return {
+        n: best.n,
+        value: String(best.n),
+        holder: best.gm,
+        context: `${season.season} · Weeks ${best.from}\u2013${best.to}`,
+      };
+    },
+  },
+  {
     label: 'Best Record · Expanded Season',
     better: 'higher',
     read: (card) => pctOf(card.value),
@@ -200,8 +229,8 @@ export const DEFINITIONS = [
     label: 'Lowest Points to Win a Week',
     better: 'lower',
     read: (card) => num(card.value),
-    compute: ({ season, config, playoff }) => {
-      const wins = weekWinners(season, config, playoff);
+    compute: ({ season, config }) => {
+      const wins = weekWinners(season, config);
       if (!wins.length) return null;
       const low = wins.reduce((a, b) => (b.score < a.score ? b : a));
       return {
@@ -250,9 +279,9 @@ export const DEFINITIONS = [
     // adjacent pair was 0.19 (wk 7) while the recorded record is 0.25, which is
     // exactly that season's narrowest winning margin (wk 9). The league counts
     // the win, not the ranking gap.
-    compute: ({ season, config, playoff }) => {
+    compute: ({ season, config }) => {
       let best = null;
-      for (const { week, ranked } of rankedWeeks(season, config, playoff)) {
+      for (const { week, ranked } of rankedWeeks(season, config)) {
         if (ranked.length < 2) continue;
         const gap = round2(ranked[0].score - ranked[1].score);
         if (!best || gap < best.n) best = { n: gap, week, winner: ranked[0], over: ranked[1] };
@@ -283,34 +312,23 @@ export const DEFINITIONS = [
 ];
 
 /**
- * Every week that has a winner, ranked, with only the teams that actually
- * played it — regular-season weeks plus the playoff rounds.
+ * Every regular-season week, ranked.
  *
- * The Fantasy Bowl is deliberately absent. Verified against MFL: three Bowls
- * were won with fewer points than the standing "Lowest Points to Win a Week"
- * record of 132.54 (2016 wk 14, a five-team playoff round), so the league does
- * not treat winning the Bowl as winning a week. It has its own records.
- *
- * playoff.rounds already stops before the Bowl and already carries only the
- * teams still alive, which is why it is the source here rather than the raw
- * score sheet — in an all-play league everyone posts a score every week.
+ * "Winning a week" is a regular-season thing. The postseason is a fold with its
+ * own records (Highest Playoff Points, Widest Fantasy Bowl Margin), and topping
+ * a four-team round is not the same achievement as topping the whole league.
  */
-function rankedWeeks(season, config, playoff) {
-  const out = weeksIn(season, config.regularSeasonWeeks).map((w) => ({
-    week: w.week,
-    ranked: [...w.scores].sort(byScore),
-  }));
-  for (const round of playoff?.rounds ?? []) {
-    out.push({ week: round.week, ranked: [...round.ranked].sort(byScore) });
-  }
-  return out.sort((a, b) => a.week - b.week);
+function rankedWeeks(season, config) {
+  return weeksIn(season, config.regularSeasonWeeks)
+    .map((w) => ({ week: w.week, ranked: [...w.scores].sort(byScore) }))
+    .sort((a, b) => a.week - b.week);
 }
 
 const byScore = (a, b) => b.score - a.score || a.gm.localeCompare(b.gm);
 
-/** Winner of every week that has one, Fantasy Bowl excluded. */
-function weekWinners(season, config, playoff) {
-  return rankedWeeks(season, config, playoff)
+/** Winner of every regular-season week. */
+function weekWinners(season, config) {
+  return rankedWeeks(season, config)
     .filter((w) => w.ranked.length)
     .map((w) => ({ week: w.week, gm: w.ranked[0].gm, score: w.ranked[0].score }));
 }

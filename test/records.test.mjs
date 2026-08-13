@@ -91,20 +91,33 @@ test('slimmest margin measures the winning margin, not any adjacent gap', () => 
   assert.notEqual(got.value, String(anyPair));
 });
 
-// Three Fantasy Bowls were won with fewer points than the standing 132.54
-// record (2016 wk 14, a five-team playoff round), so winning the Bowl is not
-// "winning a week" — it has its own records.
-test('week winners include playoff rounds but never the Fantasy Bowl', () => {
+// Winning a week is a regular-season thing. The postseason is a fold with its
+// own records, and topping a four-team round is not the same achievement.
+test('week winners come from the regular season only', () => {
   const s = fixture(2025);
   const ctx = buildContext(s, CONFIG, playoffResult(s, CONFIG));
   const got = DEFINITIONS.find((d) => d.label === 'Lowest Points to Win a Week').compute(ctx);
 
-  // 2025's Fantasy Bowl was won with 123.77 — lower than this — and must not
-  // be the answer.
   assert.equal(got.value, '168.69');
-  const bowl = s.weeks.find((w) => w.week === CONFIG.fantasyBowlWeek);
-  const bowlWin = Math.max(...bowl.scores.map((x) => x.score));
-  assert.ok(bowlWin < Number(got.value), 'the Bowl was won for less, so it must be excluded');
+  assert.equal(got.context, '2025 · Week 13');
+
+  // 2025's Fantasy Bowl was won with 123.77 — well under the regular-season
+  // low — so it would take the record if the postseason counted. It must not.
+  const bowl = s.weeks.find((w) => w.week === CONFIG.fantasyBowlWeek).scores.filter((x) => x.score > 0);
+  const bowlWin = Math.max(...bowl.map((x) => x.score));
+  assert.ok(bowlWin < Number(got.value), 'the Bowl was won for less and must be excluded');
+  assert.equal(bowlWin, 123.77);
+});
+
+test('consecutive wins counts a run of regular-season week wins', () => {
+  const s = fixture(2025);
+  const ctx = buildContext(s, CONFIG, playoffResult(s, CONFIG));
+  const got = DEFINITIONS.find((d) => d.label === 'Most Consecutive Wins').compute(ctx);
+
+  // Samson won weeks 3 through 8 of 2025 — the run the record card describes.
+  assert.equal(got.value, '6');
+  assert.equal(got.holder, 'Samson');
+  assert.equal(got.context, '2025 · Weeks 3\u20138');
 });
 
 test('no record is report-only now that every definition is verified', () => {
