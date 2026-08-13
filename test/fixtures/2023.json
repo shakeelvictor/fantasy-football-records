@@ -1,0 +1,940 @@
+{
+  "season": 2023,
+  "weeks": [
+    {
+      "week": 1,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 125.54,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 168.5,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 79.79,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 137.89,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 124.53,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 120.91,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 148.99,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 137.88,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 117.37,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 104.91,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 137.03,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 137.86,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 166.29,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 110.78,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 159.72,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 168.38,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 150.12,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 140.39,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 170.59,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 132.67,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 156.06,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 134.19,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 135.63,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 145.84,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 210.35,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 150.06,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 149.08,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 160.26,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 176.03,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 159.09,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 151.95,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 154.18,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 147.47,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 147.33,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 155.14,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 84.3,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 146.03,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 190.02,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 162.64,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 128.59,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 96.74,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 175.4,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 116.12,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 148.74,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 128.57,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 141.87,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 146.13,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 204.28,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 130.83,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 164.48,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 160.07,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 139.03,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 164.62,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 94.11,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 119.55,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 108.03,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 138.11,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 185.81,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 149.35,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 134.88,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 155.66,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 164.97,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 131.26,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 139.4,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 135.78,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 125.91,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 150.53,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 189.68,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 86.87,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 177.6,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 130.37,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 189.2,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 175.52,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 154.85,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 139.18,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 140.27,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 147.13,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 160.08,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 164.08,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 176.12,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 9,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 114.13,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 135.3,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 152.19,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 112.6,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 113.31,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 138.99,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 115.75,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 113.39,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 137.13,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 155.68,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 10,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 125.47,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 143,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 197.38,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 170.39,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 161.59,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 146.18,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 132.42,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 135.25,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 171.69,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 162.21,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 11,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 124.18,
+          "starters": 11
+        },
+        {
+          "gm": "Andres",
+          "score": 162.6,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 129.99,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 109.48,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 157.12,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 134.3,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 182.37,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 147.93,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 131.8,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 156.16,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 12,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 140.36,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 173.13,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 156.96,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 144.69,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 152.05,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 177.07,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 159.33,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 144.35,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 167.25,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 142.39,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 13,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 109.4,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 138.73,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 196.67,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 165.27,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 127.97,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 128.85,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 185.45,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 172.03,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 142.35,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 161.59,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 14,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 145.91,
+          "starters": 12
+        },
+        {
+          "gm": "Andres",
+          "score": 150.52,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 190.64,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 120.69,
+          "starters": 12
+        },
+        {
+          "gm": "Hoss",
+          "score": 164.46,
+          "starters": 12
+        },
+        {
+          "gm": "Imran",
+          "score": 129.77,
+          "starters": 12
+        },
+        {
+          "gm": "Raj",
+          "score": 123.22,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 156.94,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 90.1,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 128.18,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 15,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Andres",
+          "score": 136.33,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 154.87,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Hoss",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Imran",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Raj",
+          "score": 101.35,
+          "starters": 12
+        },
+        {
+          "gm": "Samson",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Shak",
+          "score": 112.76,
+          "starters": 12
+        },
+        {
+          "gm": "Vip",
+          "score": 156.57,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 16,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Andres",
+          "score": 156.95,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 138.26,
+          "starters": 12
+        },
+        {
+          "gm": "Dante",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Hoss",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Imran",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Raj",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Samson",
+          "score": 141.89,
+          "starters": 12
+        },
+        {
+          "gm": "Shak",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Vip",
+          "score": 146.22,
+          "starters": 12
+        }
+      ]
+    },
+    {
+      "week": 17,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Andres",
+          "score": 142.36,
+          "starters": 12
+        },
+        {
+          "gm": "Asher",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Dante",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Hoss",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Imran",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Raj",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Samson",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Shak",
+          "score": 0,
+          "starters": 0
+        },
+        {
+          "gm": "Vip",
+          "score": 125.67,
+          "starters": 12
+        }
+      ]
+    }
+  ]
+}

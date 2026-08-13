@@ -38,6 +38,68 @@ function renderChampions(filter = 'all') {
   }).join('');
 }
 
+// ====== Pakistan vs. the World ======
+// Week 18 exhibition — the league's Pro Bowl. Each side fields one combined
+// super lineup of its managers' best players, equal size on both sides. The
+// per-GM line is that manager's contribution to it: players sent, points
+// returned. Manager counts differ between sides and don't matter; lineups
+// are what's equal, so that's what the header shows.
+function renderExhibition() {
+  const tally = document.getElementById('seriesTally');
+  const list = document.getElementById('exhibitionList');
+  if (!tally || !list) return;
+
+  const meetings = [...DATA.exhibition].sort((a, b) => b.year - a.year);
+  const won = (name) => meetings.filter(m => m.winner === name).length;
+
+  tally.innerHTML = `
+    <div class="series-side ${won('Pakistan') > won('World') ? 'leading' : ''}">
+      <div class="series-name">Pakistan</div>
+      <div class="series-count">${won('Pakistan')}</div>
+    </div>
+    <div class="series-divider">
+      <span class="series-label">All-Time Series</span>
+      <span class="series-state">${won('Pakistan') === won('World') ? 'All square' : 'Series lead'}</span>
+    </div>
+    <div class="series-side ${won('World') > won('Pakistan') ? 'leading' : ''}">
+      <div class="series-name">the World</div>
+      <div class="series-count">${won('World')}</div>
+    </div>
+  `;
+
+  const sideHtml = (side, label, isWinner) => `
+    <div class="ex-side ${isWinner ? 'won' : ''}">
+      <div class="ex-side-head">
+        <span class="ex-side-name">${label}</span>
+        <span class="ex-side-total">${side.total.toFixed(2)}</span>
+      </div>
+      <div class="ex-side-meta">${side.players} players from ${side.roster.length} managers</div>
+      <ul class="ex-roster">
+        ${side.roster.map(r => `
+          <li${r.players === 0 ? ' class="blank"' : ''}>
+            <span class="ex-gm">${r.gm}</span>
+            <span class="ex-count">${r.players === 0 ? 'none' : r.players === 1 ? '1 player' : r.players + ' players'}</span>
+            <span class="ex-pts">${r.points.toFixed(2)}</span>
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+  `;
+
+  list.innerHTML = meetings.map(m => `
+    <div class="exhibition-card">
+      <div class="ex-year">
+        <span>${m.year}</span>
+        <span class="ex-result">${m.winner} by ${m.margin.toFixed(2)}</span>
+      </div>
+      <div class="ex-sides">
+        ${sideHtml(m.pakistan, 'Pakistan', m.winner === 'Pakistan')}
+        ${sideHtml(m.world, 'the World', m.winner === 'World')}
+      </div>
+    </div>
+  `).join('');
+}
+
 // ====== Leaderboards ======
 function renderLeaderboard(elId, items, valueKey = 'count', valueRenderer = null) {
   const ul = document.getElementById(elId);
@@ -169,6 +231,7 @@ function setupMobileNav() {
 // ====== Init ======
 document.addEventListener('DOMContentLoaded', () => {
   renderChampions();
+  renderExhibition();
   renderLeaderboard('playoffApps', DATA.playoffApps);
   renderLeaderboard('bowlApps', DATA.bowlApps, 'count',
     item => `${item.count} <span style="color:var(--text-muted);font-size:11px">(${item.record})</span>`

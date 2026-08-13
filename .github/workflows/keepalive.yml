@@ -1,0 +1,41 @@
+name: Offseason keepalive
+
+# GitHub disables scheduled workflows after ~60 days of repository inactivity,
+# and the failure is silent — the weekly job just stops. This league's offseason
+# runs February to August, which trips that every single year, so the weekly
+# update would be dead by the time Week 1 arrives.
+#
+# Workflow runs do not themselves count as activity; commits do. This job makes
+# a tiny commit on the 1st of each month so the repo never goes quiet long
+# enough to trip the timer. It is deliberately separate from the weekly update
+# so a failure here can never block a real week of results.
+#
+# GitHub scopes the auto-disable rule to public repositories in its docs, but
+# sources disagree about private ones. This costs one commit a month either way.
+
+on:
+  schedule:
+    - cron: '17 12 1 * *'
+  workflow_dispatch:
+
+concurrency:
+  group: keepalive
+  cancel-in-progress: false
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Touch the heartbeat and commit
+        run: |
+          mkdir -p data
+          date -u +'%Y-%m-%dT%H:%M:%SZ' > data/.keepalive
+          git config user.name "fflr-bot"
+          git config user.email "fflr-bot@users.noreply.github.com"
+          git add data/.keepalive
+          git diff --staged --quiet || git commit -m "Keepalive $(date -u +%F)"
+          git push

@@ -30,9 +30,16 @@
 //  After editing: commit and push. Netlify redeploys automatically.
 // ═══════════════════════════════════════════════════════════════════════
 
+// The array below is regenerated from MFL by `npm run ingest` every Thursday.
+// Hand-edits between the BEGIN/END markers are overwritten on the next run —
+// if a week looks wrong, fix it in MFL and rerun, or edit data/franchises.json.
+// Everything outside the markers is hand-maintained and never touched.
+
+// >>> BEGIN GENERATED — do not edit by hand
 const WEEKLY_LOG = [
   // ── 2026 ──
 ];
+// <<< END GENERATED
 
 // Valid GM names, used to catch typos in the log above.
 // Add a name here when the league takes on a new GM.

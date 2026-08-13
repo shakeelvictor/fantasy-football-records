@@ -1,0 +1,16 @@
+{
+  "name": "fflr-records",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "FFLR records site. Static pages plus a weekly MFL ingest.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "ingest": "node src/ingest.mjs",
+    "seal-season": "node src/seal-season.mjs",
+    "fixtures": "node scripts/make-fixtures.mjs"
+  }
+}

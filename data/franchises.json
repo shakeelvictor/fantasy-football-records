@@ -1,0 +1,42 @@
+{
+  "_comment": [
+    "Franchise ID -> GM name. Hand-maintained, and the one thing in this",
+    "pipeline that cannot be fetched: MFL's league response carries team names",
+    "but no owner_name for any franchise in 19716, so there is no machine link",
+    "from a franchise to the GM names the site displays.",
+    "",
+    "IDs are stable across seasons; team names are not. 0001 has been 'FOX",
+    "Injury Time-Out Music' (2023), 'The GOAT' (2024), 'Uncle Rico' (2025) and",
+    "'Smells Like GOAT' (2026) — all Shak. Key on id, never on name.",
+    "",
+    "This mapping was derived, not guessed. Each row was confirmed by replaying",
+    "past seasons through src/derive.mjs and matching the result against the",
+    "records already on the site: 0003's 2025 all-play record comes out to",
+    "116-24 .829 (Samson's recorded best), and the 2023 fold reproduces the",
+    "Fantasy Bowl at 142.36-125.67 exactly, fixing seeds 1-6 that year against",
+    "the recorded field order Samson, Andres, Asher, Shak, Vip, Raj. 2024 and",
+    "2025 agree independently.",
+    "",
+    "0002 was Raj's franchise through 2024 and is Ryaan's from 2025 — confirmed",
+    "by the league: Ryaan replaced Raj, who is no longer in the league. The slot",
+    "changed hands; it was not a rename. If a GM leaves, update the row rather",
+    "than adding one — records follow the gm name, not the id. Raj's history",
+    "stays under 'Raj' in data.js and is untouched by this.",
+    "",
+    "'gm' must match a name in the GMS list in weekly-log.js. Ingest fails loudly",
+    "on any unmapped id or unknown GM name rather than writing a wrong record."
+  ],
+  "franchises": [
+    { "id": "0001", "gm": "Shak", "teamName": "Smells Like GOAT" },
+    { "id": "0002", "gm": "Ryaan", "teamName": "Ryaan" },
+    { "id": "0003", "gm": "Samson", "teamName": "3rd and 1" },
+    { "id": "0004", "gm": "Imran", "teamName": "The Don is Yinz King" },
+    { "id": "0005", "gm": "Hoss", "teamName": "I'm Just Here to Network" },
+    { "id": "0006", "gm": "Andres", "teamName": "2-minute Drill" },
+    { "id": "0007", "gm": "Asher", "teamName": "High Flyers" },
+    { "id": "0008", "gm": "Dante", "teamName": "WhiskeyDitka" },
+    { "id": "0009", "gm": "Vip", "teamName": "Vip" },
+    { "id": "0010", "gm": "Anand", "teamName": "Reggaeton Forever" },
+    { "id": "0011", "gm": "Laura", "teamName": "Lil' Sosos" }
+  ]
+}

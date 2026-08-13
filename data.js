@@ -28,6 +28,72 @@ const DATA = {
     { year: 2025, era: 'mfl', champ: 'Shak', seed: 6, runnerUp: 'Laura', runnerSeed: 5, score: '123.76 – 116.70' },
   ],
 
+  // Pakistan vs. the World — the Week 18 exhibition, first contested in 2024.
+  // The league's Pro Bowl: each side fields one combined super lineup of its
+  // managers' best players, 12 a side. Managers contribute uneven numbers of
+  // players to it, and the sides need not have the same number of managers —
+  // the lineups are what's equal. `players` is the figure that matters.
+  //
+  // Rosters live in data/exhibition.json and the numbers are derived by
+  // src/derive.mjs — `npm run seal-season` prints the new row each January.
+  exhibition: [
+    {
+      year: 2025,
+      winner: 'World',
+      margin: 23.32,
+      pakistan: {
+        total: 124.31,
+        players: 12,
+        roster: [
+          { gm: 'Hoss', points: 31.64, players: 3 },
+          { gm: 'Shak', points: 27.07, players: 4 },
+          { gm: 'Samson', points: 25.30, players: 2 },
+          { gm: 'Asher', points: 19.80, players: 1 },
+          { gm: 'Ryaan', points: 19.60, players: 1 },
+          { gm: 'Imran', points: 0.90, players: 1 },
+        ],
+      },
+      world: {
+        total: 147.63,
+        players: 12,
+        roster: [
+          { gm: 'Andres', points: 47.10, players: 3 },
+          { gm: 'Anand', points: 38.76, players: 2 },
+          { gm: 'Dante', points: 31.00, players: 3 },
+          { gm: 'Vip', points: 30.77, players: 4 },
+          { gm: 'Laura', points: 0.00, players: 0 },
+        ],
+      },
+    },
+    {
+      year: 2024,
+      winner: 'Pakistan',
+      margin: 51.87,
+      pakistan: {
+        total: 234.98,
+        players: 12,
+        roster: [
+          { gm: 'Samson', points: 68.34, players: 4 },
+          { gm: 'Shak', points: 67.20, players: 3 },
+          { gm: 'Hoss', points: 52.97, players: 2 },
+          { gm: 'Asher', points: 28.10, players: 2 },
+          { gm: 'Imran', points: 18.37, players: 1 },
+        ],
+      },
+      world: {
+        total: 183.11,
+        players: 12,
+        roster: [
+          { gm: 'Dante', points: 104.50, players: 6 },
+          { gm: 'Raj', points: 39.78, players: 2 },
+          { gm: 'Andres', points: 21.00, players: 2 },
+          { gm: 'Vip', points: 17.83, players: 2 },
+          { gm: 'Anand', points: 0.00, players: 0 },
+        ],
+      },
+    },
+  ],
+
   playoffApps: [
     { gm: 'Samson', count: 18 },
     { gm: 'Hoss', count: 17 },
