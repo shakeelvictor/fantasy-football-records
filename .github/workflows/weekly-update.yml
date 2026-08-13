@@ -2,20 +2,25 @@ name: Weekly league update
 
 on:
   schedule:
-    # Thursday morning: after Monday night football and after MFL's stat
-    # corrections have landed, matching how the league already validates
-    # weekly winners. Off the hour deliberately — top-of-hour runs contend
-    # for shared runners.
+    # Thursday AFTERNOON, deliberately.
     #
-    # This is UTC. 13:23 UTC is 08:23 CDT during the season and 07:23 CST
-    # after the November DST change — i.e. it drifts an hour, mid-playoffs,
-    # but always lands Thursday morning, which is all this job needs.
+    # MFL posts stat corrections Thursday morning, and the league has treated
+    # the post-correction numbers as the final tally since the MFL era began.
+    # Running Thursday morning would race those corrections and could record a
+    # weekly winner that MFL then revises — and weekly winners carry the
+    # largest payout share, so that is a money question, not a cosmetic one.
+    #
+    # 19:23 UTC is 14:23 CDT through early November and 13:23 CST after the
+    # DST change: several hours clear of the morning corrections in both, and
+    # still Thursday, well before that night's kickoff. Off the hour because
+    # top-of-hour runs contend for shared runners.
     #
     # The build spec called for `timezone: America/Chicago` here. That key is
     # left out on purpose: an unrecognised key makes the whole workflow fail
     # to parse, and a silently dead scheduler is worse than an hour of drift.
-    # If you confirm your GitHub plan supports it, add it and drop this note.
-    - cron: '23 13 * * 4'
+    # The afternoon slot is chosen so that drift cannot push the run back into
+    # the correction window.
+    - cron: '23 19 * * 4'
   workflow_dispatch:
 
 # Only one update in flight at a time; a manual rerun should not race the cron.

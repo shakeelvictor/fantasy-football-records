@@ -59,6 +59,13 @@ never rewritten. Don't fetch prior seasons for data either — MFL only supports
 the current year. Past seasons are fetched *once*, deliberately, by
 `npm run fixtures` to build replay tests.
 
+**The weekly job runs Thursday afternoon on purpose.** MFL posts stat
+corrections Thursday morning, and the league has treated the post-correction
+numbers as the final tally since the MFL era began. Do not move the cron
+earlier to "get results sooner" — it would race the corrections, and weekly
+winners carry the largest payout share, so a revised winner is a money
+question. The cron is UTC (`23 19 * * 4`), landing 13:23–14:23 Central.
+
 **Config keys must be live.** `data/league.config.mjs` previously carried keys
 that looked like settings but were never read. Every key there is now consulted
 by code. If you add one, wire it up or leave it out.

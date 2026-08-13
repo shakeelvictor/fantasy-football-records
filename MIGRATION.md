@@ -223,6 +223,31 @@ still on the side.
 
 ---
 
+## Why the job runs Thursday afternoon
+
+MFL posts stat corrections **Thursday morning**, and the league has treated the
+post-correction numbers as the final tally for a week since the MFL era began.
+The schedule is built around that convention rather than around convenience.
+
+The cron is `23 19 * * 4` (UTC), which lands **13:23–14:23 Central** across the
+whole season including the DST change — several hours clear of the morning
+corrections, still Thursday, well before that night's kickoff.
+
+This is deliberately *not* Thursday morning. Running while corrections are
+landing could record a weekly winner that MFL then revises, and per the payouts
+table weekly winners take the largest share — a revised winner is a money
+question, not a cosmetic one. The afternoon slot also means the hour of DST
+drift moves the run *away* from the correction window, never back into it.
+
+A late correction — one landing after Thursday afternoon — is still picked up,
+because every run refetches the whole season and overwrites. The site would
+show the old figure for a week and then change silently. Rerun discrepancy
+reconciliation was explicitly out of scope, so nothing announces that; if the
+league ever wants a heads-up when a past week's winner changes, that is a small
+addition to the ingest and worth asking for rather than assuming.
+
+---
+
 ## What is automated, and what is not
 
 **Automated, weekly (Thursday):** fetch the season, recompute weekly winners and
