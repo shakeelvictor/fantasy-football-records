@@ -338,6 +338,14 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto 48px;
 }
 
+.lede a {
+  color: var(--text);
+  border-bottom: 1px solid var(--accent);
+  transition: color 0.15s ease;
+}
+
+.lede a:hover { color: var(--accent); }
+
 .hero-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
