@@ -42,6 +42,24 @@ running highs, running lows and cumulative totals. Win-pct records and anything
 resting on the playoff bracket wait for a finished season — after one week every
 team in an all-play league is 11-0 or 0-11.
 
+| Moves every Thursday (10) | Waits for season-end (7) |
+| --- | --- |
+| Highest Single Week · Reg. Season | Best Record · Expanded Season |
+| Lowest Single-Game Total | Worst Record · Expanded Season |
+| Lowest Points to Win a Week | Highest Total Points · Season |
+| Slimmest Margin of Victory | Highest Playoff Points |
+| Highest Total Points · Reg. Season | Widest Fantasy Bowl Margin |
+| Highest Points to Start a Season | Most Fantasy Bowl Championships |
+| Most Weekly Wins, Single Season | Most Consecutive Playoff Apps |
+| Most Consecutive Wins | |
+| Highest Single-Player · Reg. Season | |
+| Highest Single-Player · Playoffs | |
+
+The split is the `inSeason` flag in `src/records.mjs`, and
+`test/records-in-season.test.mjs` locks both halves of it — including a test
+that the full definition set *would* rewrite Best and Worst Record off a
+one-week season, which is the failure the flag exists to prevent.
+
 Thursday afternoon is deliberate: MFL posts stat corrections Thursday morning,
 and the league treats the post-correction numbers as a week's final tally. The
 job runs after them.
