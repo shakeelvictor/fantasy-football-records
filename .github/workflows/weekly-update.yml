@@ -51,6 +51,15 @@ jobs:
         env:
           MFL_API_KEY: ${{ secrets.MFL_API_KEY }}
 
+      # Promotes any all-time record card this season has already beaten, so a
+      # record broken in Week 3 shows up the same Thursday. Limited to the cards
+      # that are monotone in weeks played — see the note on DEFINITIONS in
+      # src/records.mjs. Reads the season file the ingest just wrote, so it runs
+      # after it. No-ops before the first game of the year.
+      - run: npm run records
+        env:
+          MFL_API_KEY: ${{ secrets.MFL_API_KEY }}
+
       # Records the finished season into data.js — champion, playoff field,
       # Pakistan vs. the World, appearance counts and any all-time record the
       # season broke. No-ops until Week 18 has been played, and no-ops again

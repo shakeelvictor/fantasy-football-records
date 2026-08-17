@@ -39,6 +39,20 @@ const minBy = (rows, f) =>
  * `better` decides whether a bigger or smaller candidate wins. `read` pulls the
  * comparable number off the incumbent card. `compute` returns null when the
  * record doesn't apply to this season.
+ *
+ * `inSeason` marks a record safe to evaluate against a season that is still
+ * being played, so the weekly job can promote it the Thursday it happens rather
+ * than waiting for season-end. The test is MONOTONICITY: adding later weeks may
+ * only push the candidate further in the `better` direction, never back. A
+ * running max, a running min and a cumulative total all qualify — a partial
+ * season understates them, so they can break a record early but can never
+ * invent one. Rates and playoff-dependent records do not: a win pct reads
+ * 1.000 after one week and only settles as the year fills in, and anything
+ * needing `playoff` would quietly compute something else entirely from a
+ * regular season that has not finished. Those stay with season-end, where the
+ * inputs are final. Same rule as the cross-season note on Most Consecutive
+ * Wins: understating leaves a record stale, which is recoverable; overstating
+ * puts fiction in the book.
  */
 export const DEFINITIONS = [
   {
@@ -84,6 +98,7 @@ export const DEFINITIONS = [
   },
   {
     label: 'Most Weekly Wins, Single Season',
+    inSeason: true,
     better: 'higher',
     read: (card) => num(card.value),
     compute: ({ season, config }) => {
@@ -104,6 +119,7 @@ export const DEFINITIONS = [
     // an overstatement — it can miss a cross-season streak but can never
     // invent one, so a missed record stays stale rather than becoming wrong.
     label: 'Most Consecutive Wins',
+    inSeason: true,
     better: 'higher',
     read: (card) => num(card.value),
     compute: ({ season, config }) => {
@@ -160,6 +176,7 @@ export const DEFINITIONS = [
   },
   {
     label: 'Highest Total Points · Reg. Season',
+    inSeason: true,
     better: 'higher',
     read: (card) => num(card.value),
     compute: ({ season, allPlay }) => {
@@ -195,6 +212,7 @@ export const DEFINITIONS = [
   },
   {
     label: 'Highest Points to Start a Season',
+    inSeason: true,
     better: 'higher',
     read: (card) => num(card.value),
     compute: ({ season, config }) => {
@@ -205,6 +223,7 @@ export const DEFINITIONS = [
   },
   {
     label: 'Highest Single Week · Reg. Season',
+    inSeason: true,
     better: 'higher',
     read: (card) => num(card.value),
     compute: ({ season, config }) => {
@@ -216,6 +235,7 @@ export const DEFINITIONS = [
   },
   {
     label: 'Lowest Single-Game Total',
+    inSeason: true,
     better: 'lower',
     read: (card) => num(card.value),
     compute: ({ season, config }) => {
@@ -227,6 +247,7 @@ export const DEFINITIONS = [
   },
   {
     label: 'Lowest Points to Win a Week',
+    inSeason: true,
     better: 'lower',
     read: (card) => num(card.value),
     compute: ({ season, config }) => {
@@ -272,6 +293,7 @@ export const DEFINITIONS = [
   },
   {
     label: 'Slimmest Margin of Victory',
+    inSeason: true,
     better: 'lower',
     read: (card) => num(card.value),
     // The margin by which a week was WON — first over second — not the gap
@@ -297,6 +319,7 @@ export const DEFINITIONS = [
   },
   {
     label: 'Highest Single-Player · Reg. Season',
+    inSeason: true,
     better: 'higher',
     read: (card) => num(card.value),
     needsPlayerName: true,
@@ -304,6 +327,7 @@ export const DEFINITIONS = [
   },
   {
     label: 'Highest Single-Player · Playoffs',
+    inSeason: true,
     better: 'higher',
     read: (card) => num(card.value),
     needsPlayerName: true,
@@ -380,14 +404,16 @@ function topPlayerIn(season, weeks, year, bowlWeek) {
  * card with the old value demoted to the "Previous:" line, matching how the
  * cards already read.
  */
-export function compareToRecords(cards, ctx, playerNames = new Map()) {
+export function compareToRecords(cards, ctx, playerNames = new Map(), defs = DEFINITIONS) {
   const byLabel = new Map(cards.map((c) => [c.label, c]));
   const broken = [];
   const unchanged = [];
   const review = [];
+  // Always measured against the full set: a card the weekly pass skips on
+  // purpose is not an unrecognised card.
   const unknown = cards.filter((c) => !DEFINITIONS.some((d) => d.label === c.label)).map((c) => c.label);
 
-  for (const def of DEFINITIONS) {
+  for (const def of defs) {
     const card = byLabel.get(def.label);
     if (!card) continue;
 
@@ -431,9 +457,13 @@ export function compareToRecords(cards, ctx, playerNames = new Map()) {
   return { broken, unchanged, review, unknown };
 }
 
+/** The subset the weekly job may promote. See the note on DEFINITIONS. */
+export const IN_SEASON = DEFINITIONS.filter((d) => d.inSeason);
+
 /** Player ids that could hold a record, so names are fetched only when needed. */
-export function playerIdsToResolve(ctx) {
-  return DEFINITIONS.filter((d) => d.needsPlayerName)
+export function playerIdsToResolve(ctx, defs = DEFINITIONS) {
+  return defs
+    .filter((d) => d.needsPlayerName)
     .map((d) => d.compute(ctx)?.playerId)
     .filter(Boolean);
 }

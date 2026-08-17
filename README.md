@@ -34,7 +34,13 @@ MyFantasyLeague  ──►  GitHub Actions (Thursday)  ──►  commit  ──
 
 Every Thursday afternoon the job fetches the season so far and updates the two
 living leaderboards — **Weekly Regular Season Wins** and **200+ Point
-Performances**.
+Performances** — then promotes any **Single-Game & Season Record** the year has
+already beaten, so a record broken in Week 3 is on the site that same day.
+
+Only records that can't be overstated by a half-played season move weekly:
+running highs, running lows and cumulative totals. Win-pct records and anything
+resting on the playoff bracket wait for a finished season — after one week every
+team in an all-play league is 11-0 or 0-11.
 
 Thursday afternoon is deliberate: MFL posts stat corrections Thursday morning,
 and the league treats the post-correction numbers as a week's final tally. The
@@ -44,9 +50,9 @@ job runs after them.
 
 Once Week 18 has been played, the same job records the year: champion and
 runner-up, the playoff field in seed order, Pakistan vs. the World, playoff and
-Fantasy Bowl appearance counts, and any all-time record the season broke. It
-does nothing before Week 18 and nothing again once the season is recorded, so it
-is safe to run every week year-round.
+Fantasy Bowl appearance counts, and the records that needed the finished season.
+It does nothing before Week 18 and nothing again once the season is recorded, so
+it is safe to run every week year-round.
 
 ### What stays manual
 
@@ -59,6 +65,7 @@ is safe to run every week year-round.
 ```bash
 npm test            # offline — replays checked-in seasons, no network
 npm run ingest      # fetch the current season
+npm run records     # promote records the season has already beaten
 npm run season-end  # record a finished season (no-op until Week 18)
 npm run seal-season # yearly rollover
 npm run fixtures    # regenerate test fixtures (hits MFL; rarely needed)

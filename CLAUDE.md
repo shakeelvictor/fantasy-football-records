@@ -27,14 +27,24 @@ Commits to `main` deploy. That is intended.
 ```bash
 npm test            # offline; replays checked-in fixtures
 npm run ingest      # fetch current season -> data/<year>.json + weekly-log.js
+npm run records     # promote any all-time record this season has already beaten
 npm run season-end  # after Week 18: write the season into data.js (no-op until then)
 npm run seal-season # rollover only: fold baselines, reset the log for next year
 npm run fixtures    # regenerate replay fixtures (dev only, hits MFL)
 ```
 
-Both `ingest` and `season-end` run in the weekly job. `season-end` no-ops until
+`ingest`, `records` and `season-end` all run in the weekly job, in that order —
+`records` reads the season file `ingest` just wrote. `season-end` no-ops until
 Week 18 has been played and no-ops again once the season is recorded, so it is
 safe to run every week forever.
+
+**`records` only touches cards that are monotone in weeks played** — running
+maxes, running mins, cumulative totals. Those can be broken early but never
+overstated, so a half-played season is a valid input. Win-pct records and
+anything needing the playoff fold are excluded and wait for `season-end`; after
+one week every team is 11-0 or 0-11, and promoting that would put a .1000 season
+in the book. The `inSeason` flag in `src/records.mjs` is the list, and
+`test/records-in-season.test.mjs` locks both halves of it.
 
 ## Editing rules
 
@@ -44,7 +54,8 @@ safe to run every week forever.
 - **`data.js`** — part generated, part hand-maintained. Blocks wrapped in
   `>>> BEGIN GENERATED <key>` markers (champions, seasons, exhibition,
   playoffApps, bowlApps, records, both baselines) are rewritten by
-  `season-end` and `seal-season`. `tidbits` and `drafts` have no markers and are
+  `season-end` and `seal-season`, and `records` alone also by the weekly
+  `npm run records`. `tidbits` and `drafts` have no markers and are
   never touched by any script — tidbits are editorial and stay that way.
   Rewriting the same data back must be byte-identical, or the weekly job commits
   churn; `test/write-data.test.mjs` asserts that.
@@ -121,8 +132,10 @@ season.
 ## End of season
 
 After Week 18 the weekly job records the year automatically: champion, playoff
-field, Pakistan vs. the World, playoff and Bowl appearance counts, and any
-all-time record the season broke. Nothing to paste.
+field, Pakistan vs. the World, playoff and Bowl appearance counts, and the
+all-time records that need a finished season — win pct, playoff and Fantasy Bowl
+records. The rest have already been promoted week by week by `npm run records`,
+so season-end finds them current and leaves them alone. Nothing to paste.
 
 Only two things remain manual:
 
