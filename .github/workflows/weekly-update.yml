@@ -34,7 +34,11 @@ jobs:
     permissions:
       contents: write
     steps:
+      # Full history: the commit step rebases onto origin/main when the branch
+      # has moved, and a depth-1 clone makes that unreliable. The repo is small.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -73,8 +77,35 @@ jobs:
           git config user.name "fflr-bot"
           git config user.email "fflr-bot@users.noreply.github.com"
           git add data/ weekly-log.js data.js
-          git diff --staged --quiet || git commit -m "Week update $(date +%F)"
-          git push
+
+          # Nothing to record: stop here. Pushing anyway used to fail the whole
+          # job whenever the local branch was behind for any reason at all —
+          # including a re-run of an older run, which checks out the SHA the run
+          # was created at, not the tip.
+          if git diff --staged --quiet; then
+            echo "No change this week; nothing to commit."
+            exit 0
+          fi
+
+          git commit -m "Week update $(date +%F)"
+
+          # main can move between checkout and push: a hand commit, the monthly
+          # keepalive, a slow MFL fetch. Rebase this one data commit on top and
+          # retry rather than dropping the week's results — weekly winners carry
+          # the largest payout share, so a lost update is a money question, not
+          # a cosmetic one. A genuine conflict still fails loudly below.
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "Push attempt $attempt failed; retrying."
+            sleep 5
+          done
+
+          echo "::error::Week update committed but could not be pushed after 3 attempts."
+          exit 1
 
       - name: Notify on failure
         if: failure()
