@@ -9,16 +9,16 @@ const DATA = {
     { year: 2006, era: 'yahoo', champ: 'Dante', seed: 4, runnerUp: 'Raj', runnerSeed: 2, score: '131.81 – 92.31' },
     { year: 2007, era: 'yahoo', champ: 'Vip', seed: 3, runnerUp: 'Shak', runnerSeed: 1, score: '154.34 – 129.79' },
     { year: 2008, era: 'yahoo', champ: 'Anand', seed: 3, runnerUp: 'Samson', runnerSeed: 5, score: '175.80 – 158.63' },
-    { year: 2009, era: 'yahoo', champ: 'Andres', seed: 5, runnerUp: 'Austin', runnerSeed: 3, score: '144.45 – 133.47' },
+    { year: 2009, era: 'yahoo', champ: 'Andres', seed: 5, runnerUp: 'Hoss', runnerSeed: 3, score: '144.45 – 133.47' },
     { year: 2010, era: 'yahoo', champ: 'Vip', seed: 1, runnerUp: 'Asher', runnerSeed: 2, score: '147.65 – 77.05' },
-    { year: 2011, era: 'yahoo', champ: 'Imran', seed: 4, runnerUp: 'Austin', runnerSeed: 3, score: '140.40 – 133.60' },
+    { year: 2011, era: 'yahoo', champ: 'Imran', seed: 4, runnerUp: 'Hoss', runnerSeed: 3, score: '140.40 – 133.60' },
     { year: 2012, era: 'yahoo', champ: 'Shak', seed: 5, runnerUp: 'Asher', runnerSeed: 2, score: '183.05 – 118.80' },
     { year: 2013, era: 'yahoo', champ: 'Shak', seed: 1, runnerUp: 'Imran', runnerSeed: 3, score: '141.30 – 133.45' },
     { year: 2014, era: 'yahoo', champ: 'Shak', seed: 1, runnerUp: 'Vip', runnerSeed: 2, score: '113.05 – 109.95' },
     // MFL Era
     { year: 2015, era: 'mfl', champ: 'Imran', seed: 5, runnerUp: 'Dante', runnerSeed: 1, score: '127.35 – 126.04' },
     { year: 2016, era: 'mfl', champ: 'Dante', seed: 5, runnerUp: 'Asher', runnerSeed: 3, score: '116.18 – 113.68' },
-    { year: 2017, era: 'mfl', champ: 'Austin', seed: 4, runnerUp: 'Samson', runnerSeed: 1, score: '172.39 – 127.46' },
+    { year: 2017, era: 'mfl', champ: 'Hoss', seed: 4, runnerUp: 'Samson', runnerSeed: 1, score: '172.39 – 127.46' },
     { year: 2018, era: 'mfl', champ: 'Shak', seed: 2, runnerUp: 'Anand', runnerSeed: 5, score: '216.61 – 170.63' },
     { year: 2019, era: 'mfl', champ: 'Dante', seed: 6, runnerUp: 'Samson', runnerSeed: 4, score: '178.94 – 161.12' },
     { year: 2020, era: 'mfl', champ: 'Imran', seed: 4, runnerUp: 'Asher', runnerSeed: 1, score: '238.24 – 142.98' },
@@ -125,7 +125,7 @@ const DATA = {
     { gm: 'Imran', count: 5, record: '4-1' },
     { gm: 'Asher', count: 4, record: '0-4' },
     { gm: 'Samson', count: 4, record: '0-4' },
-    { gm: 'Austin', count: 3, record: '1-2' },
+    { gm: 'Hoss', count: 3, record: '1-2' },
     { gm: 'Andres', count: 2, record: '2-0' },
     { gm: 'Raj', count: 2, record: '1-1' },
     { gm: 'Augie', count: 1, record: '0-1' },
@@ -290,7 +290,7 @@ const DATA = {
       label: 'Highest Single-Player · Reg. Season',
       value: '64.33',
       holder: 'Drew Brees',
-      context: 'Austin · 2015 · Week 9'
+      context: 'Hoss · 2015 · Week 9'
     },
     {
       label: 'Highest Single-Player · Playoffs',
@@ -302,9 +302,9 @@ const DATA = {
   // <<< END GENERATED records
 
   tidbits: [
-    "Since MFL, the Champion of the previous season has <strong>not reached the playoffs</strong> the following year (Imran ×3, Dante ×2, Austin, Shak ×2).",
+    "Since MFL, the Champion of the previous season has <strong>not reached the playoffs</strong> the following year (Imran ×3, Dante ×2, Hoss, Shak ×2).",
     "<strong>Raj</strong> has the longest drought since reaching the Fantasy Bowl — last appearance was 2006.",
-    "<strong>Austin and Shak</strong> are the only GMs to win a Fantasy Bowl without winning a single week during the regular season (Austin in 2017, Shak in 2025).",
+    "<strong>Hoss and Shak</strong> are the only GMs to win a Fantasy Bowl without winning a single week during the regular season (Hoss in 2017, Shak in 2025).",
     "<strong>Raj, Anand, Dante, and Vip</strong> are the only GMs to score 200+ pts in a week and still lose. Anand is the only one to do it twice (2018 & 2019).",
     "<strong>Shak, Anand, Samson, and Vip</strong> are the only GMs to score 200+ pts twice in the same season.",
     "<strong>Samson</strong> has won the regular season in MFL three years in a row (2016–2018).",
@@ -403,7 +403,7 @@ const DATA = {
     { year: 2014, teams: ['Shak', 'Vip', 'Asher', 'Dante', 'Hoss', 'Andres'], champ: 'Shak' },
     { year: 2015, teams: ['Dante', 'Hoss', 'Samson', 'Asher', 'Imran', 'Raj'], champ: 'Imran' },
     { year: 2016, teams: ['Samson', 'Raj', 'Asher', 'Vip', 'Dante', 'Hoss'], champ: 'Dante' },
-    { year: 2017, teams: ['Samson', 'Shak', 'Andres', 'Austin', 'Hoss', 'Imran', 'Asher'], champ: 'Austin' },
+    { year: 2017, teams: ['Samson', 'Shak', 'Andres', 'Hoss', 'Imran', 'Asher'], champ: 'Hoss' },
     { year: 2018, teams: ['Samson', 'Shak', 'Dante', 'Imran', 'Anand', 'Vip'], champ: 'Shak' },
     { year: 2019, teams: ['Anand', 'Andres', 'Imran', 'Samson', 'Hoss', 'Dante'], champ: 'Dante' },
     { year: 2020, teams: ['Asher', 'Andres', 'Samson', 'Imran', 'Vip', 'Anand'], champ: 'Imran' },

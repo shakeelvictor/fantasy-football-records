@@ -44,6 +44,6 @@ const WEEKLY_LOG = [
 // Valid GM names, used to catch typos in the log above.
 // Add a name here when the league takes on a new GM.
 const GMS = [
-  'Anand', 'Andres', 'Asher', 'Augie', 'Austin', 'Dante', 'Hoss', 'Imran',
+  'Anand', 'Andres', 'Asher', 'Augie', 'Dante', 'Hoss', 'Imran',
   'Jimmy', 'Laura', 'Raj', 'Ryaan', 'Samson', 'Shak', 'Vip',
 ];
