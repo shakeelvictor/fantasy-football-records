@@ -101,18 +101,18 @@ const DATA = {
   // >>> BEGIN GENERATED playoffApps
   playoffApps: [
     { gm: 'Samson', count: 18 },
+    { gm: 'Asher', count: 17 },
     { gm: 'Hoss', count: 17 },
     { gm: 'Shak', count: 17 },
-    { gm: 'Asher', count: 17 },
     { gm: 'Dante', count: 15 },
     { gm: 'Imran', count: 15 },
     { gm: 'Anand', count: 14, note: '*' },
     { gm: 'Vip', count: 14, note: '*' },
     { gm: 'Andres', count: 12 },
     { gm: 'Raj', count: 10 },
-    { gm: 'Laura', count: 1 },
     { gm: 'Jimmy', count: 3 },
     { gm: 'Augie', count: 2 },
+    { gm: 'Laura', count: 1 },
   ],
   // <<< END GENERATED playoffApps
 
@@ -128,6 +128,8 @@ const DATA = {
     { gm: 'Austin', count: 3, record: '1-2' },
     { gm: 'Andres', count: 2, record: '2-0' },
     { gm: 'Raj', count: 2, record: '1-1' },
+    { gm: 'Augie', count: 1, record: '0-1' },
+    { gm: 'Jimmy', count: 1, record: '1-0' },
     { gm: 'Laura', count: 1, record: '0-1' },
   ],
   // <<< END GENERATED bowlApps
