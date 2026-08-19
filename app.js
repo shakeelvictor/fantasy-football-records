@@ -289,6 +289,11 @@ function renderLineups() {
 
 // The nerd math, folded away for anyone who wants it. Every definition here is
 // the one the pipeline actually implements — if one changes, change it here.
+//
+// This explains the cards in THIS section only. Most Points Left on the Bench,
+// Worst Sit and Biggest Winning Bid are also built from the lineup archive but
+// live in the records book above, so they are not described here — a definition
+// pointing at a card the reader cannot see is worse than no definition.
 function renderLineupMath() {
   const rows = [
     ['The optimum', `Every figure here compares what a manager <em>started</em> against the
@@ -309,13 +314,6 @@ function renderLineupMath() {
     ['Biggest Perfect Week', `A perfect week is one where the lineup started <em>was</em> the best
       available: 100%, nothing left on the bench. They are not rare, so the card shows the
       highest-scoring one rather than the first.`],
-    ['Most Points Left on the Bench', `The largest single-week gap between the best available lineup and
-      the one submitted. Shown with the single-game records above.`],
-    ['Worst Sit', `The highest-scoring individual player who was left on a bench in a week he belonged in
-      the optimal lineup. Shown with the single-game records above.`],
-    ['Biggest Winning Bid', `The largest blind bid that won its player, shown with the single-game records
-      above. MFL never records a losing bid, so this can only ever be the winning side of an auction.
-      Blind bidding began in 2025.`],
     ['Scope', `Regular-season weeks only, except where a card says otherwise. Exhibition weeks are
       excluded throughout. The lineup rules themselves have changed twice — 2015 had a kicker and no
       flex, 2016 a flex and no kicker, 2017 onward both — and each season is measured against the rules

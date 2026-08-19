@@ -405,3 +405,25 @@ test('data.js is untouched by the lineup archive', async () => {
     assert.ok(!labels.includes(label), `${label} must not be written into data.js`);
   }
 });
+
+test('the efficiency explainer describes only the cards in its own section', () => {
+  const app = readFileSync(join(here, '../app.js'), 'utf8');
+
+  const math = app.slice(app.indexOf('function renderLineupMath()'));
+  const cards = app.slice(app.indexOf('function renderLineups()'), app.indexOf('function renderLineupMath()'));
+
+  // Cards that moved to the records book must not be defined here, and nothing
+  // here may point at something the reader cannot see in this section.
+  for (const moved of ['Most Points Left on the Bench', 'Worst Sit', 'Biggest Winning Bid']) {
+    assert.ok(!math.includes(`['${moved}'`), `${moved} moved out; its definition should have gone with it`);
+  }
+  assert.ok(!/records above|single-game records/i.test(math), 'no cross-references to a section this text is not in');
+
+  // Every card the section still builds keeps a definition.
+  for (const label of ['Best Season', 'Best Career', 'Best in the Playoffs']) {
+    assert.ok(cards.includes(`label: '${label}'`), `${label} card missing`);
+    assert.ok(math.includes(`['${label}'`), `${label} card has no definition`);
+  }
+  // The perfect-week card's label is conditional, so check it by name.
+  assert.ok(math.includes("['Biggest Perfect Week'"), 'perfect week has no definition');
+});
