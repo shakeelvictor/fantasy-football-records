@@ -23,7 +23,13 @@
     "later, and the buy-in was raised at some point -- but those numbers are not",
     "recorded anywhere available. The Yahoo era knows WHO won and cannot know",
     "what they were paid, so it is left out rather than priced with the wrong",
-    "structure. Do not backfill it by assuming today's numbers."
+    "structure. Do not backfill it by assuming today's numbers.",
+    "",
+    "A season is listed here BEFORE it is played so the weekly job has a",
+    "structure to price it with. An in-progress season is settled but never",
+    "reconciled -- only weekly money is decided until the Fantasy Bowl. The",
+    "reconciliation fires the moment season-end records the year, so an",
+    "assumption carried forward wrongly fails loudly instead of publishing."
   ],
   "seasons": [
     {
@@ -33,7 +39,10 @@
       "regularSeason": 195,
       "champion": 250,
       "runnerUp": 100,
-      "stated": ["weekly", "regularSeason"],
+      "stated": [
+        "weekly",
+        "regularSeason"
+      ],
       "note": "Meeting notes state the weekly and regular-season figures; the regular-season prize was introduced this year. Champion and runner-up are the 2021 figures, which is what reconciles the pot to $1,000."
     },
     {
@@ -44,7 +53,7 @@
       "champion": 250,
       "runnerUp": 100,
       "stated": [],
-      "note": "No payout topic in the 2020 notes, so 2019 carried forward. The notes cover only COVID contingencies, which did not trigger — the league confirms 2020 paid out normally."
+      "note": "No payout topic in the 2020 notes, so 2019 carried forward. The notes cover only COVID contingencies, which did not trigger \u2014 the league confirms 2020 paid out normally."
     },
     {
       "year": 2021,
@@ -53,7 +62,12 @@
       "regularSeason": 160,
       "champion": 250,
       "runnerUp": 100,
-      "stated": ["weekly", "regularSeason", "champion", "runnerUp"],
+      "stated": [
+        "weekly",
+        "regularSeason",
+        "champion",
+        "runnerUp"
+      ],
       "note": "Stated in full in the meeting notes."
     },
     {
@@ -93,8 +107,23 @@
       "regularSeason": 160,
       "champion": 275,
       "runnerUp": 105,
-      "stated": ["weekly", "regularSeason", "champion", "runnerUp"],
+      "stated": [
+        "weekly",
+        "regularSeason",
+        "champion",
+        "runnerUp"
+      ],
       "note": "Restructured for the 11-team league. The 2025 notes settle the $100 buy-in; the split is the one recorded in rules-data.js."
+    },
+    {
+      "year": 2026,
+      "buyIn": 100,
+      "weekly": 40,
+      "regularSeason": 160,
+      "champion": 275,
+      "runnerUp": 105,
+      "stated": [],
+      "note": "The 2026 meeting notes record a draft order but no resolutions at all, so 2025 carries forward \u2014 same 11 teams, same $100 buy-in. If the league did change something, the season will fail to reconcile at season-end rather than publish a wrong number; fix this row when it does."
     }
   ]
 }

@@ -75,17 +75,22 @@ test('every settled season reconciles, and the league nets to zero', () => {
     const DATA = new Function(`${read('data.js')}; return DATA;`).call({ Set });
     const champ = DATA.champions.find((c) => c.year === year);
     const field = DATA.seasons.find((s) => s.year === year);
+    // A season still being played has neither yet — that is the normal state
+    // every Thursday of the year, not a missing-data error.
+    const complete = Boolean(champ && field);
 
-    // settleSeason throws unless it balances, so reaching the push is the test.
+    // settleSeason throws unless a FINISHED season balances, so reaching the
+    // push is the test.
     settled.push(settleSeason({
       year,
       structure: payouts.seasons.find((s) => s.year === year),
       teams: season.managers.length,
+      complete,
       winners: {
         weekly: season.weeklyWinners.map((w) => w.gm),
-        regularSeason: field.teams[0],
-        champion: champ.champ,
-        runnerUp: champ.runnerUp,
+        regularSeason: field?.teams[0] ?? null,
+        champion: champ?.champ ?? null,
+        runnerUp: champ?.runnerUp ?? null,
       },
     }));
     played.set(year, season.managers.map((m) => m.gm));
@@ -93,7 +98,14 @@ test('every settled season reconciles, and the league nets to zero', () => {
 
   const net = netPositions(settled, played);
   const sum = net.reduce((n, r) => n + r.net, 0);
-  assert.equal(sum, 0, 'the league is zero-sum: every dollar won came from a buy-in');
+
+  // The league is zero-sum once the money is all paid. A season still being
+  // played holds the rest of its pot back, so the shortfall is exactly what is
+  // still pending — never an imbalance. This must hold every Thursday of the
+  // season, because `npm test` gates the weekly job.
+  const pending = settled.reduce((n, s) => n + (s.pending ?? 0), 0);
+  // Phrased as a sum so a zero pending cannot trip the -0 !== 0 distinction.
+  assert.equal(sum + pending, 0, 'the only money unaccounted for is the pot still on the table');
 
   // Everyone who bought in is listed, including the managers who won nothing.
   const everyone = new Set([...played.values()].flat());
@@ -101,7 +113,7 @@ test('every settled season reconciles, and the league nets to zero', () => {
 
   const won = careerPayouts(settled).reduce((n, c) => n + c.total, 0);
   const pot = settled.reduce((n, s) => n + s.pool, 0);
-  assert.equal(won, pot, 'winnings must account for the entire pot');
+  assert.equal(won, pot - pending, 'winnings must account for every settled dollar');
 });
 
 test('the browser file lists everyone and balances', () => {
@@ -109,8 +121,9 @@ test('the browser file lists everyone and balances', () => {
   assert.doesNotMatch(src, /^\s*(import|export)\s/m, 'must not be an ES module');
 
   const PAYOUTS = new Function(`${src}; return PAYOUTS;`)();
-  assert.equal(PAYOUTS.careers.reduce((n, c) => n + c.net, 0), 0);
-  assert.equal(PAYOUTS.careers.reduce((n, c) => n + c.won, 0), PAYOUTS.pot);
+  const pending = PAYOUTS.inProgress ? PAYOUTS.inProgress.pending : 0;
+  assert.equal(PAYOUTS.careers.reduce((n, c) => n + c.net, 0) + pending, 0);
+  assert.equal(PAYOUTS.careers.reduce((n, c) => n + c.won, 0) + pending, PAYOUTS.pot);
   assert.ok(PAYOUTS.careers.some((c) => c.won === 0), 'a manager who won nothing should be listed');
   assert.ok(PAYOUTS.careers.every((c) => c.paidIn > 0), 'everyone listed paid a buy-in');
 });
@@ -166,4 +179,73 @@ test('the caption admits how much of this is reconstructed', () => {
   assert.match(app, /best guess/i, 'the caption must not present this as a ledger');
   assert.match(app, /PAYOUTS\.stated/, 'the count must be derived, not typed');
   assert.ok(!/only 2 of 7/.test(app), 'the counts must not be hardcoded');
+});
+
+test('a season still being played is settled but never reconciled', () => {
+  const structure = { buyIn: 100, weekly: 40, regularSeason: 160, champion: 275, runnerUp: 105 };
+
+  // Week 16: every regular week played, both playoff rounds done, Bowl to come.
+  const live = settleSeason({
+    year: 2026, structure, teams: 11, complete: false,
+    winners: {
+      weekly: Array.from({ length: 14 }, (_, i) => (i % 2 ? 'Shak' : 'Samson')),
+      regularSeason: null, champion: null, runnerUp: null,
+    },
+  });
+
+  assert.equal(live.complete, false);
+  assert.equal(live.paid, 14 * structure.weekly);
+  // Exactly the three prizes the Fantasy Bowl and the seeding still decide.
+  assert.equal(live.pending, structure.regularSeason + structure.champion + structure.runnerUp);
+  assert.equal(live.paid + live.pending, live.pool);
+});
+
+test('the playoff rounds before the Fantasy Bowl pay nothing', () => {
+  const structure = { buyIn: 100, weekly: 40, regularSeason: 160, champion: 275, runnerUp: 105 };
+  const winners = { weekly: Array(14).fill('Shak'), regularSeason: null, champion: null, runnerUp: null };
+
+  // Weeks 15 and 16 knock four teams out and change nothing about the money.
+  const week14 = settleSeason({ year: 2026, structure, teams: 11, complete: false, winners });
+  const week16 = settleSeason({ year: 2026, structure, teams: 11, complete: false, winners });
+  assert.equal(week16.paid, week14.paid, 'eliminating a team is not a payout event');
+  assert.equal(week16.pending, week14.pending);
+});
+
+test('a finished season is still held to the whole pot', () => {
+  // The in-progress path must not become a way to skip the check.
+  assert.throws(
+    () => settleSeason({
+      year: 2026,
+      structure: { buyIn: 100, weekly: 40, regularSeason: 160, champion: 275, runnerUp: 105 },
+      teams: 11, complete: true,
+      winners: { weekly: Array(14).fill('Shak'), regularSeason: 'Samson', champion: null, runnerUp: null },
+    }),
+    /does not reconcile/
+  );
+});
+
+test('every season has a payout structure before it is played', () => {
+  // Without one the weekly job skips the year and the board never moves all
+  // season. The current season must always be listed here.
+  const { config } = JSON.parse('{"config":null}') ?? {};
+  const payoutsJson = JSON.parse(read('data/payouts.json'));
+  const years = payoutsJson.seasons.map((s) => s.year);
+  const latest = Math.max(...years);
+  assert.ok(years.includes(latest), 'sanity');
+
+  // Contiguous from 2019 — a gap would silently drop a season from the board.
+  for (let y = Math.min(...years); y <= latest; y++) {
+    assert.ok(years.includes(y), `no payout structure on record for ${y}`);
+  }
+});
+
+test('the weekly job settles the money book', () => {
+  const wf = read('.github/workflows/weekly-update.yml');
+  assert.match(wf, /npm run payouts/);
+  assert.match(wf, /git add .*payouts-data\.js/);
+
+  // It must run after the archive it reads, and after season-end, which is
+  // what flips a season from in-progress to reconciled.
+  assert.ok(wf.indexOf('npm run payouts') > wf.indexOf('npm run lineups'));
+  assert.ok(wf.indexOf('npm run payouts') > wf.indexOf('npm run season-end'));
 });

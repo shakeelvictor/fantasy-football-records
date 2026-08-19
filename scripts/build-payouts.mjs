@@ -50,23 +50,26 @@ async function main() {
       continue;
     }
 
+    // A season is finished when season-end has recorded it in data.js. Until
+    // then only the weekly winners are decided: the regular-season winner
+    // needs the full 14 weeks folded into a seed order, and the champion and
+    // runner-up need the Fantasy Bowl played. Weeks 15 and 16 therefore add
+    // nothing at all — knocking a team out is not a payout event.
     const champion = DATA.champions.find((c) => c.year === year);
     const field = DATA.seasons.find((s) => s.year === year);
-    if (!champion || !field) {
-      skipped.push(`${year} (data.js has no champion or playoff field)`);
-      continue;
-    }
+    const complete = Boolean(champion && field);
 
     settled.push(
       settleSeason({
         year,
         structure,
+        complete,
         teams: season.managers.length,
         winners: {
           weekly: season.weeklyWinners.map((w) => w.gm),
-          regularSeason: field.teams[0], // seed 1 is the regular-season winner
-          champion: champion.champ,
-          runnerUp: champion.runnerUp,
+          regularSeason: field?.teams[0] ?? null, // seed 1 is the regular-season winner
+          champion: champion?.champ ?? null,
+          runnerUp: champion?.runnerUp ?? null,
         },
       })
     );
@@ -84,6 +87,7 @@ async function main() {
   // How many settled seasons have every figure written down in the meeting
   // notes, rather than reconstructed and justified by the pot reconciling.
   // Derived so the caption corrects itself if the missing notes ever surface.
+  const live = settled.filter((s) => !s.complete);
   const stated = settled.filter((s) => {
     const row = payouts.seasons.find((p) => p.year === s.year);
     return FIELDS.every((f) => (row.stated ?? []).includes(f));
@@ -120,6 +124,11 @@ const PAYOUTS = {
   seasons: ${settled.length},
   pot: ${pot},
 
+  // A season still being played, if any. Only weekly money has been decided in
+  // it — the regular-season prize and the Bowl are still on the table, and the
+  // playoff weeks before the Bowl pay nothing at all.
+  inProgress: ${live.length ? `{ year: ${live[0].year}, paid: ${live[0].paid}, pending: ${live[0].pending} }` : 'null'},
+
   // Seasons whose payout figures are stated in full in the meeting notes. The
   // rest are reconstructed — every one reconciles to its pot exactly, but the
   // page says out loud that they are a best guess rather than a record.
@@ -142,7 +151,13 @@ ${[...net].sort((a, b) => b.won - a.won || a.gm.localeCompare(b.gm)).map(line).j
     console.log(`payouts-data.js rewritten from ${settled.length} season(s).`);
   }
 
-  for (const s of settled) console.log(`  ${s.year}: $${s.pool} across ${s.rows.length} GMs — reconciled`);
+  for (const s of settled) {
+    console.log(
+      s.complete
+        ? `  ${s.year}: $${s.pool} across ${s.rows.length} GMs — reconciled`
+        : `  ${s.year}: $${s.paid} paid, $${s.pending} still on the table — in progress, not reconciled`
+    );
+  }
   for (const s of skipped) console.log(`  SKIPPED ${s}`);
   console.log(`\nTotal paid out ${span}: $${pot.toLocaleString()}`);
 }

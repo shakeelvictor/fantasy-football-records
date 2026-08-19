@@ -25,8 +25,20 @@ const LINES = [
  * `winners` is { weekly: [gm...], regularSeason: gm, champion: gm, runnerUp: gm }.
  * `structure` is a row from data/payouts.json. `teams` is how many managers
  * bought in that year — the pot is theirs, so it is what the total must match.
+ *
+ * `complete` says whether the season is over. A FINISHED season must pay out
+ * its whole pot and throws otherwise. A season still being played must not:
+ * only weekly winners have been decided, and demanding the full pot every
+ * Thursday would fail the job all season long. An in-progress season instead
+ * reports what is still `pending`.
+ *
+ * Nothing accrues during the playoffs until the Fantasy Bowl. Weekly payouts
+ * are regular-season only, so Weeks 15 and 16 add nothing, and the champion
+ * and runner-up are not known until the Bowl has been played. A team knocked
+ * out in the first round earns no more that year, and the board should not
+ * imply otherwise by moving in the meantime.
  */
-export function settleSeason({ year, structure, winners, teams }) {
+export function settleSeason({ year, structure, winners, teams, complete = true }) {
   if (!structure) throw new Error(`No payout structure on record for ${year}.`);
   if (!teams) throw new Error(`${year}: cannot settle without a team count.`);
 
@@ -50,6 +62,24 @@ export function settleSeason({ year, structure, winners, teams }) {
   const paid = [...rows.values()].reduce((n, r) => n + r.total, 0);
   const pool = teams * structure.buyIn;
 
+  if (!complete) {
+    if (paid > pool) {
+      throw new Error(
+        `${year} has already paid $${paid} of a $${pool} pool while still in progress. ` +
+          'That cannot happen — check the payout structure.'
+      );
+    }
+    return {
+      year,
+      pool,
+      teams,
+      complete: false,
+      paid,
+      pending: pool - paid,
+      rows: [...rows.values()].sort((a, b) => b.total - a.total || a.gm.localeCompare(b.gm)),
+    };
+  }
+
   if (paid !== pool) {
     throw new Error(
       `${year} does not reconcile: paid $${paid} against a $${pool} pool ` +
@@ -65,6 +95,9 @@ export function settleSeason({ year, structure, winners, teams }) {
     year,
     pool,
     teams,
+    complete: true,
+    paid,
+    pending: 0,
     rows: [...rows.values()].sort((a, b) => b.total - a.total || a.gm.localeCompare(b.gm)),
   };
 }
@@ -92,6 +125,11 @@ export function careerPayouts(settled) {
  *
  * A manager pays the buy-in every season he plays, not only the ones he cashed
  * in, so `seasonsPlayed` comes from the archive rather than from `settled`.
+ *
+ * An in-progress season counts too: the buy-in is already spent and the weekly
+ * money already won. Net simply will not sum to zero until the year is over,
+ * which is correct rather than a fault — the rest of the pot is still on the
+ * table.
  */
 export function netPositions(settled, seasonsPlayed) {
   const paidIn = new Map();

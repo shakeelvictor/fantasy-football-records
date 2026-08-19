@@ -15,6 +15,11 @@ const PAYOUTS = {
   seasons: 7,
   pot: 7100,
 
+  // A season still being played, if any. Only weekly money has been decided in
+  // it — the regular-season prize and the Bowl are still on the table, and the
+  // playoff weeks before the Bowl pay nothing at all.
+  inProgress: null,
+
   // Seasons whose payout figures are stated in full in the meeting notes. The
   // rest are reconstructed — every one reconciles to its pot exactly, but the
   // page says out loud that they are a best guess rather than a record.

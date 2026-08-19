@@ -81,11 +81,21 @@ jobs:
         env:
           MFL_API_KEY: ${{ secrets.MFL_API_KEY }}
 
+      # Settles the money book. Offline — it reads the archive the step above
+      # just wrote plus data.js, so it runs last and needs no MFL key.
+      #
+      # The season being played is settled but never reconciled: only weekly
+      # money is decided until the Fantasy Bowl, so Weeks 15 and 16 add nothing
+      # at all. The full-pot check fires the Thursday season-end records the
+      # year, which is also when a payout structure carried forward wrongly
+      # would fail loudly rather than publish a wrong number.
+      - run: npm run payouts
+
       - name: Commit if changed
         run: |
           git config user.name "fflr-bot"
           git config user.email "fflr-bot@users.noreply.github.com"
-          git add data/ weekly-log.js data.js lineups-data.js
+          git add data/ weekly-log.js data.js lineups-data.js payouts-data.js
 
           # Nothing to record: stop here. Pushing anyway used to fail the whole
           # job whenever the local branch was behind for any reason at all —

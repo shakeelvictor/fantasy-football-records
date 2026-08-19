@@ -343,8 +343,10 @@ test('only first-season managers are marked, and everyone is still ranked', () =
   for (const y of years()) {
     for (const m of archive(y).managers) seasonsOf.set(m.gm, (seasonsOf.get(m.gm) ?? 0) + 1);
   }
+  // Derived, never named: Laura and Ryaan are the only ones marked today, but
+  // they stop being newcomers the moment they play a second season and the set
+  // becomes empty. Naming them here would fail the weekly job that offseason.
   const expected = [...seasonsOf].filter(([, n]) => n < config.archive.careerMinSeasons).map(([g]) => g);
-  assert.deepEqual(expected.sort(), ['Laura', 'Ryaan']);
 
   for (const c of LINEUPS.careers) {
     assert.equal(!!c.isNew, expected.includes(c.gm), `${c.gm} is marked wrongly`);
@@ -358,22 +360,28 @@ test('only first-season managers are marked, and everyone is still ranked', () =
 
   // Nobody is hidden — every manager who played appears, ranked by the number.
   assert.equal(LINEUPS.careers.length, seasonsOf.size);
+  assert.ok(expected.every((g) => LINEUPS.careers.some((c) => c.gm === g)), 'a marked manager is still listed');
   const eff = LINEUPS.careers.map((c) => c.efficiency);
   assert.deepEqual(eff, [...eff].sort((a, b) => b - a));
 });
 
-test('a career record goes to a settled manager, not a newcomer on one season', () => {
+test('a career record never goes to a manager still in his first season', () => {
   const LINEUPS = browserData();
 
-  assert.equal(LINEUPS.records.bestCareer.gm, 'Samson');
-  assert.ok(LINEUPS.careers[0].isNew, 'Laura still tops the board on the raw number');
-  assert.notEqual(LINEUPS.records.bestCareer.gm, LINEUPS.careers[0].gm,
-    'the record must skip the marked newcomer above it');
+  // Stated as a rule rather than as today's names: once the 2025 arrivals have
+  // a second season nobody is marked, the record simply goes to the top row,
+  // and this must still pass.
+  for (const key of ['bestCareer', 'bestPlayoff']) {
+    const rec = LINEUPS.records[key];
+    const board = key === 'bestCareer' ? LINEUPS.careers : LINEUPS.playoffCareers;
+    const holder = board.find((c) => c.gm === rec.gm);
+    assert.ok(holder, `${key} holder is not on its board`);
+    assert.ok(!holder.isNew, `${key} went to a manager in his first season`);
 
-  // It is the best among managers who are not new, not simply the second row.
-  const settled = LINEUPS.careers.filter((c) => !c.isNew);
-  assert.equal(LINEUPS.records.bestCareer.efficiency, Math.max(...settled.map((c) => c.efficiency)));
-  assert.equal(LINEUPS.records.bestPlayoff.gm, 'Hoss');
+    // And it is the best among those eligible, not merely the next row down.
+    const eligible = board.filter((c) => !c.isNew);
+    assert.equal(rec.efficiency, Math.max(...eligible.map((c) => c.efficiency)));
+  }
 });
 test('the three single-game records are rendered from the archive, not data.js', () => {
   // They belong in the Single-Game & Season Records book, but they are derived

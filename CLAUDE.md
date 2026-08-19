@@ -192,6 +192,22 @@ priced at all — one where the manager outscored the best legal lineup, meaning
 the shape model itself is wrong. There are none on record, and if one ever
 appears the fix is the model, not the data.
 
+**A season being played is settled but never reconciled.** `settleSeason()`
+enforces the full-pot check only when `complete` is true — which the build
+decides by whether season-end has recorded the year in `data.js`. Demanding the
+whole pot mid-season would fail the weekly job every Thursday of the year.
+
+**Nothing accrues in the playoffs until the Fantasy Bowl.** Weekly payouts are
+regular-season only, so Weeks 15 and 16 add nothing at all — knocking a team out
+is not a payout event — and the regular-season prize and both Bowl prizes land
+together the Thursday season-end records the year. That is also when a payout
+structure carried forward wrongly fails loudly instead of publishing.
+
+Because of this, anything asserting the league nets to zero must allow for the
+pot still on the table. `npm test` gates the weekly job, so a test that only
+holds in the offseason breaks every run of the season. The same applies to
+tests naming who is new to the league: derive the set, never write the names.
+
 **The money book pays out the whole pot, and that is the check.** Every season
 in `data/payouts.json` must sum to exactly `teams x buyIn`; `settleSeason()`
 throws otherwise rather than publish a gap, and across the league the net is
