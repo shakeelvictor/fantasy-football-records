@@ -167,11 +167,18 @@ test('the caption admits how much of this is reconstructed', () => {
   const payoutsJson = JSON.parse(read('data/payouts.json'));
 
   // The count is derived, so it corrects itself if the missing notes surface.
+  //
+  // It counts SETTLED seasons only — the caption reads "N of M seasons", and M
+  // is what the board actually shows. A season listed ahead of being played
+  // (2026 is, so the weekly job has a structure to price it with) is not on the
+  // board yet and must not inflate either number.
   const fields = ['weekly', 'regularSeason', 'champion', 'runnerUp'];
+  const settled = new Set(settledYears());
   const fullyStated = payoutsJson.seasons.filter(
-    (s) => fields.every((f) => (s.stated ?? []).includes(f))
+    (s) => settled.has(s.year) && fields.every((f) => (s.stated ?? []).includes(f))
   ).length;
   assert.equal(PAYOUTS.stated, fullyStated);
+  assert.equal(PAYOUTS.seasons, settled.size);
   assert.ok(PAYOUTS.stated < PAYOUTS.seasons, 'some seasons are reconstructed');
 
   // And the page says so rather than presenting a reconstruction as a record.

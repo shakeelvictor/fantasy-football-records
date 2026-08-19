@@ -219,8 +219,9 @@ the buy-in was raised at some point — and those amounts are not recorded
 anywhere available. **The Yahoo era knows who won and cannot know what they were
 paid.** Do not backfill it with today's numbers.
 
-Two of the seven seasons state a full split (2021, 2025); the rest are
-reconstructed. What justifies that is 2021: the regular-season prize drops
+Only some seasons have their figures known for certain — from the meeting notes,
+or confirmed directly by the league (2026 is unchanged from 2025, confirmed). The
+rest are reconstructed. What justifies that is 2021: the regular-season prize drops
 $195 -> $160 in exactly the year the schedule goes 13 -> 14 weeks, and
 195 - 35 = 160 — the extra weekly payout came straight out of it. A test locks
 that relationship, because it is what makes the 2019/2020 champion figures

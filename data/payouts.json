@@ -8,7 +8,7 @@
     "payouts must sum to exactly `teams x buyIn`. The league pays out the whole",
     "pot, so a structure that does not reconcile is wrong, not approximate.",
     "",
-    "`stated` records what the notes actually say. Where a field is not stated it",
+    "`stated` marks figures known for certain rather than reconstructed \u2014 from the meeting notes, or confirmed directly by the league. Where a field is not stated it is marked and the reconciliation is what",
     "is marked and the reconciliation is what justifies it -- see 2019/2020. A",
     "season with no payout topic in its notes carried the previous year forward,",
     "which is the league's own default and is also what reconciles.",
@@ -122,8 +122,13 @@
       "regularSeason": 160,
       "champion": 275,
       "runnerUp": 105,
-      "stated": [],
-      "note": "The 2026 meeting notes record a draft order but no resolutions at all, so 2025 carries forward \u2014 same 11 teams, same $100 buy-in. If the league did change something, the season will fail to reconcile at season-end rather than publish a wrong number; fix this row when it does."
+      "stated": [
+        "weekly",
+        "regularSeason",
+        "champion",
+        "runnerUp"
+      ],
+      "note": "Unchanged from 2025 \u2014 confirmed by the league, not inferred. The 2026 meeting notes record a draft order and no resolutions, and the league confirms the payouts are not changing: same 11 teams, same $100 buy-in, same split."
     }
   ]
 }
