@@ -256,3 +256,60 @@ test('the weekly job settles the money book', () => {
   assert.ok(wf.indexOf('npm run payouts') > wf.indexOf('npm run lineups'));
   assert.ok(wf.indexOf('npm run payouts') > wf.indexOf('npm run season-end'));
 });
+
+test('each season is priced at its own rates, not a flat one', () => {
+  // The weekly prize went $35 -> $40, the regular-season prize $195 -> $160,
+  // the champion $250 -> $275 and the runner-up $100 -> $105. A manager who
+  // won in both eras must have each win priced at the rate of its own year.
+  const PAYOUTS = new Function(`${read('payouts-data.js')}; return PAYOUTS;`)();
+  const years = settledYears();
+  const structureOf = (y) => payouts.seasons.find((s) => s.year === y);
+
+  // Weekly money, computed per season.
+  const correct = {};
+  const wins = {};
+  for (const year of years) {
+    const rate = structureOf(year).weekly;
+    for (const w of archive(year).weeklyWinners) {
+      correct[w.gm] = (correct[w.gm] ?? 0) + rate;
+      wins[w.gm] = (wins[w.gm] ?? 0) + 1;
+    }
+  }
+
+  for (const c of PAYOUTS.careers) {
+    assert.equal(c.weekly, correct[c.gm] ?? 0, `${c.gm}'s weekly money is not priced per season`);
+    assert.equal(c.weeklyWins, wins[c.gm] ?? 0, `${c.gm}'s weekly win count is wrong`);
+  }
+
+  // And the distinction is load-bearing: pricing every win at a single rate
+  // would give a different answer for at least one manager. If this ever stops
+  // being true the test above has quietly lost its teeth.
+  const rates = [...new Set(years.map((y) => structureOf(y).weekly))];
+  assert.ok(rates.length > 1, 'expected the weekly rate to have changed');
+  const flat = Math.max(...rates);
+  assert.ok(
+    PAYOUTS.careers.some((c) => c.weekly !== (wins[c.gm] ?? 0) * flat),
+    'a flat rate would give the same answer — the per-season pricing is not being exercised'
+  );
+});
+
+test('the season prizes follow their own year too', () => {
+  const DATA = new Function(`${read('data.js')}; return DATA;`).call({ Set });
+  const PAYOUTS = new Function(`${read('payouts-data.js')}; return PAYOUTS;`)();
+
+  const reg = {};
+  const bowl = {};
+  for (const year of settledYears()) {
+    const s = payouts.seasons.find((p) => p.year === year);
+    const champ = DATA.champions.find((c) => c.year === year);
+    const field = DATA.seasons.find((f) => f.year === year);
+    reg[field.teams[0]] = (reg[field.teams[0]] ?? 0) + s.regularSeason;
+    bowl[champ.champ] = (bowl[champ.champ] ?? 0) + s.champion;
+    bowl[champ.runnerUp] = (bowl[champ.runnerUp] ?? 0) + s.runnerUp;
+  }
+
+  for (const c of PAYOUTS.careers) {
+    assert.equal(c.regularSeason, reg[c.gm] ?? 0, `${c.gm}'s regular-season money is mispriced`);
+    assert.equal(c.bowl, bowl[c.gm] ?? 0, `${c.gm}'s Fantasy Bowl money is mispriced`);
+  }
+});
