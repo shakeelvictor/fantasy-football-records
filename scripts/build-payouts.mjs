@@ -1,0 +1,139 @@
+// Builds payouts-data.js — what the league actually paid each manager.
+//
+// Offline. Reads the season archive (weekly winners, team counts), data.js
+// (champion, runner-up, regular-season winner) and data/payouts.json (the
+// amounts), and writes the browser file. No network, so it is safe to run any
+// time and cheap to re-run.
+//
+//   npm run payouts
+//
+// Every season is reconciled against `teams x buyIn` before anything is
+// written. A season that does not balance fails the whole run rather than
+// publishing a number the league never paid.
+
+import { readFile, readdir, writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+
+import { loadSiteData } from '../src/write-data.mjs';
+import { settleSeason, careerPayouts, netPositions } from '../src/payouts.mjs';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const archiveDir = join(root, 'data/lineups');
+
+const q = (s) => `'${String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
+
+async function main() {
+  const payouts = JSON.parse(await readFile(join(root, 'data/payouts.json'), 'utf8'));
+  const DATA = await loadSiteData();
+
+  const archive = new Map();
+  for (const f of (await readdir(archiveDir)).filter((f) => f.endsWith('.json'))) {
+    const j = JSON.parse(await readFile(join(archiveDir, f), 'utf8'));
+    archive.set(j.season, j);
+  }
+
+  const settled = [];
+  const skipped = [];
+  const seasonsPlayed = new Map();
+
+  for (const structure of payouts.seasons) {
+    const year = structure.year;
+    const season = archive.get(year);
+
+    // A season whose weekly winners have not been recorded yet cannot be
+    // settled. Say so out loud — a silently short leaderboard is the failure
+    // mode this whole pipeline is built to avoid.
+    if (!season?.weeklyWinners?.length) {
+      skipped.push(`${year} (archive has no weekly winners — run \`npm run lineups --year ${year}\`)`);
+      continue;
+    }
+
+    const champion = DATA.champions.find((c) => c.year === year);
+    const field = DATA.seasons.find((s) => s.year === year);
+    if (!champion || !field) {
+      skipped.push(`${year} (data.js has no champion or playoff field)`);
+      continue;
+    }
+
+    settled.push(
+      settleSeason({
+        year,
+        structure,
+        teams: season.managers.length,
+        winners: {
+          weekly: season.weeklyWinners.map((w) => w.gm),
+          regularSeason: field.teams[0], // seed 1 is the regular-season winner
+          champion: champion.champ,
+          runnerUp: champion.runnerUp,
+        },
+      })
+    );
+    seasonsPlayed.set(year, season.managers.map((m) => m.gm));
+  }
+
+  if (settled.length === 0) throw new Error('No season could be settled.');
+
+  const careers = careerPayouts(settled);
+  const net = netPositions(settled, seasonsPlayed);
+  const years = settled.map((s) => s.year).sort((a, b) => a - b);
+  const span = `${years[0]}–${years[years.length - 1]}`;
+  const pot = settled.reduce((n, s) => n + s.pool, 0);
+
+  // Rows come from the NET positions, not the winners: a manager who bought in
+  // every year and never cashed is the most interesting row on the board, and
+  // building from `careers` would drop him entirely.
+  const careerOf = new Map(careers.map((c) => [c.gm, c]));
+  const line = (n) => {
+    const c = careerOf.get(n.gm) ?? { total: 0, weeklyWins: 0, byLine: {} };
+    return (
+      `    { gm: ${q(n.gm)}, won: ${c.total}, paidIn: ${n.paidIn}, net: ${n.net}, ` +
+      `seasons: ${n.seasonsPlayed}, weeklyWins: ${c.weeklyWins}, ` +
+      `weekly: ${c.byLine['weekly win'] ?? 0}, regularSeason: ${c.byLine['regular season'] ?? 0}, ` +
+      `bowl: ${(c.byLine['Fantasy Bowl'] ?? 0) + (c.byLine['runner-up'] ?? 0)} },`
+    );
+  };
+
+  const out = `// League payouts — ${span}. GENERATED, do not hand-edit.
+//
+// Rebuilt by \`npm run payouts\`. Who won what comes from the season archive and
+// data.js; what it was worth comes from data/payouts.json, which is sourced
+// from the manager's meeting notes. Every season reconciles to its full pot
+// before it is written here.
+//
+// ${span} ONLY. The league confirms the structure was genuinely different
+// before 2019 — no weekly payouts, the regular-season prize came later, the
+// buy-in was raised at some point — and those amounts are not recorded
+// anywhere available. The Yahoo era knows who won and cannot know what they
+// were paid, so it is left out rather than priced with the wrong structure.
+const PAYOUTS = {
+  span: ${q(span)},
+  seasons: ${settled.length},
+  pot: ${pot},
+
+  // Career money, richest first. \`net\` is winnings less every buy-in paid,
+  // counting seasons played rather than seasons cashed.
+  careers: [
+${[...net].sort((a, b) => b.won - a.won || a.gm.localeCompare(b.gm)).map(line).join('\n')}
+  ],
+};
+`;
+
+  const path = join(root, 'payouts-data.js');
+  const prev = await readFile(path, 'utf8').catch(() => null);
+  if (prev === out) {
+    console.log('payouts-data.js already current.');
+  } else {
+    await writeFile(path, out);
+    console.log(`payouts-data.js rewritten from ${settled.length} season(s).`);
+  }
+
+  for (const s of settled) console.log(`  ${s.year}: $${s.pool} across ${s.rows.length} GMs — reconciled`);
+  for (const s of skipped) console.log(`  SKIPPED ${s}`);
+  console.log(`\nTotal paid out ${span}: $${pot.toLocaleString()}`);
+}
+
+main().catch((err) => {
+  console.error(`\nPayouts failed: ${err.message}\n`);
+  process.exitCode = 1;
+});

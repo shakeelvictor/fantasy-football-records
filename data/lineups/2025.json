@@ -4,6 +4,64 @@
   "weeksPlayed": 14,
   "unmodelled": [],
   "illegal": [],
+  "weeklyWinners": [
+    {
+      "week": 1,
+      "gm": "Samson"
+    },
+    {
+      "week": 2,
+      "gm": "Laura"
+    },
+    {
+      "week": 3,
+      "gm": "Samson"
+    },
+    {
+      "week": 4,
+      "gm": "Samson"
+    },
+    {
+      "week": 5,
+      "gm": "Samson"
+    },
+    {
+      "week": 6,
+      "gm": "Samson"
+    },
+    {
+      "week": 7,
+      "gm": "Samson"
+    },
+    {
+      "week": 8,
+      "gm": "Samson"
+    },
+    {
+      "week": 9,
+      "gm": "Andres"
+    },
+    {
+      "week": 10,
+      "gm": "Dante"
+    },
+    {
+      "week": 11,
+      "gm": "Hoss"
+    },
+    {
+      "week": 12,
+      "gm": "Hoss"
+    },
+    {
+      "week": 13,
+      "gm": "Imran"
+    },
+    {
+      "week": 14,
+      "gm": "Samson"
+    }
+  ],
   "managers": [
     {
       "gm": "Samson",

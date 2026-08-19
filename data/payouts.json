@@ -1,0 +1,100 @@
+{
+  "_comment": [
+    "League payouts by season. Hand-maintained, and the one thing about the money",
+    "that cannot be fetched: MFL knows nothing about what the league pays out.",
+    "",
+    "Source is the manager's meeting notes in Notion, one page per year. Every",
+    "season here is checked against a hard invariant before it is published: the",
+    "payouts must sum to exactly `teams x buyIn`. The league pays out the whole",
+    "pot, so a structure that does not reconcile is wrong, not approximate.",
+    "",
+    "`stated` records what the notes actually say. Where a field is not stated it",
+    "is marked and the reconciliation is what justifies it -- see 2019/2020. A",
+    "season with no payout topic in its notes carried the previous year forward,",
+    "which is the league's own default and is also what reconciles.",
+    "",
+    "2021 is the load-bearing year: the regular-season prize drops 195 -> 160 in",
+    "exactly the season the schedule goes 13 -> 14 weeks. 195 - 35 = 160, so the",
+    "extra weekly payout came straight out of it. That is corroboration, not",
+    "coincidence, and it is why the 2019/2020 champion figures can be trusted.",
+    "",
+    "NOTHING BEFORE 2019. The league confirms the structure was genuinely",
+    "different then -- no weekly payouts at all, the regular-season prize came in",
+    "later, and the buy-in was raised at some point -- but those numbers are not",
+    "recorded anywhere available. The Yahoo era knows WHO won and cannot know",
+    "what they were paid, so it is left out rather than priced with the wrong",
+    "structure. Do not backfill it by assuming today's numbers."
+  ],
+  "seasons": [
+    {
+      "year": 2019,
+      "buyIn": 100,
+      "weekly": 35,
+      "regularSeason": 195,
+      "champion": 250,
+      "runnerUp": 100,
+      "stated": ["weekly", "regularSeason"],
+      "note": "Meeting notes state the weekly and regular-season figures; the regular-season prize was introduced this year. Champion and runner-up are the 2021 figures, which is what reconciles the pot to $1,000."
+    },
+    {
+      "year": 2020,
+      "buyIn": 100,
+      "weekly": 35,
+      "regularSeason": 195,
+      "champion": 250,
+      "runnerUp": 100,
+      "stated": [],
+      "note": "No payout topic in the 2020 notes, so 2019 carried forward. The notes cover only COVID contingencies, which did not trigger — the league confirms 2020 paid out normally."
+    },
+    {
+      "year": 2021,
+      "buyIn": 100,
+      "weekly": 35,
+      "regularSeason": 160,
+      "champion": 250,
+      "runnerUp": 100,
+      "stated": ["weekly", "regularSeason", "champion", "runnerUp"],
+      "note": "Stated in full in the meeting notes."
+    },
+    {
+      "year": 2022,
+      "buyIn": 100,
+      "weekly": 35,
+      "regularSeason": 160,
+      "champion": 250,
+      "runnerUp": 100,
+      "stated": [],
+      "note": "No payout topic in the 2022 notes; 2021 carried forward."
+    },
+    {
+      "year": 2023,
+      "buyIn": 100,
+      "weekly": 35,
+      "regularSeason": 160,
+      "champion": 250,
+      "runnerUp": 100,
+      "stated": [],
+      "note": "No payout topic in the 2023 notes; carried forward."
+    },
+    {
+      "year": 2024,
+      "buyIn": 100,
+      "weekly": 35,
+      "regularSeason": 160,
+      "champion": 250,
+      "runnerUp": 100,
+      "stated": [],
+      "note": "No payout topic in the 2024 notes; carried forward."
+    },
+    {
+      "year": 2025,
+      "buyIn": 100,
+      "weekly": 40,
+      "regularSeason": 160,
+      "champion": 275,
+      "runnerUp": 105,
+      "stated": ["weekly", "regularSeason", "champion", "runnerUp"],
+      "note": "Restructured for the 11-team league. The 2025 notes settle the $100 buy-in; the split is the one recorded in rules-data.js."
+    }
+  ]
+}

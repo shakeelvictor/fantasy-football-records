@@ -4,6 +4,64 @@
   "weeksPlayed": 14,
   "unmodelled": [],
   "illegal": [],
+  "weeklyWinners": [
+    {
+      "week": 1,
+      "gm": "Imran"
+    },
+    {
+      "week": 2,
+      "gm": "Imran"
+    },
+    {
+      "week": 3,
+      "gm": "Asher"
+    },
+    {
+      "week": 4,
+      "gm": "Hoss"
+    },
+    {
+      "week": 5,
+      "gm": "Hoss"
+    },
+    {
+      "week": 6,
+      "gm": "Andres"
+    },
+    {
+      "week": 7,
+      "gm": "Anand"
+    },
+    {
+      "week": 8,
+      "gm": "Vip"
+    },
+    {
+      "week": 9,
+      "gm": "Vip"
+    },
+    {
+      "week": 10,
+      "gm": "Imran"
+    },
+    {
+      "week": 11,
+      "gm": "Vip"
+    },
+    {
+      "week": 12,
+      "gm": "Asher"
+    },
+    {
+      "week": 13,
+      "gm": "Samson"
+    },
+    {
+      "week": 14,
+      "gm": "Dante"
+    }
+  ],
   "managers": [
     {
       "gm": "Imran",

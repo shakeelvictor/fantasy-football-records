@@ -11,6 +11,7 @@
     "ingest": "node src/ingest.mjs",
     "records": "node src/records-update.mjs",
     "lineups": "node scripts/backfill-lineups.mjs",
+    "payouts": "node scripts/build-payouts.mjs",
     "seal-season": "node src/seal-season.mjs",
     "fixtures": "node scripts/make-fixtures.mjs",
     "season-end": "node src/season-end.mjs"

@@ -32,6 +32,7 @@ npm run season-end  # after Week 18: write the season into data.js (no-op until 
 npm run seal-season # rollover only: fold baselines, reset the log for next year
 npm run fixtures    # regenerate replay fixtures (dev only, hits MFL)
 npm run lineups     # lineup efficiency for the current season -> lineups-data.js
+npm run payouts     # settle the money book -> payouts-data.js (offline)
 ```
 
 `npm run lineups --all` rebuilds the whole 2016-2025 archive and hits MFL hard
@@ -190,6 +191,28 @@ The season file also carries an `unmodelled` array for a week that cannot be
 priced at all — one where the manager outscored the best legal lineup, meaning
 the shape model itself is wrong. There are none on record, and if one ever
 appears the fix is the model, not the data.
+
+**The money book pays out the whole pot, and that is the check.** Every season
+in `data/payouts.json` must sum to exactly `teams x buyIn`; `settleSeason()`
+throws otherwise rather than publish a gap, and across the league the net is
+zero. Both are locked by tests.
+
+Only 2019-2025 is priced. The league confirms the structure was genuinely
+different before that — no weekly payouts, the regular-season prize came later,
+the buy-in was raised at some point — and those amounts are not recorded
+anywhere available. **The Yahoo era knows who won and cannot know what they were
+paid.** Do not backfill it with today's numbers.
+
+Two of the seven seasons state a full split (2021, 2025); the rest are
+reconstructed. What justifies that is 2021: the regular-season prize drops
+$195 -> $160 in exactly the year the schedule goes 13 -> 14 weeks, and
+195 - 35 = 160 — the extra weekly payout came straight out of it. A test locks
+that relationship, because it is what makes the 2019/2020 champion figures
+trustworthy when the notes never state them.
+
+The board is built from NET positions, not winners: a manager who bought in
+every year and never cashed is the most interesting row on it, and building
+from the winners list would drop him entirely.
 
 **Playoff efficiency counts only the weeks a manager was alive to play.**
 All-play means an eliminated team still posts a score every playoff week, so

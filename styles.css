@@ -1427,3 +1427,6 @@ a { color: inherit; text-decoration: none; }
   }
   .lineup-defs dd { margin-bottom: 10px; }
 }
+
+.money-up { color: var(--accent); font-weight: 700; }
+.money-down { color: var(--text-muted); font-weight: 700; }

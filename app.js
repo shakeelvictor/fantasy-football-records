@@ -376,6 +376,48 @@ function renderLineupMath() {
   `;
 }
 
+// ====== The Money ======
+// PAYOUTS comes from payouts-data.js. Who won what is derived; what it was
+// worth is hand-maintained in data/payouts.json from the meeting notes, and
+// every season reconciles to its full pot before it is written.
+function renderMoney() {
+  if (typeof PAYOUTS === 'undefined') return;
+
+  const usd = n => (n < 0 ? '-$' : '$') + Math.abs(n).toLocaleString();
+
+  document.getElementById('moneyBlurb').textContent =
+    `Every dollar the league has paid out, ${PAYOUTS.span} — ` +
+    `${usd(PAYOUTS.pot)} across ${PAYOUTS.seasons} season${PAYOUTS.seasons === 1 ? '' : 's'}.`;
+
+  const board = (id, rows, valueOf) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = rows.map((r, i) => `
+      <li class="${i === 0 ? 'top-rank' : ''}">
+        <span class="rank ${i === 0 ? 'top' : ''}">${String(i + 1).padStart(2, '0')}</span>
+        <span class="gm-name">${r.gm}</span>
+        <span class="gm-value">${valueOf(r)}</span>
+      </li>
+    `).join('');
+  };
+
+  board('moneyWon', PAYOUTS.careers, r =>
+    `${usd(r.won)} <span class="lineup-sub">${r.weeklyWins} wk</span>`);
+
+  // Net is winnings less every buy-in paid, so it sums to zero across the
+  // league — one manager is only ever up because another is down.
+  const byNet = [...PAYOUTS.careers].sort((a, b) => b.net - a.net);
+  board('moneyNet', byNet, r =>
+    `<span class="${r.net >= 0 ? 'money-up' : 'money-down'}">${usd(r.net)}</span>` +
+    ` <span class="lineup-sub">${r.seasons} yr</span>`);
+
+  document.getElementById('moneyNote').textContent =
+    `Weekly winners, the regular-season title and the Fantasy Bowl, priced with each ` +
+    `season's own structure — the weekly prize, the regular-season prize and the buy-in ` +
+    `have all changed. Earlier seasons are not shown: the league paid out differently ` +
+    `before ${PAYOUTS.span.split('–')[0]} and those amounts are not on record.`;
+}
+
 // ====== Tidbits ======
 function renderTidbits() {
   const ul = document.getElementById('tidbitsList');
@@ -445,6 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderLeaderboard('bigGames', bigGamesTotals());
   renderRecords();
   renderLineups();
+  renderMoney();
   renderTidbits();
   renderSeasons();
   setupEraTabs();

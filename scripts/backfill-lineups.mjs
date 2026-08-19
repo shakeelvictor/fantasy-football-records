@@ -29,7 +29,7 @@ import { loadFranchiseFile, mapForSeason } from '../src/franchise-map.mjs';
 import {
   weekEfficiency, seasonEfficiency, shapeOf, shapeKey, fitsWithin, legalShapes, rulesFor,
 } from '../src/lineups.mjs';
-import { playoffResult } from '../src/derive.mjs';
+import { playoffResult, weeklyWinners } from '../src/derive.mjs';
 import { renderLineups } from '../src/render-lineups.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -231,6 +231,10 @@ async function buildSeason(year, file) {
     weeksPlayed: rows.length,
     unmodelled,
     illegal,
+    // Who topped the league each regular-season week. Cheap to record on a
+    // pass that already has every score, and the only per-season source for
+    // it — data.js keeps an all-time total per GM, never a yearly breakdown.
+    weeklyWinners: weeklyWinners(forDerive, pcfg).map((w) => ({ week: w.week, gm: w.gm })),
     managers: seasonEfficiency(rows),
     // Playoff weeks, counting only the teams still alive in each one.
     playoffManagers: seasonEfficiency(playoffRows),
