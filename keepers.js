@@ -1,5 +1,15 @@
 // ====== Keeper History ======
 const YEARS = KEEPERS.map(s => s.year).sort((a, b) => b - a);
+
+// Derived, never typed — the span grows on its own as seasons are added.
+(function renderKeeperEyebrow() {
+  const el = document.getElementById('keeperEyebrow');
+  if (!el || !KEEPERS.length) return;
+  const years = KEEPERS.map(s => s.year);
+  const first = Math.min(...years);
+  const last = Math.max(...years);
+  el.textContent = `${first}–${last} · ${KEEPERS.length} Season${KEEPERS.length === 1 ? '' : 's'}`;
+})();
 let activeYear = 'all';
 
 function seasonBlock(season) {

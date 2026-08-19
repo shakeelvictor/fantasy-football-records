@@ -205,6 +205,55 @@ function renderRecords() {
   `).join('');
 }
 
+// ====== Living headline numbers ======
+// Everything the page says about "how many" and "since when" is derived from
+// DATA, never typed. These used to be literals in index.html and had already
+// drifted: the Unique Champs tile read 9 for a year after Raj's 2024 title
+// made it 10. A number a human has to remember to update is a number that will
+// eventually be wrong.
+function renderHeadlineNumbers() {
+  const champions = DATA.champions;
+  if (!champions.length) return;
+
+  const first = champions[0].year;
+  const reigning = champions[champions.length - 1];
+  const seasons = champions.length;
+
+  // Every name the archive mentions, anywhere. A slot co-managed by two GMs is
+  // written "Anand/Vip" and is not a fourteenth person — both are already
+  // counted on their own.
+  const gms = new Set();
+  const add = name => { if (name && !name.includes('/')) gms.add(name); };
+  champions.forEach(c => { add(c.champ); add(c.runnerUp); });
+  DATA.seasons.forEach(s => s.teams.forEach(add));
+  DATA.playoffApps.forEach(r => add(r.gm));
+  DATA.bowlApps.forEach(r => add(r.gm));
+
+  const set = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  };
+
+  set('heroEyebrow', `Est. ${first} · ${seasons} Seasons`);
+  set('statSeasons', seasons);
+  set('statGms', gms.size);
+  set('statChamps', new Set(champions.map(c => c.champ)).size);
+  set('statReignYear', reigning.year);
+  set('statReignGm', `Reigning: ${reigning.gm || reigning.champ}`);
+  set('siteFooterLine', `The League · Records compiled across ${seasons} seasons · ${first}–${reigning.year}`);
+
+  const era = key => {
+    const rows = champions.filter(c => c.era === key);
+    return rows.length ? `${rows[0].year}–${rows[rows.length - 1].year}` : '';
+  };
+  set('eraTabMfl', `MFL · ${era('mfl')}`);
+  set('eraTabYahoo', `Yahoo! · ${era('yahoo')}`);
+
+  if (DATA.exhibition && DATA.exhibition.length) {
+    set('exhibitionSince', Math.min(...DATA.exhibition.map(e => e.year)));
+  }
+}
+
 // ====== Lineup Efficiency ======
 // What a manager started against the best lineup his roster could legally have
 // fielded. LINEUPS comes from lineups-data.js; the full season-by-season
@@ -385,6 +434,7 @@ function setupMobileNav() {
 
 // ====== Init ======
 document.addEventListener('DOMContentLoaded', () => {
+  renderHeadlineNumbers();
   renderChampions();
   renderExhibition();
   renderLeaderboard('playoffApps', DATA.playoffApps);

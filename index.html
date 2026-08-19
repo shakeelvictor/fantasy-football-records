@@ -81,20 +81,20 @@
 
   <main>
     <section class="hero">
-      <p class="eyebrow">Est. 2002 · 24 Seasons</p>
+      <p class="eyebrow" id="heroEyebrow"></p>
       <h1>The Book of <span class="accent">Champions</span><br/>&amp; Heartbreak</h1>
       <p class="lede">A complete archive of our fantasy football league — every champion, every record, every legendary tidbit from the Yahoo! era through the modern MFL dynasty. Plus <a href="keepers.html">keeper history</a> since the rule came in, and <a href="rules.html">the league rules</a> we voted on to get here.</p>
       <div class="hero-stats">
         <div class="stat-tile">
-          <span class="stat-num">24</span>
+          <span class="stat-num" id="statSeasons"></span>
           <span class="stat-label">Seasons</span>
         </div>
         <div class="stat-tile">
-          <span class="stat-num">14</span>
+          <span class="stat-num" id="statGms"></span>
           <span class="stat-label">GMs All-Time</span>
         </div>
         <div class="stat-tile">
-          <span class="stat-num">9</span>
+          <span class="stat-num" id="statChamps"></span>
           <span class="stat-label">Unique Champs</span>
         </div>
         <div class="stat-tile reigning">
@@ -106,8 +106,8 @@
             <rect x="20" y="38" width="24" height="4" rx="1" fill="currentColor"/>
             <rect x="16" y="44" width="32" height="6" rx="2" fill="currentColor"/>
           </svg>
-          <span class="stat-num accent">2025</span>
-          <span class="stat-label">Reigning: Shak</span>
+          <span class="stat-num accent" id="statReignYear"></span>
+          <span class="stat-label" id="statReignGm"></span>
         </div>
       </div>
     </section>
@@ -120,8 +120,8 @@
 
       <div class="era-tabs">
         <button class="era-tab active" data-era="all">All Eras</button>
-        <button class="era-tab" data-era="mfl">MFL · 2015–2025</button>
-        <button class="era-tab" data-era="yahoo">Yahoo! · 2002–2014</button>
+        <button class="era-tab" data-era="mfl" id="eraTabMfl"></button>
+        <button class="era-tab" data-era="yahoo" id="eraTabYahoo"></button>
       </div>
 
       <div class="champions-grid" id="championsGrid"></div>
@@ -130,7 +130,7 @@
     <section id="exhibition" class="section">
       <div class="section-head">
         <h2>Pakistan vs. the World</h2>
-        <p>The league&rsquo;s Pro Bowl. Week 18, two sides, one combined super lineup each &mdash; every manager&rsquo;s best players, twelve a side. Contested since 2024.</p>
+        <p>The league&rsquo;s Pro Bowl. Week 18, two sides, one combined super lineup each &mdash; every manager&rsquo;s best players, twelve a side. Contested since <span id="exhibitionSince"></span>.</p>
       </div>
 
       <div class="series-tally" id="seriesTally"></div>
@@ -217,7 +217,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>The League · Records compiled across 24 seasons · 2002–2025</p>
+    <p id="siteFooterLine"></p>
   </footer>
 
   <script src="data.js"></script>

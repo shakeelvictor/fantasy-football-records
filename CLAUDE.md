@@ -52,6 +52,15 @@ one week every team is 11-0 or 0-11, and promoting that would put a .1000 season
 in the book. The `inSeason` flag in `src/records.mjs` is the list, and
 `test/records-in-season.test.mjs` locks both halves of it.
 
+**Headline numbers are derived, never typed.** The hero tiles, the era tab
+labels, the exhibition "contested since", the footer span and the keeper page's
+eyebrow are all filled in by script from `DATA` — `renderHeadlineNumbers()` in
+`app.js`, and a small block in `keepers.js`. They used to be literals in the
+markup and had already drifted: the Unique Champs tile read 9 for a year after
+Raj's 2024 title made it 10. If you add something to the hero, derive it or
+leave it out; `test/headline-numbers.test.mjs` fails on a hardcoded year in the
+markup and checks that recording a season moves every number.
+
 ## Editing rules
 
 - **`weekly-log.js`** — the block between `>>> BEGIN GENERATED` and
