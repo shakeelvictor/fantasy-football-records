@@ -36,6 +36,7 @@ async function main() {
   const settled = [];
   const skipped = [];
   const seasonsPlayed = new Map();
+  const FIELDS = ['weekly', 'regularSeason', 'champion', 'runnerUp'];
 
   for (const structure of payouts.seasons) {
     const year = structure.year;
@@ -80,6 +81,14 @@ async function main() {
   const span = `${years[0]}–${years[years.length - 1]}`;
   const pot = settled.reduce((n, s) => n + s.pool, 0);
 
+  // How many settled seasons have every figure written down in the meeting
+  // notes, rather than reconstructed and justified by the pot reconciling.
+  // Derived so the caption corrects itself if the missing notes ever surface.
+  const stated = settled.filter((s) => {
+    const row = payouts.seasons.find((p) => p.year === s.year);
+    return FIELDS.every((f) => (row.stated ?? []).includes(f));
+  }).length;
+
   // Rows come from the NET positions, not the winners: a manager who bought in
   // every year and never cashed is the most interesting row on the board, and
   // building from `careers` would drop him entirely.
@@ -110,6 +119,11 @@ const PAYOUTS = {
   span: ${q(span)},
   seasons: ${settled.length},
   pot: ${pot},
+
+  // Seasons whose payout figures are stated in full in the meeting notes. The
+  // rest are reconstructed — every one reconciles to its pot exactly, but the
+  // page says out loud that they are a best guess rather than a record.
+  stated: ${stated},
 
   // Career money, richest first. \`net\` is winnings less every buy-in paid,
   // counting seasons played rather than seasons cashed.

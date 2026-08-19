@@ -404,11 +404,17 @@ function renderMoney() {
     </li>
   `).join('');
 
+  // Say plainly that most of this is reconstructed. Every season reconciles to
+  // its pot exactly, which is good evidence — but it is evidence, not a receipt.
+  const reconstructed = PAYOUTS.seasons - PAYOUTS.stated;
   document.getElementById('moneyNote').textContent =
-    `Weekly wins, the regular-season title and the Fantasy Bowl combined. ` +
-    `Priced with each season's own structure — the weekly prize, the ` +
-    `regular-season prize and the buy-in have all changed. Earlier seasons ` +
-    `paid out differently and those amounts are not on record.`;
+    `Weekly wins, the regular-season title and the Fantasy Bowl combined, priced with ` +
+    `each season's own structure — the weekly prize, the regular-season prize and the ` +
+    `buy-in have all changed. Our best guess, not a ledger: only ${PAYOUTS.stated} of ` +
+    `${PAYOUTS.seasons} seasons have their figures written down in full, and the other ` +
+    `${reconstructed} are reconstructed from the meeting notes. Each one balances to its ` +
+    `pot exactly, which is what makes them believable. Earlier seasons paid out ` +
+    `differently and those amounts are not on record at all.`;
 }
 
 // ====== Tidbits ======

@@ -148,3 +148,22 @@ test('the money board is one leaderboard inside All-Time Leaders', () => {
   const app = read('app.js');
   assert.ok(!/money-up|money-down/.test(app + read('styles.css')), 'net styling should be gone');
 });
+
+test('the caption admits how much of this is reconstructed', () => {
+  const PAYOUTS = new Function(`${read('payouts-data.js')}; return PAYOUTS;`)();
+  const payoutsJson = JSON.parse(read('data/payouts.json'));
+
+  // The count is derived, so it corrects itself if the missing notes surface.
+  const fields = ['weekly', 'regularSeason', 'champion', 'runnerUp'];
+  const fullyStated = payoutsJson.seasons.filter(
+    (s) => fields.every((f) => (s.stated ?? []).includes(f))
+  ).length;
+  assert.equal(PAYOUTS.stated, fullyStated);
+  assert.ok(PAYOUTS.stated < PAYOUTS.seasons, 'some seasons are reconstructed');
+
+  // And the page says so rather than presenting a reconstruction as a record.
+  const app = read('app.js');
+  assert.match(app, /best guess/i, 'the caption must not present this as a ledger');
+  assert.match(app, /PAYOUTS\.stated/, 'the count must be derived, not typed');
+  assert.ok(!/only 2 of 7/.test(app), 'the counts must not be hardcoded');
+});

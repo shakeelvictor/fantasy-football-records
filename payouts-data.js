@@ -15,6 +15,11 @@ const PAYOUTS = {
   seasons: 7,
   pot: 7100,
 
+  // Seasons whose payout figures are stated in full in the meeting notes. The
+  // rest are reconstructed — every one reconciles to its pot exactly, but the
+  // page says out loud that they are a best guess rather than a record.
+  stated: 2,
+
   // Career money, richest first. `net` is winnings less every buy-in paid,
   // counting seasons played rather than seasons cashed.
   careers: [
