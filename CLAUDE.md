@@ -224,6 +224,19 @@ all-time records that need a finished season — win pct, playoff and Fantasy Bo
 records. The rest have already been promoted week by week by `npm run records`,
 so season-end finds them current and leaves them alone. Nothing to paste.
 
+Lineup efficiency needs nothing at season end either. `npm run lineups` runs in
+the weekly job, so the finished season's regular-season *and* playoff numbers
+are already current by the last Thursday of the year — playoff weeks fill in on
+their own once the bracket has folded, and until then `playoffResult()` reports
+incomplete and they stay empty rather than half-counted.
+
+The archive is also self-describing: each `data/lineups/<year>.json` records its
+own season length, and `--all` spans every season on disk as well as every one
+named in config. That is what stops rollover dropping the season just played —
+after `seal-season` bumps the year, the finished season is neither `config.season`
+nor listed in `config.archive.regularSeasonWeeks`, and reading config alone would
+skip it without a word.
+
 Only two things remain manual:
 
 1. **Tidbits** — editorial prose, deliberately never generated.

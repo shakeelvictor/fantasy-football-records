@@ -10,6 +10,12 @@
 //   node scripts/backfill-lineups.mjs --year 2019
 //   node scripts/backfill-lineups.mjs --render-only   # no network; rebuild from disk
 //
+// Nothing here needs touching at season end. The weekly job keeps the current
+// season current, including its playoff weeks once the bracket has folded, and
+// a finished season stays archived under data/lineups/ from then on. `--all`
+// covers every season the archive knows about, not just the ones named in
+// config, so rolling the league to a new year cannot drop the one just played.
+//
 // Writes data/lineups/<year>.json per season, then rebuilds lineups-data.js
 // from every season file on disk.
 
@@ -57,8 +63,36 @@ function playoffConfig(year) {
 }
 
 /** Regular-season length for a season. The archive owns finished years; config owns this one. */
+/**
+ * Season structure already written into the archive, keyed by year.
+ *
+ * The archive is self-describing on purpose. Without this, a season would be
+ * knowable only while it is `config.season` or listed in config — so the moment
+ * `seal-season` rolls the league to the next year, the season just finished
+ * would fall out of both and `--all` would quietly skip it. Silent omission is
+ * the one failure this pipeline must not have.
+ */
+const archived = new Map();
+
+async function loadArchivedStructure() {
+  const files = await readdir(archiveDir).catch(() => []);
+  for (const f of files.filter((f) => f.endsWith('.json'))) {
+    const j = JSON.parse(await readFile(join(archiveDir, f), 'utf8'));
+    if (j.season && j.regularSeasonWeeks) archived.set(j.season, j.regularSeasonWeeks);
+  }
+}
+
+/** Every season the archive can build: config, plus anything already archived. */
+function knownSeasons() {
+  return [...new Set([
+    ...Object.keys(config.archive.regularSeasonWeeks).map(Number),
+    ...archived.keys(),
+    config.season,
+  ])].sort((a, b) => a - b);
+}
+
 function regularWeeks(year) {
-  const n = config.archive.regularSeasonWeeks[year];
+  const n = config.archive.regularSeasonWeeks[year] ?? archived.get(year);
   if (n) return Array.from({ length: n }, (_, i) => i + 1);
   if (year === config.season) return config.regularSeasonWeeks;
   throw new Error(
@@ -217,14 +251,16 @@ async function buildSeason(year, file) {
 async function main() {
   const argv = process.argv.slice(2);
   const yearArg = argv.includes('--year') ? Number(argv[argv.indexOf('--year') + 1]) : null;
+  await mkdir(archiveDir, { recursive: true });
+  await loadArchivedStructure();
+
   const years = yearArg
     ? [yearArg]
     : argv.includes('--all')
-      ? Object.keys(config.archive.regularSeasonWeeks).map(Number).sort()
+      ? knownSeasons()
       : [config.season];
 
   const file = await loadFranchiseFile();
-  await mkdir(archiveDir, { recursive: true });
 
   // Rebuilding the browser file from the archive on disk needs no network, so
   // a rate-limited or offline day cannot leave lineups-data.js out of step

@@ -427,3 +427,25 @@ test('the efficiency explainer describes only the cards in its own section', () 
   // The perfect-week card's label is conditional, so check it by name.
   assert.ok(math.includes("['Biggest Perfect Week'"), 'perfect week has no definition');
 });
+
+test('the archive is self-describing, so rollover cannot drop a season', () => {
+  // Every archived season records its own structure. That is what lets the
+  // backfill rebuild a season after `seal-season` has moved the league on:
+  // without it a year would be knowable only while it is config.season or
+  // listed in config, and the season just played would fall out of both.
+  for (const year of years()) {
+    const a = archive(year);
+    assert.equal(a.season, year, `${year}.json disagrees with its filename`);
+    assert.ok(a.regularSeasonWeeks > 0, `${year} does not record its own season length`);
+    assert.ok(a.weeksPlayed <= a.regularSeasonWeeks);
+  }
+
+  // And `--all` must span everything known, not just the config keys.
+  const script = readFileSync(join(here, '../scripts/backfill-lineups.mjs'), 'utf8');
+  assert.match(script, /knownSeasons\(\)/);
+  assert.match(script, /\.\.\.archived\.keys\(\)/);
+  assert.ok(
+    !/argv\.includes\('--all'\)\s*\n\s*\?\s*Object\.keys\(config\.archive\.regularSeasonWeeks\)/.test(script),
+    '--all must not read config alone; a rolled-over season would be skipped silently'
+  );
+});
