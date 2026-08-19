@@ -106,3 +106,30 @@ test('recording a season moves every headline number', async () => {
   assert.equal(after.champs, before.champs + 1, "Asher's first title is a new unique champion");
   assert.ok(after.gms > before.gms, 'a GM new to the archive should be counted');
 });
+
+test('the README documents every command and every weekly step', () => {
+  const readme = read('README.md');
+  const pkg = JSON.parse(read('package.json')).scripts;
+  const workflow = read('.github/workflows/weekly-update.yml');
+
+  // A script nobody documented is a script nobody knows to run.
+  for (const name of Object.keys(pkg)) {
+    if (name === 'test') continue;
+    assert.ok(readme.includes(`npm run ${name}`), `README does not document \`npm run ${name}\``);
+  }
+
+  // And a documented command that does not exist is worse than none.
+  for (const [, name] of readme.matchAll(/npm run ([a-z-]+)/g)) {
+    assert.ok(pkg[name], `README names \`npm run ${name}\`, which package.json does not define`);
+  }
+
+  // Every step the Thursday job actually runs is listed, in the order it runs.
+  const steps = [...workflow.matchAll(/- run: npm run ([a-z-]+)/g)].map((m) => m[1]);
+  let cursor = -1;
+  for (const step of steps) {
+    const at = readme.indexOf(`\`${step}\``);
+    assert.ok(at > -1, `README does not list the weekly step \`${step}\``);
+    assert.ok(at > cursor, `README lists \`${step}\` out of the order the job runs it`);
+    cursor = at;
+  }
+});
