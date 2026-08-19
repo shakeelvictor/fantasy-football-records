@@ -9,31 +9,19 @@ import { dirname, join } from 'node:path';
 
 import { config } from '../data/league.config.mjs';
 import { fetchWeeklyResults } from '../src/mfl/client.mjs';
+import { loadFranchiseFile, mapForSeason } from '../src/franchise-map.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-// Franchise 0002 changed hands after 2024 (Raj out, Ryaan in) and 0011 did not
-// exist before Laura joined in 2025, so the current map in data/franchises.json
-// cannot be applied to older seasons. These are the per-season maps.
-const BASE = {
-  '0001': 'Shak',
-  '0003': 'Samson',
-  '0004': 'Imran',
-  '0005': 'Hoss',
-  '0006': 'Andres',
-  '0007': 'Asher',
-  '0008': 'Dante',
-  '0009': 'Vip',
-  '0010': 'Anand',
-};
+// Seasons to replay. The id -> GM map for each comes from data/franchises.json,
+// which knows that 0002 changed hands after 2024 and that 0011 did not exist
+// before the 2025 expansion.
+const SEASONS = [2023, 2024, 2025];
 
-const MAPS = {
-  2023: { ...BASE, '0002': 'Raj' },
-  2024: { ...BASE, '0002': 'Raj' },
-  2025: { ...BASE, '0002': 'Ryaan', '0011': 'Laura' },
-};
+const file = await loadFranchiseFile();
 
-for (const [season, map] of Object.entries(MAPS)) {
+for (const season of SEASONS) {
+  const map = Object.fromEntries(mapForSeason(file, season));
   const weeks = await fetchWeeklyResults(season, config.leagueId);
   const out = {
     season: Number(season),

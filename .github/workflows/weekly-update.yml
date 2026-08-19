@@ -72,11 +72,20 @@ jobs:
         env:
           MFL_API_KEY: ${{ secrets.MFL_API_KEY }}
 
+      # Lineup efficiency for the current season: what each manager started
+      # against the best lineup his roster could legally have fielded. Current
+      # season only — the historical archive under data/lineups/ is frozen and
+      # rebuilt by hand with `npm run lineups --all`. Runs after the ingest so
+      # a stat correction is reflected here too.
+      - run: npm run lineups
+        env:
+          MFL_API_KEY: ${{ secrets.MFL_API_KEY }}
+
       - name: Commit if changed
         run: |
           git config user.name "fflr-bot"
           git config user.email "fflr-bot@users.noreply.github.com"
-          git add data/ weekly-log.js data.js
+          git add data/ weekly-log.js data.js lineups-data.js
 
           # Nothing to record: stop here. Pushing anyway used to fail the whole
           # job whenever the local branch was behind for any reason at all —

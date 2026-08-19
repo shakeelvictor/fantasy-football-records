@@ -1,0 +1,388 @@
+{
+  "season": 2019,
+  "regularSeasonWeeks": 13,
+  "weeksPlayed": 13,
+  "unmodelled": [],
+  "illegal": [],
+  "managers": [
+    {
+      "gm": "Andres",
+      "scored": 2012.53,
+      "optimal": 2264.78,
+      "left": 252.25,
+      "weeks": 13,
+      "efficiency": 0.8886205282632308
+    },
+    {
+      "gm": "Imran",
+      "scored": 1911.54,
+      "optimal": 2196.57,
+      "left": 285.03,
+      "weeks": 13,
+      "efficiency": 0.8702385992706811
+    },
+    {
+      "gm": "Raj",
+      "scored": 1724.97,
+      "optimal": 1990.3,
+      "left": 265.33,
+      "weeks": 13,
+      "efficiency": 0.8666884389288046
+    },
+    {
+      "gm": "Anand",
+      "scored": 2021.84,
+      "optimal": 2339.63,
+      "left": 317.79,
+      "weeks": 13,
+      "efficiency": 0.8641708304304527
+    },
+    {
+      "gm": "Hoss",
+      "scored": 1878.39,
+      "optimal": 2188.45,
+      "left": 310.06,
+      "weeks": 13,
+      "efficiency": 0.858319815394457
+    },
+    {
+      "gm": "Dante",
+      "scored": 1880.62,
+      "optimal": 2202.03,
+      "left": 321.41,
+      "weeks": 13,
+      "efficiency": 0.8540392274401347
+    },
+    {
+      "gm": "Asher",
+      "scored": 1801.84,
+      "optimal": 2154.35,
+      "left": 352.51,
+      "weeks": 13,
+      "efficiency": 0.8363729199062361
+    },
+    {
+      "gm": "Vip",
+      "scored": 1651.41,
+      "optimal": 2034.67,
+      "left": 383.26,
+      "weeks": 13,
+      "efficiency": 0.8116353020391511
+    },
+    {
+      "gm": "Shak",
+      "scored": 1717.35,
+      "optimal": 2175.67,
+      "left": 458.32,
+      "weeks": 13,
+      "efficiency": 0.78934305294461
+    },
+    {
+      "gm": "Samson",
+      "scored": 1895.81,
+      "optimal": 2422.63,
+      "left": 526.82,
+      "weeks": 13,
+      "efficiency": 0.7825421133231242
+    }
+  ],
+  "playoffManagers": [
+    {
+      "gm": "Dante",
+      "scored": 530.99,
+      "optimal": 577.47,
+      "left": 46.48,
+      "weeks": 3,
+      "efficiency": 0.9195109702668537
+    },
+    {
+      "gm": "Andres",
+      "scored": 131.12,
+      "optimal": 143.15,
+      "left": 12.03,
+      "weeks": 1,
+      "efficiency": 0.9159622773314705
+    },
+    {
+      "gm": "Hoss",
+      "scored": 247.64,
+      "optimal": 277.73,
+      "left": 30.09,
+      "weeks": 2,
+      "efficiency": 0.8916573650667914
+    },
+    {
+      "gm": "Samson",
+      "scored": 479.59,
+      "optimal": 549.67,
+      "left": 70.08,
+      "weeks": 3,
+      "efficiency": 0.8725053213746431
+    },
+    {
+      "gm": "Imran",
+      "scored": 131.69,
+      "optimal": 152.66,
+      "left": 20.97,
+      "weeks": 1,
+      "efficiency": 0.8626359229660684
+    },
+    {
+      "gm": "Anand",
+      "scored": 168.41,
+      "optimal": 195.34,
+      "left": 26.93,
+      "weeks": 1,
+      "efficiency": 0.8621378109962117
+    }
+  ],
+  "playoffWeeks": 3,
+  "worstWeeks": [
+    {
+      "gm": "Shak",
+      "week": 1,
+      "scored": 141.79,
+      "optimal": 236.3,
+      "left": 94.51
+    },
+    {
+      "gm": "Samson",
+      "week": 5,
+      "scored": 126.78,
+      "optimal": 215.73,
+      "left": 88.95
+    },
+    {
+      "gm": "Asher",
+      "week": 7,
+      "scored": 124.73,
+      "optimal": 196.53,
+      "left": 71.8
+    },
+    {
+      "gm": "Samson",
+      "week": 1,
+      "scored": 104.84,
+      "optimal": 167.08,
+      "left": 62.24
+    },
+    {
+      "gm": "Dante",
+      "week": 5,
+      "scored": 109.13,
+      "optimal": 169.66,
+      "left": 60.53
+    },
+    {
+      "gm": "Shak",
+      "week": 3,
+      "scored": 140.79,
+      "optimal": 200.61,
+      "left": 59.82
+    },
+    {
+      "gm": "Vip",
+      "week": 2,
+      "scored": 124.5,
+      "optimal": 184.11,
+      "left": 59.61
+    },
+    {
+      "gm": "Vip",
+      "week": 8,
+      "scored": 133.13,
+      "optimal": 190.05,
+      "left": 56.92
+    },
+    {
+      "gm": "Samson",
+      "week": 2,
+      "scored": 158.43,
+      "optimal": 214.75,
+      "left": 56.32
+    },
+    {
+      "gm": "Andres",
+      "week": 10,
+      "scored": 132.59,
+      "optimal": 188.57,
+      "left": 55.98
+    },
+    {
+      "gm": "Shak",
+      "week": 9,
+      "scored": 114.46,
+      "optimal": 165.7,
+      "left": 51.24
+    },
+    {
+      "gm": "Imran",
+      "week": 7,
+      "scored": 127.53,
+      "optimal": 176.93,
+      "left": 49.4
+    }
+  ],
+  "perfect": 3,
+  "bestWeeks": [
+    {
+      "gm": "Anand",
+      "week": 8,
+      "scored": 175.38,
+      "optimal": 175.38,
+      "efficiency": 1
+    },
+    {
+      "gm": "Dante",
+      "week": 10,
+      "scored": 164.52,
+      "optimal": 164.52,
+      "efficiency": 1
+    },
+    {
+      "gm": "Vip",
+      "week": 4,
+      "scored": 112.09,
+      "optimal": 112.09,
+      "efficiency": 1
+    },
+    {
+      "gm": "Andres",
+      "week": 9,
+      "scored": 162.19,
+      "optimal": 162.42,
+      "efficiency": 0.9985839182366705
+    },
+    {
+      "gm": "Raj",
+      "week": 6,
+      "scored": 176.67,
+      "optimal": 177.87,
+      "efficiency": 0.9932534997470062
+    },
+    {
+      "gm": "Anand",
+      "week": 4,
+      "scored": 161.3,
+      "optimal": 162.53,
+      "efficiency": 0.9924321663692858
+    },
+    {
+      "gm": "Raj",
+      "week": 5,
+      "scored": 154.39,
+      "optimal": 155.66,
+      "efficiency": 0.9918411923422844
+    },
+    {
+      "gm": "Andres",
+      "week": 8,
+      "scored": 224.23,
+      "optimal": 228.76,
+      "efficiency": 0.9801975869907327
+    },
+    {
+      "gm": "Vip",
+      "week": 12,
+      "scored": 139.69,
+      "optimal": 142.69,
+      "efficiency": 0.9789754012194267
+    },
+    {
+      "gm": "Anand",
+      "week": 7,
+      "scored": 129.28,
+      "optimal": 132.88,
+      "efficiency": 0.9729078868151716
+    },
+    {
+      "gm": "Hoss",
+      "week": 6,
+      "scored": 111.12,
+      "optimal": 114.26,
+      "efficiency": 0.9725188167337651
+    },
+    {
+      "gm": "Andres",
+      "week": 2,
+      "scored": 214.39,
+      "optimal": 220.89,
+      "efficiency": 0.970573588664041
+    }
+  ],
+  "worstSits": [
+    {
+      "gm": "Asher",
+      "week": 7,
+      "player": "Aaron Rodgers",
+      "score": 59.96
+    },
+    {
+      "gm": "Samson",
+      "week": 5,
+      "player": "Will Fuller",
+      "score": 52.7
+    },
+    {
+      "gm": "Shak",
+      "week": 1,
+      "player": "Dak Prescott",
+      "score": 47.8
+    },
+    {
+      "gm": "Andres",
+      "week": 1,
+      "player": "Lamar Jackson",
+      "score": 44.76
+    },
+    {
+      "gm": "Vip",
+      "week": 11,
+      "player": "Jimmy Garoppolo",
+      "score": 43.89
+    },
+    {
+      "gm": "Raj",
+      "week": 4,
+      "player": "Jameis Winston",
+      "score": 43.27
+    },
+    {
+      "gm": "Samson",
+      "week": 3,
+      "player": "Daniel Jones",
+      "score": 43.17
+    },
+    {
+      "gm": "Samson",
+      "week": 7,
+      "player": "Matthew Stafford",
+      "score": 42.56
+    },
+    {
+      "gm": "Andres",
+      "week": 10,
+      "player": "Patrick Mahomes",
+      "score": 41.84
+    },
+    {
+      "gm": "Andres",
+      "week": 6,
+      "player": "Lamar Jackson",
+      "score": 41.71
+    },
+    {
+      "gm": "Samson",
+      "week": 7,
+      "player": "Chase Edmonds",
+      "score": 41.2
+    },
+    {
+      "gm": "Imran",
+      "week": 7,
+      "player": "Kirk Cousins",
+      "score": 40.12
+    }
+  ],
+  "bids": []
+}

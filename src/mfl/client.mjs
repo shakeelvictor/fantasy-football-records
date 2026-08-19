@@ -1,4 +1,5 @@
-// MFL client. Three calls per run, no retry loop.
+// MFL client. The weekly ingest makes three calls; the lineup archive adds a
+// few more of its own, on its own schedule. No retry loop.
 // MFL asks clients to cache aggressively and back off rather than retry;
 // a weekly job is well inside their limits, so failure here just fails the run.
 // See SHAPES.md for the observed response shapes this is built against.
@@ -105,6 +106,94 @@ export async function fetchPlayerNames(season, leagueId, ids) {
     out.set(p.id, first ? `${first} ${last}` : last);
   }
   return out;
+}
+
+/**
+ * Whole-season lineups: every rostered player, week by week, with the score he
+ * posted and whether he was started.
+ *
+ * This is the same `weeklyResults` response `fetchWeeklyResults` already reads
+ * — it simply keeps the player rows instead of reducing them to a score. Used
+ * by the lineup archive, which needs the bench to know what was left on it.
+ *
+ * `opt_pts` is deliberately NOT returned. MFL's optimizer does not know this
+ * league's lineup rules and gets the optimum wrong in about half of all weeks.
+ * See src/lineups.mjs.
+ */
+export async function fetchWeeklyLineups(season, leagueId) {
+  const body = await call(season, 'weeklyResults', { L: leagueId, W: 'YTD' });
+  const weeks = toArray(body?.allWeeklyResults?.weeklyResults ?? body?.weeklyResults);
+
+  return weeks
+    .map((w) => ({
+      week: Number(w.week),
+      franchises: toArray(w.franchise)
+        .filter((f) => f.score != null && f.score !== '')
+        .map((f) => ({
+          id: f.id,
+          score: Number(f.score),
+          started: String(f.starters ?? '').split(',').filter(Boolean),
+          // A rostered player MFL reports with no score did not play. That is
+          // a zero, not missing data — the lineup rules are explicit that a
+          // player on bye scores nothing and that is the manager's problem.
+          players: toArray(f.player).map((p) => ({
+            id: p.id,
+            score: Number(p.score) || 0,
+            started: p.status === 'starter',
+          })),
+        })),
+    }))
+    .filter((w) => Number.isFinite(w.week) && w.franchises.length > 0)
+    .sort((a, b) => a.week - b.week);
+}
+
+/**
+ * Player id -> { name, position }. Chunked, because the lineup archive asks
+ * about every player rostered all season rather than the handful that hold a
+ * record.
+ */
+export async function fetchPlayerInfo(season, leagueId, ids) {
+  const wanted = [...new Set(ids)].filter(Boolean);
+  const out = new Map();
+
+  for (let i = 0; i < wanted.length; i += 250) {
+    const body = await call(season, 'players', {
+      L: leagueId,
+      PLAYERS: wanted.slice(i, i + 250).join(','),
+    });
+    for (const p of toArray(body?.players?.player)) {
+      const [last, first] = String(p.name ?? '').split(',').map((s) => s.trim());
+      out.set(p.id, { name: first ? `${first} ${last}` : last, position: p.position });
+    }
+  }
+  return out;
+}
+
+/**
+ * Winning blind bids for a season, newest first.
+ *
+ * MFL exposes only the bids that WON — a losing bid never enters the
+ * transaction log — so this is "biggest winning bid", never "biggest bid".
+ * The transaction field reads `addedId,|amount|droppedId,`.
+ *
+ * Blind bidding started in 2025; earlier seasons return nothing, which is
+ * correct rather than an error.
+ */
+export async function fetchWinningBids(season, leagueId) {
+  const body = await call(season, 'transactions', { L: leagueId, TRANS_TYPE: 'BBID_WAIVER' });
+
+  return toArray(body?.transactions?.transaction)
+    .map((t) => {
+      const [added, amount] = String(t.transaction ?? '').split('|');
+      return {
+        franchise: t.franchise,
+        player: String(added ?? '').replace(/,$/, ''),
+        amount: Number(amount),
+        timestamp: Number(t.timestamp),
+      };
+    })
+    .filter((b) => b.player && Number.isFinite(b.amount))
+    .sort((a, b) => b.amount - a.amount || a.timestamp - b.timestamp);
 }
 
 // TYPE=leagueStandings is deliberately not fetched. Its totals include the

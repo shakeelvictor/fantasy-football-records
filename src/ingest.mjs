@@ -8,24 +8,17 @@ import { dirname, join } from 'node:path';
 
 import { config } from '../data/league.config.mjs';
 import { fetchFranchises, fetchWeeklyResults } from './mfl/client.mjs';
+import { loadFranchiseFile, mapForSeason, assertFullyMapped } from './franchise-map.mjs';
 import { weeklyWinners, bigGames } from './derive.mjs';
 import { renderLog, spliceLog } from './render-log.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-/** Franchise id -> GM. Throws rather than returning a half-filled map. */
+/** Franchise id -> GM for the current season. Throws on a half-filled map. */
 async function loadFranchiseMap() {
-  const raw = JSON.parse(await readFile(join(root, 'data/franchises.json'), 'utf8'));
-  const unmapped = raw.franchises.filter((f) => !f.gm);
-  if (unmapped.length) {
-    throw new Error(
-      `data/franchises.json has unmapped franchises:\n  ` +
-        unmapped.map((f) => `${f.id} (${f.teamName})`).join('\n  ') +
-        '\nFill in "gm" for each before the ingest can attribute scores. MFL carries ' +
-        'no owner_name for this league, so this map cannot be fetched.'
-    );
-  }
-  return new Map(raw.franchises.map((f) => [f.id, f.gm]));
+  const file = await loadFranchiseFile();
+  assertFullyMapped(file);
+  return mapForSeason(file, config.season);
 }
 
 /** GM names the site knows about, read from the hand-maintained list. */

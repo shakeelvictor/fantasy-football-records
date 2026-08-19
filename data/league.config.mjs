@@ -27,4 +27,45 @@ export const config = {
   // PENDING LEAGUE DECISION: do Week 18 exhibition performances count
   // toward the all-time 200+ club? Defaulting to exclude.
   includeExhibitionInRecords: false,
+
+  // The lineup archive replays finished seasons, which did not all have this
+  // season's shape. Regular-season length is what the archive needs, and it
+  // tracks the NFL's own schedule: 13 weeks while the NFL played 17, 14 from
+  // 2021 when it went to 18. Read by scripts/backfill-lineups.mjs.
+  //
+  // The MFL era starts at 2015 and nothing before it exists. Adding a season
+  // here is what makes it archivable; a year with no entry is refused rather
+  // than measured against the current season's shape.
+  archive: {
+    // 2015 lived in its own MFL league. Anything not listed uses `leagueId`.
+    leagueIds: {
+      2015: '53720',
+    },
+
+    // The starting lineup has changed twice. 2015 had a kicker but no flex —
+    // one fixed 11-man shape. For 2016 the league voted the kicker out and a
+    // flex in, still 11. 2017 brought the kicker back alongside the flex,
+    // giving the 12-man lineup the rules describe today. Read by
+    // src/lineups.mjs, which refuses to archive a season with no era here.
+    lineupEras: [
+      { from: 2015, to: 2015, kicker: true, flex: false },
+      { from: 2016, to: 2016, kicker: false, flex: true },
+      { from: 2017, to: null, kicker: true, flex: true },
+    ],
+
+    // A career record needs more than a single season behind it. This is the
+    // smallest bar that means anything rather than a tuning dial: today it
+    // marks exactly the two managers who joined in 2025, Laura and Ryaan, and
+    // it clears itself the moment they play a second year. Marked managers are
+    // still ranked on every board — they just do not hold the career record yet.
+    //
+    // Membership, not form: it is counted from a manager's league seasons, so
+    // the same marker follows him onto the playoff board.
+    careerMinSeasons: 2,
+
+    regularSeasonWeeks: {
+      2015: 13, 2016: 13, 2017: 13, 2018: 13, 2019: 13, 2020: 13,
+      2021: 14, 2022: 14, 2023: 14, 2024: 14, 2025: 14,
+    },
+  },
 };

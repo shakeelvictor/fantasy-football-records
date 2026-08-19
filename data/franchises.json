@@ -7,7 +7,7 @@
     "",
     "IDs are stable across seasons; team names are not. 0001 has been 'FOX",
     "Injury Time-Out Music' (2023), 'The GOAT' (2024), 'Uncle Rico' (2025) and",
-    "'Smells Like GOAT' (2026) — all Shak. Key on id, never on name.",
+    "'Smells Like GOAT' (2026) \u2014 all Shak. Key on id, never on name.",
     "",
     "This mapping was derived, not guessed. Each row was confirmed by replaying",
     "past seasons through src/derive.mjs and matching the result against the",
@@ -17,26 +17,106 @@
     "the recorded field order Samson, Andres, Asher, Shak, Vip, Raj. 2024 and",
     "2025 agree independently.",
     "",
-    "0002 was Raj's franchise through 2024 and is Ryaan's from 2025 — confirmed",
+    "0002 was Raj's franchise through 2024 and is Ryaan's from 2025 \u2014 confirmed",
     "by the league: Ryaan replaced Raj, who is no longer in the league. The slot",
     "changed hands; it was not a rename. If a GM leaves, update the row rather",
-    "than adding one — records follow the gm name, not the id. Raj's history",
+    "than adding one \u2014 records follow the gm name, not the id. Raj's history",
     "stays under 'Raj' in data.js and is untouched by this.",
     "",
     "'gm' must match a name in the GMS list in weekly-log.js. Ingest fails loudly",
     "on any unmapped id or unknown GM name rather than writing a wrong record."
   ],
   "franchises": [
-    { "id": "0001", "gm": "Shak", "teamName": "Smells Like GOAT" },
-    { "id": "0002", "gm": "Ryaan", "teamName": "Ryaan" },
-    { "id": "0003", "gm": "Samson", "teamName": "3rd and 1" },
-    { "id": "0004", "gm": "Imran", "teamName": "The Don is Yinz King" },
-    { "id": "0005", "gm": "Hoss", "teamName": "I'm Just Here to Network" },
-    { "id": "0006", "gm": "Andres", "teamName": "2-minute Drill" },
-    { "id": "0007", "gm": "Asher", "teamName": "High Flyers" },
-    { "id": "0008", "gm": "Dante", "teamName": "WhiskeyDitka" },
-    { "id": "0009", "gm": "Vip", "teamName": "Vip" },
-    { "id": "0010", "gm": "Anand", "teamName": "Reggaeton Forever" },
-    { "id": "0011", "gm": "Laura", "teamName": "Lil' Sosos" }
+    {
+      "id": "0001",
+      "gm": "Shak",
+      "teamName": "Smells Like GOAT"
+    },
+    {
+      "id": "0002",
+      "gm": "Ryaan",
+      "teamName": "Ryaan"
+    },
+    {
+      "id": "0003",
+      "gm": "Samson",
+      "teamName": "3rd and 1"
+    },
+    {
+      "id": "0004",
+      "gm": "Imran",
+      "teamName": "The Don is Yinz King"
+    },
+    {
+      "id": "0005",
+      "gm": "Hoss",
+      "teamName": "I'm Just Here to Network"
+    },
+    {
+      "id": "0006",
+      "gm": "Andres",
+      "teamName": "2-minute Drill"
+    },
+    {
+      "id": "0007",
+      "gm": "Asher",
+      "teamName": "High Flyers"
+    },
+    {
+      "id": "0008",
+      "gm": "Dante",
+      "teamName": "WhiskeyDitka"
+    },
+    {
+      "id": "0009",
+      "gm": "Vip",
+      "teamName": "Vip"
+    },
+    {
+      "id": "0010",
+      "gm": "Anand",
+      "teamName": "Reggaeton Forever"
+    },
+    {
+      "id": "0011",
+      "gm": "Laura",
+      "teamName": "Lil' Sosos"
+    }
+  ],
+  "_history_comment": [
+    "Franchise ids are stable, but a slot can change hands. `history` pins the GM",
+    "for seasons where the current mapping above is wrong, so the lineup archive",
+    "can attribute a 2019 week to the man who actually played it.",
+    "",
+    "Only 0002 has changed hands in the MFL era: Raj held it through 2024, Ryaan",
+    "from 2025. 0011 is Laura's, created by the 2025 expansion -- `since` keeps it",
+    "out of earlier seasons, where MFL confirms only 0001-0010 ever posted a score.",
+    "",
+    "Verified the same way the mapping above was: replay each MFL season through",
+    "src/derive.mjs and check the derived top-six seed order against the playoff",
+    "field recorded in data.js. 2016-2019 and 2021-2025 reproduce their recorded",
+    "field exactly. 2020 reproduces the same six teams with seeds 4 and 5 swapped:",
+    "Vip and Imran both finished 64-53 and the recorded order puts Imran ahead",
+    "despite Vip holding 3.48 more points. The league confirms this is moot --",
+    "both had the record and the points to make the playoffs, and the bracket bore",
+    "it out, with Imran going on to win the whole thing and Vip reaching the",
+    "Fantasy Four. Nothing downstream reads 2020 seed order, and the lineup",
+    "archive never reads seeds at all.",
+    "",
+    "2015 ran in a DIFFERENT MFL league (53720). The same ids mean the same GMs",
+    "there, verified by replaying it: the derived top six reproduces the recorded",
+    "field Dante > Hoss > Samson > Asher > Imran > Raj exactly, including the",
+    "three-way 53-64 tie that points for breaks in Raj's favour for the last spot."
+  ],
+  "history": [
+    {
+      "id": "0002",
+      "gm": "Raj",
+      "through": 2024
+    },
+    {
+      "id": "0011",
+      "since": 2025
+    }
   ]
 }

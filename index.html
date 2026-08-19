@@ -66,6 +66,7 @@
       <a href="#exhibition">Pak vs. World</a>
       <a href="#leaders">Leaders</a>
       <a href="#records">Records</a>
+      <a href="#lineups">Efficiency</a>
       <a href="#seasons">Seasons</a>
       <a href="#tidbits">Notes</a>
       <a class="nav-page-link" href="keepers.html">Keepers</a>
@@ -171,6 +172,33 @@
       <div class="records-grid" id="recordsGrid"></div>
     </section>
 
+    <section id="lineups" class="section">
+      <div class="section-head">
+        <h2>Lineup Efficiency</h2>
+        <p id="lineupsBlurb"></p>
+      </div>
+
+      <div class="records-grid" id="lineupRecords"></div>
+
+      <div class="leaderboards lineup-boards">
+        <div class="leaderboard">
+          <h3>Career · Regular Season</h3>
+          <ul id="careerEff"></ul>
+          <p class="lineup-foot"></p>
+        </div>
+        <div class="leaderboard">
+          <h3>Career · Playoffs</h3>
+          <ul id="playoffEff"></ul>
+          <p class="lineup-foot"></p>
+        </div>
+      </div>
+
+      <details class="lineup-math">
+        <summary>How each of these is worked out</summary>
+        <div id="lineupMath"></div>
+      </details>
+    </section>
+
     <section id="seasons" class="section">
       <div class="section-head">
         <h2>Playoff Field by Season</h2>
@@ -194,6 +222,7 @@
 
   <script src="data.js"></script>
   <script src="weekly-log.js"></script>
+  <script src="lineups-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

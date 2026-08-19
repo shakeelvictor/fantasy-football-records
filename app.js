@@ -158,9 +158,42 @@ const TROPHY_SVG = `<svg class="trophy-icon" viewBox="0 0 64 64" aria-hidden="tr
     <rect x="16" y="44" width="32" height="6" rx="2" fill="currentColor"/>
   </svg>`;
 
+/**
+ * Single-game and season records that fall out of the lineup archive rather
+ * than data.js. They belong in this book — they are single-game records — but
+ * they are computed from lineups-data.js, so they are appended here instead of
+ * being written into data.js, whose `records` block is owned by season-end.
+ */
+function lineupRecordCards() {
+  if (typeof LINEUPS === 'undefined') return [];
+  const r = LINEUPS.records;
+  const pts = n => n.toFixed(2);
+  const cards = [];
+
+  if (r.worstWeek) cards.push({
+    label: 'Most Points Left on the Bench',
+    value: pts(r.worstWeek.left),
+    holder: r.worstWeek.gm,
+    context: `${r.worstWeek.year} · Week ${r.worstWeek.week} — started ${pts(r.worstWeek.scored)} of ${pts(r.worstWeek.optimal)}`,
+  });
+  if (r.worstSit) cards.push({
+    label: 'Worst Sit',
+    value: pts(r.worstSit.score),
+    holder: r.worstSit.gm,
+    context: `${r.worstSit.player} — benched, ${r.worstSit.year} Week ${r.worstSit.week}`,
+  });
+  if (r.topBid) cards.push({
+    label: 'Biggest Winning Bid',
+    value: '$' + r.topBid.amount.toFixed(2),
+    holder: r.topBid.gm,
+    context: `${r.topBid.player} — ${r.topBid.year}`,
+  });
+  return cards;
+}
+
 function renderRecords() {
   const grid = document.getElementById('recordsGrid');
-  grid.innerHTML = DATA.records.map(r => `
+  grid.innerHTML = [...DATA.records, ...lineupRecordCards()].map(r => `
     <div class="record-card ${r.trophy ? 'has-trophy' : ''}">
       ${r.trophy ? TROPHY_SVG : ''}
       <div class="record-label">${r.label}</div>
@@ -170,6 +203,130 @@ function renderRecords() {
       ${r.prev ? `<div class="record-prev">${r.prev}</div>` : ''}
     </div>
   `).join('');
+}
+
+// ====== Lineup Efficiency ======
+// What a manager started against the best lineup his roster could legally have
+// fielded. LINEUPS comes from lineups-data.js; the full season-by-season
+// tables stay in data/lineups/ and are deliberately not shipped here.
+function renderLineups() {
+  if (typeof LINEUPS === 'undefined') return;
+
+  const pct = n => (n * 100).toFixed(1) + '%';
+  const pts = n => n.toFixed(2);
+  const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
+  const r = LINEUPS.records;
+
+  document.getElementById('lineupsBlurb').textContent =
+    `Every week has a best possible lineup hiding in your roster. This is how close each ` +
+    `manager came to actually starting it, ${LINEUPS.span}.`;
+
+  const cards = [];
+  if (r.bestSeason) cards.push({
+    label: 'Best Season',
+    value: pct(r.bestSeason.efficiency),
+    holder: r.bestSeason.gm,
+    context: `${r.bestSeason.year} · ${r.bestSeason.weeks} weeks`,
+  });
+  if (r.bestCareer) cards.push({
+    label: 'Best Career',
+    value: pct(r.bestCareer.efficiency),
+    holder: r.bestCareer.gm,
+    context: `${r.bestCareer.weeks} weeks across ${plural(r.bestCareer.seasons, 'season')}`,
+    trophy: true,
+  });
+  if (r.bestPlayoff) cards.push({
+    label: 'Best in the Playoffs',
+    value: pct(r.bestPlayoff.efficiency),
+    holder: r.bestPlayoff.gm,
+    context: `${r.bestPlayoff.weeks} playoff weeks across ${plural(r.bestPlayoff.seasons, 'run')}`,
+  });
+  if (r.bestWeek) cards.push({
+    label: r.bestWeek.efficiency >= 1 ? 'Biggest Perfect Week' : 'Best Managed Week',
+    value: pts(r.bestWeek.scored),
+    holder: r.bestWeek.gm,
+    context: `${r.bestWeek.year} · Week ${r.bestWeek.week} — nothing left behind`,
+    prev: LINEUPS.perfect ? `${LINEUPS.perfect} perfect lineups on record` : '',
+  });
+
+  document.getElementById('lineupRecords').innerHTML = cards.map(c => `
+    <div class="record-card${c.trophy ? ' has-trophy' : ''}">
+      ${c.trophy ? TROPHY_SVG : ''}
+      <div class="record-label">${c.label}</div>
+      <div class="record-value">${c.value}</div>
+      <div class="record-holder">${c.holder}</div>
+      <div class="record-context">${c.context}</div>
+      ${c.prev ? `<div class="record-prev">${c.prev}</div>` : ''}
+    </div>
+  `).join('');
+
+  // Everyone is ranked. An asterisk marks a manager still in his first league
+  // season, and the footnote only appears while somebody carries one — it will
+  // disappear on its own once Laura and Ryaan have a second year behind them.
+  const board = (id, rows) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = rows.map((row, i) => `
+      <li class="${i === 0 ? 'top-rank' : ''}">
+        <span class="rank ${i === 0 ? 'top' : ''}">${String(i + 1).padStart(2, '0')}</span>
+        <span class="gm-name">${row.gm}${row.isNew ? '<span class="lineup-star">*</span>' : ''}</span>
+        <span class="gm-value">${pct(row.efficiency)} <span class="lineup-sub">${row.weeks} wk</span></span>
+      </li>
+    `).join('');
+
+    const note = el.parentElement.querySelector('.lineup-foot');
+    if (note) {
+      note.innerHTML = rows.some(r => r.isNew)
+        ? `<span class="lineup-star">*</span> New to the league — ranked here, but a career record needs more than one season.`
+        : '';
+    }
+  };
+  board('careerEff', LINEUPS.careers);
+  board('playoffEff', LINEUPS.playoffCareers);
+
+  renderLineupMath();
+}
+
+// The nerd math, folded away for anyone who wants it. Every definition here is
+// the one the pipeline actually implements — if one changes, change it here.
+function renderLineupMath() {
+  const rows = [
+    ['The optimum', `Every figure here compares what a manager <em>started</em> against the
+      highest-scoring lineup his roster could <em>legally</em> have fielded that week — chosen from all
+      20 rostered players under the league's own starting rules. It is recomputed here rather than read
+      from MFL, whose optimizer does not know the 8-offense cap or the 3-IDP minimum and gets the answer
+      wrong in roughly half of all weeks. A rostered player with no score that week counts as a zero,
+      because starting a man on bye is a real cost.`],
+    ['Best Season', `The best single-season figure on record: one manager's points started in a season
+      divided by the points available across the same weeks.`],
+    ['Best Career', `Career points started divided by career points available. A ratio of the totals,
+      not an average of season rates — a manager's big weeks should weigh more than his quiet ones.
+      Every manager is ranked, but the record itself waits for a second season — a newcomer marked
+      with an asterisk is not yet holding it.`],
+    ['Best in the Playoffs', `The same ratio over playoff weeks only. All-play means an eliminated team
+      still posts a score every week, so only the weeks a manager was actually still alive to play are
+      counted — one for a team knocked out in its first round, three for a Fantasy Bowl run.`],
+    ['Biggest Perfect Week', `A perfect week is one where the lineup started <em>was</em> the best
+      available: 100%, nothing left on the bench. They are not rare, so the card shows the
+      highest-scoring one rather than the first.`],
+    ['Most Points Left on the Bench', `The largest single-week gap between the best available lineup and
+      the one submitted. Shown with the single-game records above.`],
+    ['Worst Sit', `The highest-scoring individual player who was left on a bench in a week he belonged in
+      the optimal lineup. Shown with the single-game records above.`],
+    ['Biggest Winning Bid', `The largest blind bid that won its player, shown with the single-game records
+      above. MFL never records a losing bid, so this can only ever be the winning side of an auction.
+      Blind bidding began in 2025.`],
+    ['Scope', `Regular-season weeks only, except where a card says otherwise. Exhibition weeks are
+      excluded throughout. The lineup rules themselves have changed twice — 2015 had a kicker and no
+      flex, 2016 a flex and no kicker, 2017 onward both — and each season is measured against the rules
+      it was actually played under.`],
+  ];
+
+  document.getElementById('lineupMath').innerHTML = `
+    <dl class="lineup-defs">
+      ${rows.map(([term, body]) => `<dt>${term}</dt><dd>${body}</dd>`).join('')}
+    </dl>
+  `;
 }
 
 // ====== Tidbits ======
@@ -239,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderLeaderboard('weeklyWins', weeklyWinsTotals());
   renderLeaderboard('bigGames', bigGamesTotals());
   renderRecords();
+  renderLineups();
   renderTidbits();
   renderSeasons();
   setupEraTabs();
