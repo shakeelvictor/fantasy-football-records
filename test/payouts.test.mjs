@@ -114,3 +114,37 @@ test('the browser file lists everyone and balances', () => {
   assert.ok(PAYOUTS.careers.some((c) => c.won === 0), 'a manager who won nothing should be listed');
   assert.ok(PAYOUTS.careers.every((c) => c.paidIn > 0), 'everyone listed paid a buy-in');
 });
+
+test('money won combines the regular season and the playoffs', () => {
+  const PAYOUTS = new Function(`${read('payouts-data.js')}; return PAYOUTS;`)();
+
+  // Each manager's total is exactly his three sources added up. If a line ever
+  // stopped being counted, the board would quietly understate someone.
+  for (const c of PAYOUTS.careers) {
+    assert.equal(c.won, c.weekly + c.regularSeason + c.bowl,
+      `${c.gm}'s total does not equal weekly + regular season + bowl`);
+  }
+
+  // And both halves genuinely contribute: somebody's total is mostly playoff
+  // money while someone else's is mostly weekly, which is the point of the board.
+  assert.ok(PAYOUTS.careers.some((c) => c.bowl > c.weekly), 'expected a playoff-heavy earner');
+  assert.ok(PAYOUTS.careers.some((c) => c.weekly > c.bowl), 'expected a weekly-heavy earner');
+});
+
+test('the money board is one leaderboard inside All-Time Leaders', () => {
+  const index = read('index.html');
+  const leaders = index.slice(index.indexOf('id="leaders"'), index.indexOf('id="records"'));
+
+  assert.match(leaders, /id="moneyWon"/, 'the board belongs in All-Time Leaders');
+  assert.match(leaders, /id="moneyScope"/, 'it must carry its own span');
+
+  // The standalone section and its nav entry are gone, and so is the net board.
+  assert.ok(!index.includes('id="money" class="section"'), 'the standalone section should be removed');
+  assert.ok(!index.includes('href="#money"'), 'the nav entry should be removed');
+  assert.ok(!index.includes('id="moneyNet"'), 'the up-and-down board should be removed');
+
+  // Its neighbours cover every era; this one cannot, so it says so.
+  assert.match(leaders, /Cumulative stats across all eras|Money Won/);
+  const app = read('app.js');
+  assert.ok(!/money-up|money-down/.test(app + read('styles.css')), 'net styling should be gone');
+});

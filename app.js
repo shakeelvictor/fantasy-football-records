@@ -376,46 +376,39 @@ function renderLineupMath() {
   `;
 }
 
-// ====== The Money ======
-// PAYOUTS comes from payouts-data.js. Who won what is derived; what it was
-// worth is hand-maintained in data/payouts.json from the meeting notes, and
-// every season reconciles to its full pot before it is written.
+// ====== Money Won ======
+// PAYOUTS comes from payouts-data.js. One board in All-Time Leaders: total
+// money won, regular season and playoffs combined — weekly wins and the
+// regular-season title alongside Fantasy Bowl money, which is why a manager
+// can out-earn someone who won more weeks.
+//
+// It carries its own span because, unlike the boards beside it, this one
+// cannot span all eras: the league paid out differently before 2019 and those
+// amounts are not on record.
 function renderMoney() {
   if (typeof PAYOUTS === 'undefined') return;
 
-  const usd = n => (n < 0 ? '-$' : '$') + Math.abs(n).toLocaleString();
+  const usd = n => '$' + n.toLocaleString();
+  const scope = document.getElementById('moneyScope');
+  if (scope) scope.textContent = PAYOUTS.span;
 
-  document.getElementById('moneyBlurb').textContent =
-    `Every dollar the league has paid out, ${PAYOUTS.span} — ` +
-    `${usd(PAYOUTS.pot)} across ${PAYOUTS.seasons} season${PAYOUTS.seasons === 1 ? '' : 's'}.`;
+  const rows = [...PAYOUTS.careers]
+    .filter(r => r.won > 0)
+    .sort((a, b) => b.won - a.won || a.gm.localeCompare(b.gm));
 
-  const board = (id, rows, valueOf) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.innerHTML = rows.map((r, i) => `
-      <li class="${i === 0 ? 'top-rank' : ''}">
-        <span class="rank ${i === 0 ? 'top' : ''}">${String(i + 1).padStart(2, '0')}</span>
-        <span class="gm-name">${r.gm}</span>
-        <span class="gm-value">${valueOf(r)}</span>
-      </li>
-    `).join('');
-  };
-
-  board('moneyWon', PAYOUTS.careers, r =>
-    `${usd(r.won)} <span class="lineup-sub">${r.weeklyWins} wk</span>`);
-
-  // Net is winnings less every buy-in paid, so it sums to zero across the
-  // league — one manager is only ever up because another is down.
-  const byNet = [...PAYOUTS.careers].sort((a, b) => b.net - a.net);
-  board('moneyNet', byNet, r =>
-    `<span class="${r.net >= 0 ? 'money-up' : 'money-down'}">${usd(r.net)}</span>` +
-    ` <span class="lineup-sub">${r.seasons} yr</span>`);
+  document.getElementById('moneyWon').innerHTML = rows.map((r, i) => `
+    <li class="${i === 0 ? 'top-rank' : ''}">
+      <span class="rank ${i === 0 ? 'top' : ''}">${String(i + 1).padStart(2, '0')}</span>
+      <span class="gm-name">${r.gm}</span>
+      <span class="gm-value">${usd(r.won)}</span>
+    </li>
+  `).join('');
 
   document.getElementById('moneyNote').textContent =
-    `Weekly winners, the regular-season title and the Fantasy Bowl, priced with each ` +
-    `season's own structure — the weekly prize, the regular-season prize and the buy-in ` +
-    `have all changed. Earlier seasons are not shown: the league paid out differently ` +
-    `before ${PAYOUTS.span.split('–')[0]} and those amounts are not on record.`;
+    `Weekly wins, the regular-season title and the Fantasy Bowl combined. ` +
+    `Priced with each season's own structure — the weekly prize, the ` +
+    `regular-season prize and the buy-in have all changed. Earlier seasons ` +
+    `paid out differently and those amounts are not on record.`;
 }
 
 // ====== Tidbits ======

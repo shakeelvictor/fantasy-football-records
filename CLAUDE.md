@@ -210,9 +210,14 @@ $195 -> $160 in exactly the year the schedule goes 13 -> 14 weeks, and
 that relationship, because it is what makes the 2019/2020 champion figures
 trustworthy when the notes never state them.
 
-The board is built from NET positions, not winners: a manager who bought in
-every year and never cashed is the most interesting row on it, and building
-from the winners list would drop him entirely.
+The site shows one board — Money Won, inside All-Time Leaders — totalling the
+regular season and the playoffs together. `payouts-data.js` still carries
+`paidIn` and `net` per manager, and the zero-sum check still runs over them;
+they are simply not rendered. An up-and-down board is a live option if the
+league ever wants it.
+
+That board carries its own span, because unlike everything beside it in
+All-Time Leaders it cannot cover all eras.
 
 **Playoff efficiency counts only the weeks a manager was alive to play.**
 All-play means an eliminated team still posts a score every playoff week, so
