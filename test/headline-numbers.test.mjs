@@ -205,6 +205,14 @@ test('the header centres its nav and collapses before it can wrap', () => {
   assert.match(css, /top: var\(--header-h/, 'the drawer must use the measured header height');
   assert.match(read('theme.js'), /function trackHeaderHeight/, 'someone must publish --header-h');
 
+  // Once the nav goes position: fixed it leaves the grid flow, so three
+  // columns would be filled by two children and the buttons would drift into
+  // the middle one. The drawer breakpoint must drop to two columns.
+  const drawer = css.slice(css.indexOf('@media (max-width: 1120px)'));
+  const drawerHeader = drawer.slice(drawer.indexOf('.site-header {'), drawer.indexOf('}', drawer.indexOf('.site-header {')));
+  assert.match(drawerHeader, /grid-template-columns:\s*1fr auto\s*;/,
+    'with the nav out of flow the header needs two columns, or the buttons centre themselves');
+
   // And every page groups its buttons, or the third grid column is two cells.
   for (const page of ['index.html', 'keepers.html', 'rules.html']) {
     assert.match(read(page), /<div class="header-actions">/, `${page} does not group its header buttons`);
