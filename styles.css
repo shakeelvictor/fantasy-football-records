@@ -298,6 +298,9 @@ a { color: inherit; text-decoration: none; }
   .nav-toggle { display: flex; }
   .site-nav {
     display: flex;
+    /* The header centres the nav horizontally. Here it is a column, so that
+       same rule centres the links VERTICALLY and pushes them down the drawer. */
+    justify-content: flex-start;
     position: fixed;
     /* Measured and published by theme.js, so the drawer always starts exactly
        where the header ends rather than at a number that drifts away from it. */
@@ -310,7 +313,9 @@ a { color: inherit; text-decoration: none; }
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    padding: 24px 24px 40px;
+    /* No top padding: every link already carries 18px of its own, and stacking
+       the two left a 56px void between the header and the first item. */
+    padding: 0 24px 40px;
     background: var(--bg);
     border-top: 1px solid var(--border);
     overflow-y: auto;

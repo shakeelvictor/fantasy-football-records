@@ -222,6 +222,15 @@ test('the header centres its nav and collapses before it can wrap', () => {
   assert.match(drawerHeader, /grid-template-columns:\s*1fr auto\s*;/,
     'with the nav out of flow the header needs two columns, or the buttons centre themselves');
 
+  // The base nav is a centred row; the drawer is a column, where that same
+  // rule centres the links VERTICALLY and drops them down the panel. It must
+  // realign, and it must not add top padding on top of each link's own.
+  const drawerNav = drawer.slice(drawer.indexOf('.site-nav {'), drawer.indexOf('}', drawer.indexOf('.site-nav {')));
+  assert.match(drawerNav, /justify-content:\s*flex-start/,
+    'a column drawer inheriting justify-content: center pushes its links down');
+  assert.match(drawerNav, /padding:\s*0 /,
+    'the links carry their own top padding; stacking another left a 56px void');
+
   // And every page groups its buttons, or the third grid column is two cells.
   for (const page of ['index.html', 'keepers.html', 'rules.html']) {
     assert.match(read(page), /<div class="header-actions">/, `${page} does not group its header buttons`);
