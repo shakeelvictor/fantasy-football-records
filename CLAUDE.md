@@ -53,18 +53,23 @@ one week every team is 11-0 or 0-11, and promoting that would put a .1000 season
 in the book. The `inSeason` flag in `src/records.mjs` is the list, and
 `test/records-in-season.test.mjs` locks both halves of it.
 
-**The theme is one attribute, and `data-theme` is the only switch.** The site
-was dark-first with `@media (prefers-color-scheme: light)` doing the work; there
-are now three states — system, light, dark — so an explicit choice has to beat
-the OS. Every light rule keys off `:root[data-theme="light"]` and there is no
-`prefers-color-scheme` rule left in `styles.css`. A tiny inline script in each
-page's `<head>` resolves system against `matchMedia` and stamps the attribute
-before first paint; `theme.js` only drives the control. Both halves are needed:
-move the resolution into `theme.js` and every load flashes the wrong theme.
+**Light is the default theme and dark is the alternate.** Dark is the *presence*
+of `<html data-theme="dark">` and light is its absence, so bare `:root` carries
+the light palette — a reader with JavaScript off, or the instant before the head
+script runs, gets the default rather than the alternate. Do not move the light
+values behind an attribute; that inverts which theme a broken page falls back to.
 
-The two OS-scoped `theme-color` metas are gone for the same reason — the browser
-would have picked one by OS preference and fought an explicit choice. `theme.js`
-sets a single meta instead. `test/headline-numbers.test.mjs` locks all of it.
+Nothing consults `prefers-color-scheme` any more. The site followed the OS until
+the league asked for light to be the default, so there is no media query left in
+`styles.css` and no `matchMedia` in `theme.js` — if either reappears the OS is
+deciding the theme again.
+
+A tiny inline script in each page's `<head>` stamps the attribute before first
+paint; `theme.js` only drives the control. Both halves are needed: move the
+stamping into `theme.js` and a reader who chose dark gets a flash of light on
+every load. The two OS-scoped `theme-color` metas are gone for the same reason —
+the browser picked one by OS preference and fought the choice. `theme.js` sets a
+single meta instead. `test/headline-numbers.test.mjs` locks all of it.
 
 **Headline numbers are derived, never typed.** The hero tiles, the era tab
 labels, the exhibition "contested since", the footer span and the keeper page's

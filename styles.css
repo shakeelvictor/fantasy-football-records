@@ -1,5 +1,29 @@
+/* Light is the default theme. It lives on bare :root so a reader with no stored
+   choice — or with JavaScript off — gets the default rather than the alternate.
+   Dark is opt-in, applied by data-theme, which theme.js stamps before paint. */
 :root {
-  /* Dark theme: black base, field green + football brown accents */
+  --bg: #fafafa;
+  --bg-elev: #ffffff;
+  --bg-card: #ffffff;
+  --border: #e4e4e4;
+  --border-strong: #c8c8c8;
+  --text: #0f0f0f;
+  --text-dim: #525252;
+  --text-muted: #8a8a8a;
+  --accent: #2d7a3e;           /* field green, deepened for a white ground */
+  --accent-2: #7c4a25;         /* football leather brown */
+  --accent-fg: #ffffff;
+  --header-bg: rgba(250, 250, 250, 0.9);
+  --gold: #2d7a3e;
+  --shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  --glow-1: rgba(45, 122, 62, 0.04);
+  --glow-2: rgba(124, 74, 37, 0.03);
+  --maxw: 1200px;
+  color-scheme: light;
+}
+
+/* Dark: black base, field green + football brown accents. */
+:root[data-theme="dark"] {
   --bg: #0c0c0c;
   --bg-elev: #161616;
   --bg-card: #1a1a1a;
@@ -8,38 +32,15 @@
   --text: #f5f5f5;
   --text-dim: #a8a8a8;
   --text-muted: #6a6a6a;
-  --accent: #3d8f4a;          /* field green */
-  --accent-2: #8b5a2b;         /* football leather brown */
+  --accent: #3d8f4a;
+  --accent-2: #8b5a2b;
   --accent-fg: #ffffff;
   --header-bg: rgba(12, 12, 12, 0.85);
   --gold: #3d8f4a;
   --shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
   --glow-1: rgba(61, 143, 74, 0.06);
   --glow-2: rgba(139, 90, 43, 0.05);
-  --maxw: 1200px;
   color-scheme: dark;
-}
-
-/* Light theme. Applied by data-theme, which theme.js sets before paint —
-   resolving "system" against prefers-color-scheme and tracking it live. */
-:root[data-theme="light"] {
-    --bg: #fafafa;
-    --bg-elev: #ffffff;
-    --bg-card: #ffffff;
-    --border: #e4e4e4;
-    --border-strong: #c8c8c8;
-    --text: #0f0f0f;
-    --text-dim: #525252;
-    --text-muted: #8a8a8a;
-    --accent: #2d7a3e;          /* deeper green for white bg contrast */
-    --accent-2: #7c4a25;         /* deeper brown */
-    --accent-fg: #ffffff;
-    --header-bg: rgba(250, 250, 250, 0.9);
-    --gold: #2d7a3e;
-    --shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
-    --glow-1: rgba(45, 122, 62, 0.04);
-    --glow-2: rgba(124, 74, 37, 0.03);
-    color-scheme: light;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,11 +73,11 @@ a { color: inherit; text-decoration: none; }
 .bg-decor .ball {
   position: absolute;
   color: var(--accent-2);
-  opacity: 0.08;
+  opacity: 0.09;
   will-change: transform;
 }
 
-:root[data-theme="light"] .bg-decor .ball { opacity: 0.09; }
+:root[data-theme="dark"] .bg-decor .ball { opacity: 0.08; }
 
 .bg-decor .ball-1 {
   top: 8%;
@@ -388,9 +389,9 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
 }
 
-:root[data-theme="light"] .trophy-icon {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
-}
+/* The drop shadow reads on a light ground and only muddies a dark one. */
+.trophy-icon { filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15)); }
+:root[data-theme="dark"] .trophy-icon { filter: none; }
 
 .stat-num {
   font-family: 'Bebas Neue', sans-serif;

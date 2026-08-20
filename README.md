@@ -23,10 +23,9 @@ No build step. Netlify serves the repo root as static files, and `data.js`,
 `weekly-log.js`, `lineups-data.js`, `payouts-data.js`, `theme.js` and `app.js`
 are loaded straight by the browser as plain scripts. Pushing to `main` deploys.
 
-The site follows your system's light or dark setting by default, and the control
-in the header switches between **System**, **Light** and **Dark**. A choice is
-remembered per browser and beats the OS; on System the page tracks the OS live,
-including a change made while the page is open.
+The site is **light** by default, with a **dark** alternate behind the control in
+the header. A choice is remembered per browser, and dark is stamped on the page
+before it paints so switching never flashes.
 
 The Node code under `src/` never ships to the browser — it only runs in GitHub
 Actions, and its output is committed back as plain data.

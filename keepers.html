@@ -4,19 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
-  <!-- Resolve the theme before first paint so the page never flashes the wrong
-       one. Mirrors theme.js; kept inline because a separate file would load too
-       late to help. -->
+  <!-- Light is the default; dark is opt-in and must be stamped before first
+       paint so the page never flashes light on its way to dark. Mirrors
+       theme.js; inline because a separate file would load too late to help. -->
   <script>
     (function () {
-      var mode = 'system';
       try {
-        var v = localStorage.getItem('fflr-theme');
-        if (v === 'light' || v === 'dark') mode = v;
+        if (localStorage.getItem('fflr-theme') === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
       } catch (e) {}
-      var dark = mode === 'dark' || (mode === 'system' &&
-        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
     })();
   </script>
   <title>Keeper History — The League</title>

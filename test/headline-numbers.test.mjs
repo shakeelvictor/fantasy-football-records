@@ -144,11 +144,11 @@ test('every page can switch theme, and none flashes the wrong one', () => {
     assert.match(html, /id="themeToggle"/, `${page} has no theme control`);
     assert.match(html, /<script src="theme\.js"><\/script>/, `${page} does not load theme.js`);
 
-    // Resolved before first paint. A deferred or external script would run too
-    // late and the page would flash the wrong theme on every load.
+    // Stamped before first paint. A deferred or external script would run too
+    // late and a reader who chose dark would get a flash of light every load.
     const head = html.slice(0, html.indexOf('</head>'));
     assert.match(head, /fflr-theme/, `${page} does not resolve the theme in <head>`);
-    assert.match(head, /setAttribute\('data-theme'/, `${page}'s head script sets no data-theme`);
+    assert.match(head, /setAttribute\('data-theme', 'dark'\)/, `${page}'s head script never applies dark`);
 
     // The old media-scoped theme-colors let the OS override an explicit choice.
     assert.ok(
@@ -161,11 +161,18 @@ test('every page can switch theme, and none flashes the wrong one', () => {
   // theme on its own, or an explicit choice would only half-apply.
   const css = read('styles.css');
   const mediaRules = css.match(/@media[^{]*prefers-color-scheme[^{]*\{/g) ?? [];
-  assert.equal(mediaRules.length, 0, 'a prefers-color-scheme rule would override the toggle');
-  assert.match(css, /:root\[data-theme="light"\]/, 'the light theme must key off data-theme');
+  assert.equal(mediaRules.length, 0, 'a prefers-color-scheme rule would override the choice');
+
+  // Light is the DEFAULT, so it must sit on bare :root — a reader with
+  // JavaScript off, or before the head script runs, gets the default rather
+  // than the alternate. Dark is the opt-in, keyed off the attribute.
+  const root = css.slice(css.indexOf(':root {'), css.indexOf('}', css.indexOf(':root {')));
+  assert.match(root, /--bg:\s*#fafafa/, 'bare :root must carry the light palette');
+  assert.match(css, /:root\[data-theme="dark"\]/, 'dark must key off data-theme');
+  assert.ok(!/:root\[data-theme="light"\]/.test(css), 'light is the default and needs no attribute');
 
   // theme.js must not assume storage is available — private browsing throws.
   const js = read('theme.js');
   assert.match(js, /catch/, 'localStorage access must be guarded');
-  assert.match(js, /matchMedia/, 'system mode must follow the OS');
+  assert.ok(!/matchMedia/.test(js), 'the OS no longer decides the theme');
 });
