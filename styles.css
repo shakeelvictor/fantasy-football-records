@@ -17,10 +17,12 @@
   --glow-1: rgba(61, 143, 74, 0.06);
   --glow-2: rgba(139, 90, 43, 0.05);
   --maxw: 1200px;
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
+/* Light theme. Applied by data-theme, which theme.js sets before paint —
+   resolving "system" against prefers-color-scheme and tracking it live. */
+:root[data-theme="light"] {
     --bg: #fafafa;
     --bg-elev: #ffffff;
     --bg-card: #ffffff;
@@ -37,7 +39,7 @@
     --shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
     --glow-1: rgba(45, 122, 62, 0.04);
     --glow-2: rgba(124, 74, 37, 0.03);
-  }
+    color-scheme: light;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -74,9 +76,7 @@ a { color: inherit; text-decoration: none; }
   will-change: transform;
 }
 
-@media (prefers-color-scheme: light) {
-  .bg-decor .ball { opacity: 0.09; }
-}
+:root[data-theme="light"] .bg-decor .ball { opacity: 0.09; }
 
 .bg-decor .ball-1 {
   top: 8%;
@@ -388,10 +388,8 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
 }
 
-@media (prefers-color-scheme: light) {
-  .trophy-icon {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
-  }
+:root[data-theme="light"] .trophy-icon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
 }
 
 .stat-num {
@@ -1434,4 +1432,41 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.04em;
   color: var(--text-muted);
   text-transform: none;
+}
+
+/* ====== Theme toggle ====== */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-elev);
+  color: var(--text-dim);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.theme-toggle svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle { transition: none; }
 }

@@ -20,8 +20,13 @@ date without anyone editing a file mid-season.
 ## How it works
 
 No build step. Netlify serves the repo root as static files, and `data.js`,
-`weekly-log.js`, `lineups-data.js`, `payouts-data.js` and `app.js` are loaded
-straight by the browser as plain scripts. Pushing to `main` deploys.
+`weekly-log.js`, `lineups-data.js`, `payouts-data.js`, `theme.js` and `app.js`
+are loaded straight by the browser as plain scripts. Pushing to `main` deploys.
+
+The site follows your system's light or dark setting by default, and the control
+in the header switches between **System**, **Light** and **Dark**. A choice is
+remembered per browser and beats the OS; on System the page tracks the OS live,
+including a change made while the page is open.
 
 The Node code under `src/` never ships to the browser — it only runs in GitHub
 Actions, and its output is committed back as plain data.
@@ -138,7 +143,7 @@ Node 22+. No dependencies.
 
 ```
 index.html  rules.html  keepers.html   pages
-app.js  styles.css                     rendering
+app.js  styles.css  theme.js           rendering
 data.js                                the record book the site reads
 weekly-log.js                          current season, regenerated weekly
 lineups-data.js  payouts-data.js       generated boards — efficiency and money

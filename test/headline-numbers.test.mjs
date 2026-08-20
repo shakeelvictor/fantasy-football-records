@@ -133,3 +133,39 @@ test('the README documents every command and every weekly step', () => {
     cursor = at;
   }
 });
+
+test('every page can switch theme, and none flashes the wrong one', () => {
+  const pages = ['index.html', 'keepers.html', 'rules.html'];
+
+  for (const page of pages) {
+    const html = read(page);
+
+    // The control itself, and the script that wires it.
+    assert.match(html, /id="themeToggle"/, `${page} has no theme control`);
+    assert.match(html, /<script src="theme\.js"><\/script>/, `${page} does not load theme.js`);
+
+    // Resolved before first paint. A deferred or external script would run too
+    // late and the page would flash the wrong theme on every load.
+    const head = html.slice(0, html.indexOf('</head>'));
+    assert.match(head, /fflr-theme/, `${page} does not resolve the theme in <head>`);
+    assert.match(head, /setAttribute\('data-theme'/, `${page}'s head script sets no data-theme`);
+
+    // The old media-scoped theme-colors let the OS override an explicit choice.
+    assert.ok(
+      !/theme-color[^>]*prefers-color-scheme/.test(html),
+      `${page} still has an OS-scoped theme-color, which would fight the toggle`
+    );
+  }
+
+  // data-theme is the single source of truth: no stylesheet rule may decide the
+  // theme on its own, or an explicit choice would only half-apply.
+  const css = read('styles.css');
+  const mediaRules = css.match(/@media[^{]*prefers-color-scheme[^{]*\{/g) ?? [];
+  assert.equal(mediaRules.length, 0, 'a prefers-color-scheme rule would override the toggle');
+  assert.match(css, /:root\[data-theme="light"\]/, 'the light theme must key off data-theme');
+
+  // theme.js must not assume storage is available — private browsing throws.
+  const js = read('theme.js');
+  assert.match(js, /catch/, 'localStorage access must be guarded');
+  assert.match(js, /matchMedia/, 'system mode must follow the OS');
+});

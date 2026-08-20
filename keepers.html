@@ -4,8 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#0c0c0c" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+  <!-- Resolve the theme before first paint so the page never flashes the wrong
+       one. Mirrors theme.js; kept inline because a separate file would load too
+       late to help. -->
+  <script>
+    (function () {
+      var mode = 'system';
+      try {
+        var v = localStorage.getItem('fflr-theme');
+        if (v === 'light' || v === 'dark') mode = v;
+      } catch (e) {}
+      var dark = mode === 'dark' || (mode === 'system' &&
+        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    })();
+  </script>
   <title>Keeper History — The League</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,6 +84,7 @@
       <a class="nav-page-link active" href="keepers.html" aria-current="page">Keepers</a>
       <a class="nav-page-link" href="rules.html">Rules</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Theme"></button>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="siteNav">
       <span></span>
       <span></span>
@@ -99,6 +113,7 @@
 
   </main>
 
+  <script src="theme.js"></script>
   <script src="keepers-data.js"></script>
   <script src="keepers.js"></script>
 </body>
