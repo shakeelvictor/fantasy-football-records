@@ -101,16 +101,6 @@ function readHash() {
 
 // Publish the sticky header's real height so the filter bar can sit flush
 // under it regardless of font loading or viewport width.
-function trackHeaderHeight() {
-  const header = document.querySelector('.site-header');
-  if (!header) return;
-  const set = () => document.documentElement.style
-    .setProperty('--header-h', `${Math.round(header.getBoundingClientRect().height)}px`);
-  set();
-  if (window.ResizeObserver) new ResizeObserver(set).observe(header);
-  else window.addEventListener('resize', set);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
-}
 
 // ====== Mobile Nav ======
 function setupMobileNav() {
@@ -137,6 +127,5 @@ document.addEventListener('DOMContentLoaded', () => {
   readHash();
   renderYearPills();
   renderSeasons();
-  trackHeaderHeight();
   setupMobileNav();
 });

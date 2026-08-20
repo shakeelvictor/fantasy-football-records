@@ -79,4 +79,27 @@ function setupTheme() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', setupTheme);
+/**
+ * Publishes the sticky header's real height as --header-h.
+ *
+ * Anything that has to sit directly below the header needs its true height,
+ * and that changes: with the viewport, when a webfont finishes loading, and
+ * whenever the header gains a control. Hard-coding it drifts silently — the
+ * mobile drawer was pinned at 64px and overlapped a 68px header by 4px the
+ * moment the theme control was added.
+ */
+function trackHeaderHeight() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  const set = () => document.documentElement.style
+    .setProperty('--header-h', `${Math.round(header.getBoundingClientRect().height)}px`);
+  set();
+  if (window.ResizeObserver) new ResizeObserver(set).observe(header);
+  else window.addEventListener('resize', set);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupTheme();
+  trackHeaderHeight();
+});

@@ -176,3 +176,37 @@ test('every page can switch theme, and none flashes the wrong one', () => {
   assert.match(js, /catch/, 'localStorage access must be guarded');
   assert.ok(!/matchMedia/.test(js), 'the OS no longer decides the theme');
 });
+
+test('the header centres its nav and collapses before it can wrap', () => {
+  const css = read('styles.css');
+
+  // Three columns, not space-between: the brand and the buttons are different
+  // widths, so space-between leaves the nav visibly off-centre.
+  const header = css.slice(css.indexOf('.site-header {'), css.indexOf('}', css.indexOf('.site-header {')));
+  assert.match(header, /display:\s*grid/, 'the header must be a grid to centre the nav');
+  assert.match(header, /grid-template-columns:\s*1fr auto 1fr/, 'the nav needs matching rails to centre against');
+  assert.ok(!/justify-content:\s*space-between/.test(header), 'space-between cannot centre the nav');
+
+  // A nav item that wraps does not look tight, it looks broken — the header
+  // silently doubles in height and the links stack.
+  assert.match(css, /\.site-nav a \{ white-space: nowrap; \}/, 'nav links must not wrap');
+  assert.match(css, /\.brand-text \{[^}]*white-space: nowrap/s, 'the wordmark must not wrap');
+
+  // The wordmark has to drop out BEFORE the nav does, or the rails stay wide
+  // enough to push the nav into wrapping while it is still inline.
+  const wordmarkAt = Number(css.match(/@media \(max-width: (\d+)px\) \{\s*\.brand-text \{ display: none/)[1]);
+  const drawerAt = Number(css.match(/@media \(max-width: (\d+)px\) \{\s*\.site-header \{ padding/)[1]);
+  assert.ok(wordmarkAt > drawerAt,
+    `the wordmark must drop (${wordmarkAt}px) before the drawer takes over (${drawerAt}px)`);
+
+  // The drawer starts where the header ends, measured rather than hard-coded.
+  // These drifted apart the moment the header gained a control.
+  assert.ok(!/top:\s*64px/.test(css), 'the drawer must not hard-code the header height');
+  assert.match(css, /top: var\(--header-h/, 'the drawer must use the measured header height');
+  assert.match(read('theme.js'), /function trackHeaderHeight/, 'someone must publish --header-h');
+
+  // And every page groups its buttons, or the third grid column is two cells.
+  for (const page of ['index.html', 'keepers.html', 'rules.html']) {
+    assert.match(read(page), /<div class="header-actions">/, `${page} does not group its header buttons`);
+  }
+});
