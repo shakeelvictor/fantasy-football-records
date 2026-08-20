@@ -194,8 +194,17 @@ test('the header centres its nav and collapses before it can wrap', () => {
 
   // The wordmark has to drop out BEFORE the nav does, or the rails stay wide
   // enough to push the nav into wrapping while it is still inline.
-  const wordmarkAt = Number(css.match(/@media \(max-width: (\d+)px\) \{\s*\.brand-text \{ display: none/)[1]);
-  const drawerAt = Number(css.match(/@media \(max-width: (\d+)px\) \{\s*\.site-header \{ padding/)[1]);
+  // Anchored to the rule that DEFINES each breakpoint, not to the incidental
+  // shape of the block — this regex broke the moment the header gained a
+  // second declaration.
+  const blocks = [...css.matchAll(/@media \(max-width: (\d+)px\) \{([\s\S]*?)\n\}/g)];
+  const at = (needle) => {
+    const hit = blocks.find(([, , body]) => body.includes(needle));
+    assert.ok(hit, `no breakpoint defines ${needle}`);
+    return Number(hit[1]);
+  };
+  const wordmarkAt = at('.brand-text { display: none; }');
+  const drawerAt = at('.nav-toggle { display: flex; }');
   assert.ok(wordmarkAt > drawerAt,
     `the wordmark must drop (${wordmarkAt}px) before the drawer takes over (${drawerAt}px)`);
 
