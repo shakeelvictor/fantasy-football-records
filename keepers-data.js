@@ -1,4 +1,4 @@
-// Keeper history, 2014–2025. Source: league Notion "KEEPERS HISTORY" page.
+// Keeper history, 2014–2026. Source: league Notion "KEEPERS HISTORY" page.
 // Each season lists every owner in the league that year; `picks` is empty when
 // the owner declared no keepers. Round "FA" means the player was a free-agent
 // pickup; "11 (FA)" is the round charged for a FA keeper.
@@ -180,6 +180,22 @@ const KEEPERS = [
       { owner: 'Imran', picks: [{ player: 'Keon Coleman', round: '13' }, { player: 'Bucky Irving', round: '18' }] },
       { owner: 'Asher', picks: [{ player: 'Jameson Williams', round: '12' }, { player: 'Zach Charbonnet', round: '14' }] },
       { owner: 'Dante', picks: [{ player: 'Trey McBride', round: '11' }, { player: 'Brian Thomas Jr.', round: '13' }] },
+    ],
+  },
+  {
+    year: 2026,
+    owners: [
+      { owner: 'Austin', picks: [{ player: 'Tucker Kraft', round: '12' }, { player: 'Bo Nix', round: '17' }] },
+      { owner: 'Samson', picks: [{ player: 'Jordan Addison', round: '11' }, { player: 'Brian Thomas Jr.', round: '12' }] },
+      { owner: 'Vip', picks: [] },
+      { owner: 'Shak', picks: [{ player: 'Harold Fannin', round: '11' }, { player: 'Chris Godwin', round: '14' }] },
+      { owner: 'Anand', picks: [{ player: 'Jaxson Dart', round: '11' }, { player: 'Matthew Stafford', round: '19' }] },
+      { owner: 'Andres', picks: [{ player: 'Drake Maye', round: '11' }, { player: 'Rhamondre Stevenson', round: '14' }] },
+      { owner: 'Imran', picks: [{ player: 'Maxx Crosby', round: '11' }, { player: 'Bucky Irving', round: '16' }] },
+      { owner: 'Asher', picks: [{ player: 'Jameson Williams', round: '12' }, { player: 'Jordyn Brooks', round: '15' }] },
+      { owner: 'Dante', picks: [{ player: 'Brock Purdy', round: '11' }, { player: 'Christian Watson', round: '12' }] },
+      { owner: 'Laura', picks: [{ player: 'Carson Schwesinger', round: '11' }, { player: 'Jayden Reed', round: '12' }] },
+      { owner: 'Ryaan', picks: [{ player: 'Myles Garrett', round: '11' }] },
     ],
   },
 ];
