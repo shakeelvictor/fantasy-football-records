@@ -1279,11 +1279,30 @@ a { color: inherit; text-decoration: none; }
 }
 
 .keeper-outlook-lede {
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.65;
   color: var(--text-dim);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   max-width: 68ch;
+}
+
+/* The names are the answer this panel exists to give, so they read a step up
+   from the chips in the history below, where they are a footnote. */
+.keeper-outlook .chip-row {
+  gap: 8px;
+}
+
+.keeper-outlook .team-chip {
+  font-size: 14px;
+  padding: 6px 13px;
+}
+
+.keeper-outlook .chip-owner {
+  font-size: 12px;
+}
+
+.keeper-outlook .keeper-count {
+  font-size: 13px;
 }
 
 /* ======= League Rules Page ======= */
