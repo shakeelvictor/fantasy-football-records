@@ -1224,7 +1224,8 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--accent-2);
 }
 
-.keeper-none {
+.keeper-none,
+.keeper-capped {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -1234,7 +1235,8 @@ a { color: inherit; text-decoration: none; }
   border-top: 1px dashed var(--border);
 }
 
-.keeper-none-label {
+.keeper-none-label,
+.keeper-capped-label {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -1246,6 +1248,42 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+/* A capped player is one the league has lost off a roster, so the chip reads
+   as spent: dashed edge, and the owner who loses him tagged alongside. */
+.team-chip.capped {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  border-style: dashed;
+}
+
+.chip-owner {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* The season ahead: knowable before a single keeper is declared, so it sits
+   above the history rather than inside it. */
+.keeper-outlook {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-bottom: 40px;
+}
+
+.keeper-outlook .keeper-season-head {
+  margin-bottom: 14px;
+}
+
+.keeper-outlook-lede {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  max-width: 68ch;
 }
 
 /* ======= League Rules Page ======= */

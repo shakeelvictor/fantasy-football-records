@@ -145,6 +145,8 @@ const RULES = [
     blurb: 'Up to two per manager, priced by the round they came from.',
     items: [
       { text: '<strong>Keep up to two players.</strong> A keeper costs the round he was drafted in; a player picked up as a free agent costs an 11th-round pick.' },
+      { text: '<strong>A player can be kept two seasons, and then he is done.</strong> The third year he goes back in the draft pool for everyone. Four players aged out ahead of 2026 — Puka Nacua, Nico Collins, Kyren Williams and Trey McBride.' },
+      { text: '<strong>The two-season clock follows the player, not the roster.</strong> Two seasons back-to-back cap him even when a different GM kept him the second year, so claiming another manager\u2019s keeper buys you one year, not two. <strong>A gap resets it</strong> — a player left unkept for a season starts fresh, which is how Matthew Stafford came back as a keeper in 2026 eight years after Asher last kept him.', since: '2027' },
       { text: '<strong>If both keepers would cost an 11th</strong>, the second rolls to the 12th. When trading such a keeper, the GM chooses whether to give up the 11th or the 12th.', since: '2019' },
       { text: '<strong>Keeper-eligible players can be traded</strong>, and they stay connected to their draft position when they change hands.', since: '2019' },
       { text: '<strong>Once you declare your two keepers, only those two players may be traded.</strong> You may still change your declarations up until the deadline, but you cannot trade a keeper-eligible player you did not declare.', since: '2025' },
