@@ -5,17 +5,18 @@ name: Offseason keepalive
 # runs February to August, which trips that every single year, so the weekly
 # update would be dead by the time Week 1 arrives.
 #
-# Workflow runs do not themselves count as activity; commits do. This job makes
-# a tiny commit on the 1st of each month so the repo never goes quiet long
-# enough to trip the timer. It is deliberately separate from the weekly update
-# so a failure here can never block a real week of results.
+# Workflow runs do not themselves count as activity; commits do. This job checks
+# weekly and commits only when nothing else has, so the repo never goes quiet
+# long enough to trip the timer. It is deliberately separate from the weekly
+# update so a failure here can never block a real week of results.
 #
 # GitHub scopes the auto-disable rule to public repositories in its docs, but
-# sources disagree about private ones. This costs one commit a month either way.
+# sources disagree about private ones. Guarded as below it costs nothing in a
+# month the repo was active anyway, so it stays as cheap insurance.
 
 on:
   schedule:
-    - cron: '17 12 1 * *'
+    - cron: '17 12 * * 1'
   workflow_dispatch:
 
 concurrency:
@@ -30,8 +31,27 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Touch the heartbeat and commit
+      - name: Touch the heartbeat, but only if the repo has gone quiet
         run: |
+          # Any commit counts as activity, so this only needs to fire when
+          # nothing else has. In season the weekly update commits every Thursday
+          # it has results and keeps the repo warm on its own, and this job then
+          # leaves no trace at all — it is the February-to-August offseason that
+          # actually needs it. That is the difference between twelve commits a
+          # year and about four, all of them load-bearing.
+          #
+          # QUIET_DAYS plus the gap between runs must stay inside GitHub's
+          # ~60-day window, which is why the cron is weekly rather than monthly:
+          # 45 + 7 = 52, a week in hand. Raising one means lowering the other.
+          QUIET_DAYS=45
+          age=$(( ( $(date -u +%s) - $(git log -1 --format=%ct) ) / 86400 ))
+
+          if [ "$age" -lt "$QUIET_DAYS" ]; then
+            echo "Last commit was $age days ago; the repo is awake. Nothing to do."
+            exit 0
+          fi
+
+          echo "Last commit was $age days ago; touching the heartbeat."
           mkdir -p data
           date -u +'%Y-%m-%dT%H:%M:%SZ' > data/.keepalive
           git config user.name "fflr-bot"
