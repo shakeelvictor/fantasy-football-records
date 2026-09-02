@@ -134,6 +134,30 @@ test('the README documents every command and every weekly step', () => {
   }
 });
 
+test('every page carries the favicon, and the file is really there', () => {
+  for (const page of ['index.html', 'keepers.html', 'rules.html']) {
+    assert.match(
+      read(page),
+      /<link rel="icon" href="favicon\.svg" type="image\/svg\+xml" \/>/,
+      `${page} does not reference the favicon`,
+    );
+  }
+
+  // A page pointing at a favicon that is not in the repo root fails silently:
+  // the browser just shows its blank default and nobody notices for months.
+  const svg = read('favicon.svg');
+  assert.match(svg, /^<svg /, 'favicon.svg is not an SVG');
+  assert.match(svg, /viewBox="0 0 64 64"/, 'the favicon lost its square viewBox');
+
+  // Drawn to sit on a light or dark tab bar without following the OS, which is
+  // easy to undo by accident. Checked against the markup, not the comment that
+  // explains it — the first version of this assertion tripped over its own
+  // rationale.
+  const markup = svg.replace(/<!--[\s\S]*?-->/g, '');
+  assert.ok(!/prefers-color-scheme/.test(markup), 'the favicon now lets the OS pick its colours');
+  assert.match(markup, /#2d7a3e/, 'the favicon no longer uses the league green');
+});
+
 test('every page can switch theme, and none flashes the wrong one', () => {
   const pages = ['index.html', 'keepers.html', 'rules.html'];
 
