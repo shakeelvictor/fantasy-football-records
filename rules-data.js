@@ -168,9 +168,9 @@ const RULES = [
     title: 'Waivers & Free Agency',
     blurb: 'A blind-bid budget, introduced in 2025 after six years of rejecting a waiver wire.',
     items: [
+      { text: '<strong>Before the season kicks off, adds and drops are free and unrestricted.</strong> Until the first game of the NFL season, anyone can pick up or release any player with no bid and no waiting period. Blind bidding and the waiver rules below take effect at kickoff of the first game.' },
       { text: '<strong>$100 blind bidding budget per manager</strong>, run as a silent auction. Nobody sees a bid until waivers process.', since: '2025' },
       { text: '<strong>Bids can be linked.</strong> Put several bids in one group and rank them, and MFL stops the group as soon as you win one — so chasing three running backs cannot leave you paying for all three.', since: '2025' },
-      { text: '<strong>Before the season kicks off, adds and drops are free and unrestricted.</strong> Until the first game of the NFL season, anyone can pick up or release any player with no bid and no waiting period. Blind bidding and the waiver rules above take effect at kickoff of the first game.' },
       { text: '<strong>No waiver priority order.</strong> The budget is the only currency — a proposal for priority-based waivers was rejected in 2019.' },
       { text: 'The league ran with <strong>no waiver wire at all</strong> from the MFL merger through 2024, rejecting the idea in 2019, 2021, 2023, and 2024 before adopting blind bidding.' },
     ],
