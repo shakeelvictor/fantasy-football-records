@@ -234,16 +234,17 @@ const DATA = {
     },
     {
       label: 'Highest Points to Start a Season',
-      value: '217.42',
-      holder: 'Shak',
-      context: '2021'
+      value: '235.94',
+      holder: 'Dante',
+      context: '2026',
+      prev: 'Previous: Shak · 217.42 (2021)'
     },
     {
       label: 'Highest Single Week · Reg. Season',
-      value: '233.44',
-      holder: 'Samson',
-      context: '2020 · Week 12',
-      prev: 'Previous: Andres · 224.23 (2019, Wk 8)'
+      value: '235.94',
+      holder: 'Dante',
+      context: '2026 · Week 1',
+      prev: 'Previous: Samson · 233.44 (2020 · Week 12)'
     },
     {
       label: 'Lowest Points to Win a Week',
