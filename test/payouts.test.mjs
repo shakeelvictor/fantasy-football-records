@@ -303,6 +303,9 @@ test('the season prizes follow their own year too', () => {
     const s = payouts.seasons.find((p) => p.year === year);
     const champ = DATA.champions.find((c) => c.year === year);
     const field = DATA.seasons.find((f) => f.year === year);
+    // A season being played has weekly winners but no champion yet; its season
+    // prizes only land when season-end records the year.
+    if (!champ || !field) continue;
     reg[field.teams[0]] = (reg[field.teams[0]] ?? 0) + s.regularSeason;
     bowl[champ.champ] = (bowl[champ.champ] ?? 0) + s.champion;
     bowl[champ.runnerUp] = (bowl[champ.runnerUp] ?? 0) + s.runnerUp;
