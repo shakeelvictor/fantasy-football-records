@@ -18,7 +18,7 @@ const PAYOUTS = {
   // A season still being played, if any. Only weekly money has been decided in
   // it — the regular-season prize and the Bowl are still on the table, and the
   // playoff weeks before the Bowl pay nothing at all.
-  inProgress: { year: 2026, paid: 40, pending: 1060 },
+  inProgress: { year: 2026, paid: 80, pending: 1020 },
 
   // Seasons whose payout figures are stated in full in the meeting notes. The
   // rest are reconstructed — every one reconciles to its pot exactly, but the
@@ -29,7 +29,7 @@ const PAYOUTS = {
   // counting seasons played rather than seasons cashed.
   careers: [
     { gm: 'Samson', won: 1435, paidIn: 800, net: 635, seasons: 8, weeklyWins: 25, weekly: 915, regularSeason: 320, bowl: 200 },
-    { gm: 'Asher', won: 910, paidIn: 800, net: 110, seasons: 8, weeklyWins: 13, weekly: 455, regularSeason: 355, bowl: 100 },
+    { gm: 'Asher', won: 950, paidIn: 800, net: 150, seasons: 8, weeklyWins: 14, weekly: 495, regularSeason: 355, bowl: 100 },
     { gm: 'Shak', won: 895, paidIn: 800, net: 95, seasons: 8, weeklyWins: 6, weekly: 210, regularSeason: 160, bowl: 525 },
     { gm: 'Imran', won: 785, paidIn: 800, net: -15, seasons: 8, weeklyWins: 8, weekly: 285, regularSeason: 0, bowl: 500 },
     { gm: 'Raj', won: 690, paidIn: 600, net: 90, seasons: 6, weeklyWins: 8, weekly: 280, regularSeason: 160, bowl: 250 },
