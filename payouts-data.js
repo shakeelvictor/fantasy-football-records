@@ -18,7 +18,7 @@ const PAYOUTS = {
   // A season still being played, if any. Only weekly money has been decided in
   // it — the regular-season prize and the Bowl are still on the table, and the
   // playoff weeks before the Bowl pay nothing at all.
-  inProgress: { year: 2026, paid: 80, pending: 1020 },
+  inProgress: { year: 2026, paid: 120, pending: 980 },
 
   // Seasons whose payout figures are stated in full in the meeting notes. The
   // rest are reconstructed — every one reconciles to its pot exactly, but the
@@ -36,7 +36,7 @@ const PAYOUTS = {
     { gm: 'Dante', won: 575, paidIn: 800, net: -225, seasons: 8, weeklyWins: 9, weekly: 325, regularSeason: 0, bowl: 250 },
     { gm: 'Anand', won: 540, paidIn: 800, net: -260, seasons: 8, weeklyWins: 7, weekly: 245, regularSeason: 195, bowl: 100 },
     { gm: 'Andres', won: 535, paidIn: 800, net: -265, seasons: 8, weeklyWins: 8, weekly: 285, regularSeason: 0, bowl: 250 },
-    { gm: 'Vip', won: 410, paidIn: 800, net: -390, seasons: 8, weeklyWins: 6, weekly: 210, regularSeason: 0, bowl: 200 },
+    { gm: 'Vip', won: 450, paidIn: 800, net: -350, seasons: 8, weeklyWins: 7, weekly: 250, regularSeason: 0, bowl: 200 },
     { gm: 'Hoss', won: 220, paidIn: 800, net: -580, seasons: 8, weeklyWins: 6, weekly: 220, regularSeason: 0, bowl: 0 },
     { gm: 'Laura', won: 145, paidIn: 200, net: -55, seasons: 2, weeklyWins: 1, weekly: 40, regularSeason: 0, bowl: 105 },
     { gm: 'Ryaan', won: 0, paidIn: 200, net: -200, seasons: 2, weeklyWins: 0, weekly: 0, regularSeason: 0, bowl: 0 },

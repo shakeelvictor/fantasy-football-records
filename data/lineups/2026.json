@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "regularSeasonWeeks": 14,
-  "weeksPlayed": 2,
+  "weeksPlayed": 3,
   "unmodelled": [],
   "illegal": [],
   "weeklyWinners": [
@@ -12,96 +12,100 @@
     {
       "week": 2,
       "gm": "Asher"
+    },
+    {
+      "week": 3,
+      "gm": "Vip"
     }
   ],
   "managers": [
     {
-      "gm": "Laura",
-      "scored": 290.79,
-      "optimal": 304.85,
-      "left": 14.06,
-      "weeks": 2,
-      "efficiency": 0.9538789568640315
-    },
-    {
       "gm": "Shak",
-      "scored": 279.41,
-      "optimal": 301.28,
-      "left": 21.87,
-      "weeks": 2,
-      "efficiency": 0.9274097185342538
+      "scored": 442.54,
+      "optimal": 473.75,
+      "left": 31.21,
+      "weeks": 3,
+      "efficiency": 0.9341213720316622
     },
     {
-      "gm": "Asher",
-      "scored": 343.45,
-      "optimal": 373.01,
-      "left": 29.56,
-      "weeks": 2,
-      "efficiency": 0.920752794831238
+      "gm": "Laura",
+      "scored": 414.9,
+      "optimal": 452.21,
+      "left": 37.31,
+      "weeks": 3,
+      "efficiency": 0.9174940846067092
     },
     {
       "gm": "Vip",
-      "scored": 289.34,
-      "optimal": 315.8,
-      "left": 26.46,
-      "weeks": 2,
-      "efficiency": 0.9162127929069034
+      "scored": 484.55,
+      "optimal": 534.35,
+      "left": 49.8,
+      "weeks": 3,
+      "efficiency": 0.9068026574342662
     },
     {
-      "gm": "Samson",
-      "scored": 286.65,
-      "optimal": 319.68,
-      "left": 33.03,
-      "weeks": 2,
-      "efficiency": 0.896677927927928
-    },
-    {
-      "gm": "Dante",
-      "scored": 391.06,
-      "optimal": 437.08,
-      "left": 46.02,
-      "weeks": 2,
-      "efficiency": 0.8947103505079161
+      "gm": "Asher",
+      "scored": 490.58,
+      "optimal": 544.67,
+      "left": 54.09,
+      "weeks": 3,
+      "efficiency": 0.9006921622266695
     },
     {
       "gm": "Andres",
-      "scored": 263.2,
-      "optimal": 298.43,
-      "left": 35.23,
-      "weeks": 2,
-      "efficiency": 0.881948865730657
+      "scored": 384.3,
+      "optimal": 434.2,
+      "left": 49.9,
+      "weeks": 3,
+      "efficiency": 0.8850760018424687
     },
     {
-      "gm": "Hoss",
-      "scored": 288.82,
-      "optimal": 345.79,
-      "left": 56.97,
-      "weeks": 2,
-      "efficiency": 0.8352468261083319
+      "gm": "Dante",
+      "scored": 530.17,
+      "optimal": 612.13,
+      "left": 81.96,
+      "weeks": 3,
+      "efficiency": 0.8661068727231144
+    },
+    {
+      "gm": "Samson",
+      "scored": 380.65,
+      "optimal": 444.79,
+      "left": 64.14,
+      "weeks": 3,
+      "efficiency": 0.8557971177409565
     },
     {
       "gm": "Ryaan",
-      "scored": 258.82,
-      "optimal": 310.45,
-      "left": 51.63,
-      "weeks": 2,
-      "efficiency": 0.8336930262522145
+      "scored": 381.62,
+      "optimal": 448.68,
+      "left": 67.06,
+      "weeks": 3,
+      "efficiency": 0.8505393599001516
+    },
+    {
+      "gm": "Hoss",
+      "scored": 460.59,
+      "optimal": 546.39,
+      "left": 85.8,
+      "weeks": 3,
+      "efficiency": 0.842969307637402
     },
     {
       "gm": "Imran",
-      "scored": 235.19,
-      "optimal": 291.72,
-      "left": 56.53,
-      "weeks": 2,
-      "efficiency": 0.8062182915124091
+      "scored": 340.04,
+      "optimal": 407.33,
+      "left": 67.29,
+      "weeks": 3,
+      "efficiency": 0.8348022487909065
     },
     {
       "gm": "Anand",
-      "scored": 223.33,
-      "optimal": 360.64,
-      "left": 137.31,
-      "weeks": 2,
-      "efficiency": 0.6192602040816326
+      "scored": 393.55,
+      "optimal": 565.22,
+      "left": 171.67,
+      "weeks": 3,
+      "efficiency": 0.6962775556420507
     }
   ],
   "playoffManagers": [],
@@ -129,6 +133,20 @@
       "left": 39.63
     },
     {
+      "gm": "Dante",
+      "week": 3,
+      "scored": 139.11,
+      "optimal": 175.05,
+      "left": 35.94
+    },
+    {
+      "gm": "Anand",
+      "week": 3,
+      "scored": 170.22,
+      "optimal": 204.58,
+      "left": 34.36
+    },
+    {
       "gm": "Hoss",
       "week": 1,
       "scored": 137.27,
@@ -136,11 +154,25 @@
       "left": 32.1
     },
     {
+      "gm": "Samson",
+      "week": 3,
+      "scored": 94,
+      "optimal": 125.11,
+      "left": 31.11
+    },
+    {
       "gm": "Imran",
       "week": 2,
       "scored": 85.89,
       "optimal": 115,
       "left": 29.11
+    },
+    {
+      "gm": "Hoss",
+      "week": 3,
+      "scored": 171.77,
+      "optimal": 200.6,
+      "left": 28.83
     },
     {
       "gm": "Dante",
@@ -162,34 +194,6 @@
       "scored": 151.55,
       "optimal": 176.42,
       "left": 24.87
-    },
-    {
-      "gm": "Asher",
-      "week": 1,
-      "scored": 144.08,
-      "optimal": 168.1,
-      "left": 24.02
-    },
-    {
-      "gm": "Andres",
-      "week": 2,
-      "scored": 102.83,
-      "optimal": 125.83,
-      "left": 23
-    },
-    {
-      "gm": "Samson",
-      "week": 2,
-      "scored": 115.39,
-      "optimal": 135.92,
-      "left": 20.53
-    },
-    {
-      "gm": "Vip",
-      "week": 1,
-      "scored": 160.6,
-      "optimal": 180.73,
-      "left": 20.13
     }
   ],
   "perfect": 0,
@@ -214,6 +218,13 @@
       "scored": 128.74,
       "optimal": 135.07,
       "efficiency": 0.9531354112682314
+    },
+    {
+      "gm": "Shak",
+      "week": 3,
+      "scored": 163.13,
+      "optimal": 172.47,
+      "efficiency": 0.9458456543166928
     },
     {
       "gm": "Laura",
@@ -258,28 +269,27 @@
       "efficiency": 0.9111308598089314
     },
     {
+      "gm": "Imran",
+      "week": 3,
+      "scored": 104.85,
+      "optimal": 115.61,
+      "efficiency": 0.9069284663956405
+    },
+    {
       "gm": "Dante",
       "week": 2,
       "scored": 155.12,
       "optimal": 172.34,
       "efficiency": 0.9000812347684809
-    },
-    {
-      "gm": "Dante",
-      "week": 1,
-      "scored": 235.94,
-      "optimal": 264.74,
-      "efficiency": 0.8912140213039208
-    },
-    {
-      "gm": "Vip",
-      "week": 1,
-      "scored": 160.6,
-      "optimal": 180.73,
-      "efficiency": 0.888618381010347
     }
   ],
   "worstSits": [
+    {
+      "gm": "Dante",
+      "week": 3,
+      "player": "Brock Purdy",
+      "score": 40.41
+    },
     {
       "gm": "Anand",
       "week": 2,
@@ -297,6 +307,12 @@
       "week": 1,
       "player": "Jalen Hurts",
       "score": 32.25
+    },
+    {
+      "gm": "Anand",
+      "week": 3,
+      "player": "Drake London",
+      "score": 30.9
     },
     {
       "gm": "Dante",
@@ -317,6 +333,12 @@
       "score": 23.73
     },
     {
+      "gm": "Hoss",
+      "week": 3,
+      "player": "Juwan Johnson",
+      "score": 23.3
+    },
+    {
       "gm": "Ryaan",
       "week": 2,
       "player": "Dalton Schultz",
@@ -329,34 +351,26 @@
       "score": 20.69
     },
     {
-      "gm": "Anand",
-      "week": 1,
-      "player": "Deebo Samuel",
-      "score": 19.1
-    },
-    {
-      "gm": "Anand",
-      "week": 2,
-      "player": "Dalton Kincaid",
-      "score": 19
-    },
-    {
-      "gm": "Anand",
-      "week": 2,
-      "player": "Jake Ferguson",
-      "score": 18.3
-    },
-    {
       "gm": "Asher",
-      "week": 1,
-      "player": "Parker Washington",
-      "score": 16.55
+      "week": 3,
+      "player": "Michael Wilson",
+      "score": 20.4
     }
   ],
   "bids": [
     {
+      "gm": "Asher",
+      "player": "17039",
+      "amount": 39
+    },
+    {
+      "gm": "Samson",
+      "player": "17059",
+      "amount": 10.51
+    },
+    {
       "gm": "Dante",
-      "player": "17500",
+      "player": "Denzel Boston",
       "amount": 10.02
     },
     {
@@ -366,8 +380,13 @@
     },
     {
       "gm": "Shak",
-      "player": "16148",
+      "player": "Bryce Young",
       "amount": 5
+    },
+    {
+      "gm": "Imran",
+      "player": "15716",
+      "amount": 2.75
     },
     {
       "gm": "Imran",
@@ -386,12 +405,12 @@
     },
     {
       "gm": "Vip",
-      "player": "16150",
+      "player": "C.J. Stroud",
       "amount": 1
     },
     {
       "gm": "Samson",
-      "player": "16617",
+      "player": "Keon Coleman",
       "amount": 1
     }
   ]
