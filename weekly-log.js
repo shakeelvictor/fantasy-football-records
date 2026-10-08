@@ -41,6 +41,7 @@ const WEEKLY_LOG = [
   { year: 2026, week: 1, winner: 'Dante', big: [{ gm: 'Dante', points: 235.94 }] },
   { year: 2026, week: 2, winner: 'Asher', big: [] },
   { year: 2026, week: 3, winner: 'Vip', big: [] },
+  { year: 2026, week: 4, winner: 'Andres', big: [] },
 ];
 // <<< END GENERATED
 
