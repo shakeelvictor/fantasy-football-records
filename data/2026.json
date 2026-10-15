@@ -416,6 +416,110 @@
           }
         }
       ]
+    },
+    {
+      "week": 5,
+      "scores": [
+        {
+          "gm": "Anand",
+          "score": 216.65,
+          "starters": 12,
+          "topPlayer": {
+            "id": "16162",
+            "score": 46.23
+          }
+        },
+        {
+          "gm": "Andres",
+          "score": 132,
+          "starters": 11,
+          "topPlayer": {
+            "id": "16211",
+            "score": 30.5
+          }
+        },
+        {
+          "gm": "Asher",
+          "score": 182.14,
+          "starters": 12,
+          "topPlayer": {
+            "id": "12611",
+            "score": 34.97
+          }
+        },
+        {
+          "gm": "Dante",
+          "score": 160.64,
+          "starters": 12,
+          "topPlayer": {
+            "id": "15789",
+            "score": 30.3
+          }
+        },
+        {
+          "gm": "Hoss",
+          "score": 109.23,
+          "starters": 12,
+          "topPlayer": {
+            "id": "14777",
+            "score": 32.93
+          }
+        },
+        {
+          "gm": "Imran",
+          "score": 141.99,
+          "starters": 12,
+          "topPlayer": {
+            "id": "16598",
+            "score": 42
+          }
+        },
+        {
+          "gm": "Laura",
+          "score": 135.29,
+          "starters": 12,
+          "topPlayer": {
+            "id": "7836",
+            "score": 28.2
+          }
+        },
+        {
+          "gm": "Ryaan",
+          "score": 104.83,
+          "starters": 12,
+          "topPlayer": {
+            "id": "15281",
+            "score": 20.7
+          }
+        },
+        {
+          "gm": "Samson",
+          "score": 144.58,
+          "starters": 12,
+          "topPlayer": {
+            "id": "13589",
+            "score": 37.53
+          }
+        },
+        {
+          "gm": "Shak",
+          "score": 141.29,
+          "starters": 12,
+          "topPlayer": {
+            "id": "15742",
+            "score": 38.17
+          }
+        },
+        {
+          "gm": "Vip",
+          "score": 149.06,
+          "starters": 12,
+          "topPlayer": {
+            "id": "14056",
+            "score": 21.96
+          }
+        }
+      ]
     }
   ]
 }
