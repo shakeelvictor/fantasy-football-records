@@ -18,11 +18,15 @@ async function call(season, type, params = {}) {
   url.searchParams.set('JSON', '1');
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
 
-  // api.myfantasyleague.com 302s to the season's real host. Follow it rather
-  // than hardcoding www44 — MFL reassigns leagues across hosts between seasons.
+  // Optional, and in practice unset: league 19716's export is readable without
+  // a key, so every run since the MFL era has fetched anonymously. The hook is
+  // kept for the day MFL starts asking — set MFL_API_KEY in the environment
+  // and it is sent.
   const key = process.env.MFL_API_KEY;
   if (key) url.searchParams.set('APIKEY', key);
 
+  // api.myfantasyleague.com 302s to the season's real host. Follow it rather
+  // than hardcoding www44 — MFL reassigns leagues across hosts between seasons.
   const res = await fetch(url, {
     redirect: 'follow',
     headers: { 'User-Agent': 'fflr-records/1.0 (league 19716 weekly update)' },

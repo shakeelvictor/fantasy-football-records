@@ -24,6 +24,15 @@ Keep new Node code as `.mjs`.
 
 Commits to `main` deploy. That is intended.
 
+**The repo is public, and that is load-bearing.** GitHub meters Actions on
+private repos and gates them behind account billing: on 2026-10-29 a billing
+problem refused the weekly job before it ran a single step, and the schedule
+stayed dead until the repo went public. Public repos get unmetered runners, so
+no billing state can cost a Thursday again. Nothing here was ever secret —
+there are no Actions secrets at all, and Netlify's `publish = "."` already
+serves the whole repo root as the site. Going private again brings the meter,
+and the failure mode, straight back.
+
 ```bash
 npm test            # offline; replays checked-in fixtures
 npm run ingest      # fetch current season -> data/<year>.json + weekly-log.js
@@ -146,6 +155,14 @@ error, which is precisely how you conclude the season has no data when it has a
 full one somewhere else. `config.archive.leagueIds` holds the exception. If a
 season ever looks suspiciously thin, check the league id before concluding
 anything.
+
+**MFL needs no API key for this league.** League 19716's export is readable
+without one, and no `MFL_API_KEY` secret has ever existed. The workflow used to
+pass `secrets.MFL_API_KEY` into four steps, where it quietly resolved to an
+empty string and looked wired up for a year. `src/mfl/client.mjs` reads the
+variable and sends `APIKEY` only when it is set, so the hook is there if MFL
+ever starts refusing. Do not add the `env:` blocks back to make the workflow
+look complete; wire it the day a fetch actually fails.
 
 **The weekly job runs Thursday afternoon on purpose.** MFL posts stat
 corrections Thursday morning, and the league has treated the post-correction

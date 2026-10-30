@@ -51,9 +51,13 @@ jobs:
       # records. Tests are offline — they replay checked-in fixtures.
       - run: npm test
 
+      # Nothing below passes an MFL key. League 19716 serves its export
+      # anonymously and no MFL_API_KEY secret has ever existed, so the four
+      # steps that used to set it were passing an empty string. If MFL starts
+      # requiring a key, add the secret and put `env:` back on ingest, records,
+      # season-end and lineups — src/mfl/client.mjs reads it from the
+      # environment and sends it only when it is set.
       - run: npm run ingest
-        env:
-          MFL_API_KEY: ${{ secrets.MFL_API_KEY }}
 
       # Promotes any all-time record card this season has already beaten, so a
       # record broken in Week 3 shows up the same Thursday. Limited to the cards
@@ -61,16 +65,12 @@ jobs:
       # src/records.mjs. Reads the season file the ingest just wrote, so it runs
       # after it. No-ops before the first game of the year.
       - run: npm run records
-        env:
-          MFL_API_KEY: ${{ secrets.MFL_API_KEY }}
 
       # Records the finished season into data.js — champion, playoff field,
       # Pakistan vs. the World, appearance counts and any all-time record the
       # season broke. No-ops until Week 18 has been played, and no-ops again
       # once the season is recorded, so it is safe to run every week.
       - run: npm run season-end
-        env:
-          MFL_API_KEY: ${{ secrets.MFL_API_KEY }}
 
       # Lineup efficiency for the current season: what each manager started
       # against the best lineup his roster could legally have fielded. Current
@@ -78,8 +78,6 @@ jobs:
       # rebuilt by hand with `npm run lineups --all`. Runs after the ingest so
       # a stat correction is reflected here too.
       - run: npm run lineups
-        env:
-          MFL_API_KEY: ${{ secrets.MFL_API_KEY }}
 
       # Settles the money book. Offline — it reads the archive the step above
       # just wrote plus data.js, so it runs last and needs no MFL key.
