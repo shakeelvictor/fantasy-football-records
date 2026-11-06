@@ -13,7 +13,7 @@
 const LINEUPS = {
   span: '2015–2026',
   seasons: 12,
-  weeks: 1570,
+  weeks: 1581,
   perfect: 58,
 
   // `isNew` marks a manager still in his first league season: ranked on every
@@ -22,18 +22,18 @@ const LINEUPS = {
 
   // Regular season.
   careers: [
-    { gm: 'Laura', scored: 2962.57, optimal: 3265.51, left: 302.94, efficiency: 0.9072, weeks: 21, seasons: 2 },
-    { gm: 'Ryaan', scored: 2752.29, optimal: 3131.17, left: 378.88, efficiency: 0.8790, weeks: 21, seasons: 2 },
-    { gm: 'Samson', scored: 23856.39, optimal: 27157.03, left: 3300.64, efficiency: 0.8785, weeks: 155, seasons: 12 },
+    { gm: 'Laura', scored: 3077.47, optimal: 3394.19, left: 316.72, efficiency: 0.9067, weeks: 22, seasons: 2 },
+    { gm: 'Ryaan', scored: 2902.93, optimal: 3293.81, left: 390.88, efficiency: 0.8813, weeks: 22, seasons: 2 },
+    { gm: 'Samson', scored: 23968.05, optimal: 27303.59, left: 3335.54, efficiency: 0.8778, weeks: 156, seasons: 12 },
     { gm: 'Raj', scored: 18589.47, optimal: 21212.42, left: 2622.95, efficiency: 0.8763, weeks: 134, seasons: 10 },
-    { gm: 'Imran', scored: 21662.67, optimal: 24754.03, left: 3091.36, efficiency: 0.8751, weeks: 155, seasons: 12 },
-    { gm: 'Hoss', scored: 21888.55, optimal: 25146.25, left: 3257.70, efficiency: 0.8704, weeks: 155, seasons: 12 },
-    { gm: 'Andres', scored: 21089.94, optimal: 24460.76, left: 3370.82, efficiency: 0.8622, weeks: 154, seasons: 12 },
-    { gm: 'Shak', scored: 22433.35, optimal: 26098.65, left: 3665.30, efficiency: 0.8596, weeks: 155, seasons: 12 },
-    { gm: 'Asher', scored: 22948.85, optimal: 26701.14, left: 3752.29, efficiency: 0.8595, weeks: 155, seasons: 12 },
-    { gm: 'Dante', scored: 22136.05, optimal: 25772.95, left: 3636.90, efficiency: 0.8589, weeks: 155, seasons: 12 },
-    { gm: 'Anand', scored: 21961.79, optimal: 25891.16, left: 3929.37, efficiency: 0.8482, weeks: 155, seasons: 12 },
-    { gm: 'Vip', scored: 21161.32, optimal: 25073.28, left: 3911.96, efficiency: 0.8440, weeks: 155, seasons: 12 },
+    { gm: 'Imran', scored: 21771.73, optimal: 24870.58, left: 3098.85, efficiency: 0.8754, weeks: 156, seasons: 12 },
+    { gm: 'Hoss', scored: 22029.83, optimal: 25337.53, left: 3307.70, efficiency: 0.8695, weeks: 156, seasons: 12 },
+    { gm: 'Andres', scored: 21288.10, optimal: 24667.96, left: 3379.86, efficiency: 0.8630, weeks: 155, seasons: 12 },
+    { gm: 'Shak', scored: 22597.57, optimal: 26273.37, left: 3675.80, efficiency: 0.8601, weeks: 156, seasons: 12 },
+    { gm: 'Asher', scored: 23080.46, optimal: 26842.99, left: 3762.53, efficiency: 0.8598, weeks: 156, seasons: 12 },
+    { gm: 'Dante', scored: 22277.33, optimal: 25937.56, left: 3660.23, efficiency: 0.8589, weeks: 156, seasons: 12 },
+    { gm: 'Anand', scored: 22110.01, optimal: 26056.12, left: 3946.11, efficiency: 0.8486, weeks: 156, seasons: 12 },
+    { gm: 'Vip', scored: 21335.95, optimal: 25258.00, left: 3922.05, efficiency: 0.8447, weeks: 156, seasons: 12 },
   ],
 
   // Playoffs, counting only the weeks a manager was still alive to play.
@@ -53,7 +53,7 @@ const LINEUPS = {
 
   records: {
     bestSeason: { gm: 'Samson', year: 2025, efficiency: 0.9527, weeks: 14 },
-    bestCareer: { gm: 'Laura', efficiency: 0.9072, weeks: 21, seasons: 2 },
+    bestCareer: { gm: 'Laura', efficiency: 0.9067, weeks: 22, seasons: 2 },
     bestPlayoff: { gm: 'Hoss', efficiency: 0.8997, weeks: 10, seasons: 6 },
     worstWeek: { gm: 'Raj', year: 2017, week: 7, scored: 67.92, optimal: 189.62, left: 121.70 },
     worstSit: { gm: 'Imran', year: 2018, week: 4, player: 'Mitchell Trubisky', score: 63.23 },
